@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bestellformular - RRCURTAINS</title>
+  <!-- Google Fonts Montserrat einbinden -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif; /* Schriftart geändert */
+      font-weight: 100; /* Thin Variante */
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff; /* Weißer Hintergrund */
+      color: #333;
+      overflow-x: hidden;
+    }
+    header {
+      background-color: #ffffff;
+      text-align: center;
+      padding: 1.2em 0;
+      position: sticky; /* Sticky Header */
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Leichter Schatten */
+    }
+    header img {
+      max-width: 150px; /* Konsistent mit anderen Seiten */
+      display: block;
+      margin: 0 auto 10px;
+    }
+    nav {
+      margin-top: 10px;
+    }
+    nav a {
+      color: #333;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    main {
+      padding: 40px;
+      max-width: 700px;
+      margin: 40px auto;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1); /* Sanfter, edler Schatten */
+    }
+    h2 {
+      text-align: center;
+      font-size: 1.8em;
+      margin-bottom: 30px;
+      color: #333;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 25px; /* Etwas mehr Abstand für Eleganz */
+    }
+    form label {
+      font-weight: bold;
+      font-size: 1.1em;
+      color: #333;
+    }
+    form input, form textarea, form select {
+      padding: 12px;
+      border: 1px solid #ddd; /* Sanftere Border-Farbe */
+      border-radius: 8px;
+      background-color: #f9f9f9; /* Leicht grauer Hintergrund */
+      font-size: 1em;
+      width: 100%;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    form input:focus, form textarea:focus, form select:focus {
+      border-color: #444; /* Dunkler Rahmen bei Fokus */
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Subtiler Fokus-Effekt */
+      outline: none;
+    }
+    fieldset {
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      padding: 20px;
+      background: #f9f9f9; /* Leicht grauer Hintergrund für Kontrast */
+    }
+    legend {
+      font-weight: bold;
+      font-size: 1.2em;
+      color: #333;
+    }
+    .payment-options {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .payment-option {
+      width: 80px;
+      height: 50px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      border: 2px solid transparent;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+    .payment-option:hover {
+      transform: translateY(-3px); /* Nach oben statt Skalierung */
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    .selected {
+      border: 3px solid #444; /* Dunklere Farbe für Eleganz */
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    button {
+      padding: 14px;
+      border: none;
+      background-color: #444; /* Dunkler, edler Button */
+      color: #fff;
+      font-size: 1.1em;
+      font-weight: bold;
+      border-radius: 25px; /* Ovaler Button */
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    button:hover {
+      background-color: #666;
+      transform: scale(1.05);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+    footer {
+      background-color: #ffffff;
+      padding: 30px 20px;
+      text-align: center;
+      color: #333;
+      box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); /* Schatten oben */
+    }
+    footer p {
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="Kavallerietuch.png" alt="RRCURTAINS Logo"> <!-- Logo anstelle von Text -->
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="uber-uns.html">Über uns</a>
+      <a href="wie-funktionierts.html">Wie funktioniert’s?</a>
+      <a href="Produkte.html">Produkte</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Bestellung aufgeben</h2>
+    <form id="bestellformular">
+      <label for="produkt">Produkt:</label>
+      <input type="text" id="produkt" name="produkt" value="Grüner Vorhang" readonly>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+      <label for="adresse">Adresse:</label>
+      <textarea id="adresse" name="adresse" rows="3" required></textarea>
+      <label for="anzahl">Menge:</label>
+      <input type="number" id="anzahl" name="anzahl" min="1" required>
+      <fieldset>
+        <legend>Zahlungsmethode</legend>
+        <div class="payment-options">
+          <img src="twint.png" class="payment-option" data-payment="Twint">
+          <img src="visa.png" class="payment-option" data-payment="Visa">
+          <img src="mastercard.png" class="payment-option" data-payment="Mastercard">
+          <img src="applepay.png" class="payment-option" data-payment="Apple Pay"> <!-- Korrigierter Alt-Text -->
+          <img src="paypal.png" class="payment-option" data-payment="PayPal">
+        </div>
+        <input type="hidden" name="zahlungsmethode" id="zahlungsmethode" required>
+      </fieldset>
+      <button type="submit">Bestellung absenden</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>© 2025 RRCURTAINS</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const paymentOptions = document.querySelectorAll('.payment-option');
+      const zahlungsmethodeInput = document.getElementById('zahlungsmethode');
+      
+      paymentOptions.forEach(option => {
+        option.addEventListener('click', () => {
+          paymentOptions.forEach(opt => opt.classList.remove('selected'));
+          option.classList.add('selected');
+          zahlungsmethodeInput.value = option.dataset.payment;
+        });
+      });
+      
+      document.getElementById('bestellformular').addEventListener('submit', function(e) {
+        e.preventDefault(); // Verhindert Standard-Formularverhalten
+        if (!zahlungsmethodeInput.value) {
+          alert('Bitte eine Zahlungsmethode auswählen.');
+        } else {
+          alert('Deine Bestellung mit ' + zahlungsmethodeInput.value + ' wurde abgeschickt!');
+          this.reset();
+          paymentOptions.forEach(opt => opt.classList.remove('selected'));
+          zahlungsmethodeInput.value = ''; // Reset der versteckten Eingabe
+        }
+      });
+    });
+  </script>
+</body>
+</html>

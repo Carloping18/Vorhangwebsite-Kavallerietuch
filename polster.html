@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produktseite - Polster - Kavallerietuch</title>
+  <!-- Google Fonts Roboto Condensed einbinden -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Roboto Condensed', sans-serif;
+      font-weight: 300;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      color: #2b2b2b;
+      overflow-x: hidden;
+    }
+    header {
+      background-color: #1a1a1a;
+      padding: 10px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background-color 0.3s;
+    }
+    header img.logo {
+      width: 60px;
+      height: 60px;
+      margin-left: 10px;
+      object-fit: cover;
+      filter: brightness(1.2);
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      margin-left: auto;
+      margin-right: 20px;
+    }
+    nav a {
+      color: #e0e0e0;
+      text-decoration: none;
+      margin: 0 10px;
+      font-size: 0.7em;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.3s;
+      line-height: 1;
+      vertical-align: middle;
+    }
+    nav a:hover {
+      color: #d4af37;
+    }
+    .dropdown {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+    .dropdown > a {
+      margin: 0 10px;
+      line-height: 1;
+      vertical-align: middle;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #1a1a1a;
+      min-width: 200px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      z-index: 1001;
+      border-radius: 8px;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .dropdown-content a {
+      color: #e0e0e0;
+      padding: 12px 15px;
+      text-decoration: none;
+      display: block;
+      font-weight: 400;
+      font-size: 0.7em;
+      transition: background-color 0.3s;
+    }
+    .dropdown-content a:hover {
+      background-color: #2b2b2b;
+      color: #d4af37;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    .flags {
+      margin-right: 20px;
+      display: flex;
+      align-items: center;
+    }
+    .flags img {
+      width: 20px;
+      height: 20px;
+      margin-left: 10px;
+      object-fit: cover;
+    }
+    .search-bar {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 20px;
+      text-align: center;
+    }
+    .search-bar input {
+      width: 60%;
+      padding: 12px 20px;
+      font-size: 1.1em;
+      font-weight: 300;
+      border: none;
+      border-radius: 30px;
+      background-color: #ffffff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: width 0.3s, box-shadow 0.3s;
+    }
+    .search-bar input:focus {
+      width: 65%;
+      outline: none;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    }
+    .category-nav {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 0 20px;
+      text-align: center;
+    }
+    .category-nav a {
+      color: #2b2b2b;
+      text-decoration: none;
+      margin: 0 20px;
+      font-size: 1.1em;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.3s;
+    }
+    .category-nav a:hover {
+      color: #d4af37;
+    }
+    .category-nav .sale-link {
+      color: #d4af37;
+    }
+    .category-nav .sale-link:hover {
+      color: #b8962e;
+    }
+    .back-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+      padding: 10px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-size: 1em;
+      font-weight: 400;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      transition: background-color 0.3s;
+    }
+    .back-button:hover {
+      background-color: #2b2b2b;
+    }
+    main {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+      position: relative;
+    }
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+    .sort-options select {
+      padding: 10px;
+      font-size: 1em;
+      font-weight: 400;
+      border: none;
+      border-radius: 8px;
+      background-color: #ffffff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      transition: box-shadow 0.3s;
+    }
+    .sort-options select:focus {
+      outline: none;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    h2 {
+      text-align: center;
+      font-size: 2.5em;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 40px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .category-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+    .category {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 12px;
+      width: 300px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s, box-shadow 0.3s;
+      text-align: center;
+      display: none;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    .category.visible {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    .category:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    }
+    .category img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      transition: transform 0.3s;
+    }
+    .category img:hover {
+      transform: scale(1.05);
+    }
+    .category h3 {
+      margin: 0 0 10px;
+      font-size: 1.6em;
+      font-weight: 700;
+      color: #1a1a1a;
+    }
+    .category p {
+      font-size: 1.1em;
+      font-weight: 300;
+      color: #666;
+      margin: 0 0 15px;
+    }
+    .category button {
+      padding: 12px 24px;
+      border: none;
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+      font-size: 1em;
+      font-weight: 400;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background-color 0.3s, box-shadow 0.3s;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    .category button:hover {
+      background-color: #d4af37;
+      color: #1a1a1a;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    }
+    .filter-sidebar {
+      position: fixed;
+      top: 100px;
+      right: -270px;
+      width: 250px;
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      z-index: 10;
+      transition: right 0.3s ease;
+    }
+    .filter-sidebar.open {
+      right: 20px;
+    }
+    .filter-toggle {
+      position: fixed;
+      top: 100px;
+      right: 20px;
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      z-index: 11;
+      font-size: 1em;
+      font-weight: 400;
+      transition: background-color 0.3s;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    .filter-toggle:hover {
+      background-color: #d4af37;
+    }
+    .filter-sidebar h3 {
+      margin-top: 0;
+      font-size: 1.8em;
+      font-weight: 700;
+      color: #1a1a1a;
+    }
+    .filter-sidebar h4 {
+      margin: 20px 0 10px;
+      font-size: 1.4em;
+      font-weight: 700;
+      color: #1a1a1a;
+    }
+    .filter-sidebar label {
+      display: block;
+      margin: 10px 0;
+      font-size: 1.1em;
+      font-weight: 300;
+      color: #666;
+    }
+    .filter-sidebar input[type="checkbox"] {
+      margin-right: 10px;
+    }
+    .price-filter {
+      margin-top: 20px;
+    }
+    .price-range {
+      width: 100%;
+    }
+    #price-value {
+      margin-top: 10px;
+      font-size: 1em;
+      font-weight: 300;
+      color: #666;
+    }
+    .process-section {
+      max-width: 1200px;
+      margin: 60px auto;
+      padding: 40px;
+      background-color: #e0e0e0;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+    .process-section h2 {
+      font-size: 2.5em;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 30px;
+      color: #1a1a1a;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .process-step {
+      display: flex;
+      align-items: center;
+      margin-bottom: 40px;
+      gap: 30px;
+    }
+    .process-step.reverse {
+      flex-direction: row-reverse;
+    }
+    .process-step img {
+      width: 50%;
+      max-width: 500px;
+      border-radius: 10px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+    .process-step .text {
+      width: 50%;
+    }
+    .process-step h3 {
+      font-size: 1.6em;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 15px;
+    }
+    .process-step p {
+      font-size: 1.1em;
+      font-weight: 300;
+      color: #666;
+      line-height: 1.6;
+    }
+    .contact-card {
+      max-width: 600px;
+      margin: 60px auto;
+      padding: 30px;
+      background-color: #f9f9f9;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    .contact-card h2 {
+      font-size: 1.8em;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 20px;
+    }
+    .contact-card p {
+      font-size: 1em;
+      font-weight: 400;
+      color: #666;
+      margin: 10px 0;
+    }
+    .contact-card a {
+      color: #d4af37;
+      text-decoration: none;
+      font-weight: 400;
+    }
+    .contact-card a:hover {
+      text-decoration: underline;
+    }
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+      padding: 12px 24px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-size: 1em;
+      font-weight: 400;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      display: none;
+      transition: background-color 0.3s;
+    }
+    .back-to-top:hover {
+      background-color: #d4af37;
+      color: #1a1a1a;
+    }
+    footer {
+      text-align: center;
+      padding: 2em 0;
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+      box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.2);
+    }
+    .footer-nav {
+      margin: 15px 0;
+    }
+    .footer-nav a {
+      color: #e0e0e0;
+      text-decoration: none;
+      margin: 0 20px;
+      font-size: 0.9em;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.3s;
+    }
+    .footer-nav a:hover {
+      color: #d4af37;
+    }
+    .social-icons {
+      margin-top: 15px;
+    }
+    .social-icons img {
+      width: 35px;
+      height: 35px;
+      margin: 0 15px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .social-icons img:hover {
+      transform: scale(1.1);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="Kavallerietuch.png" alt="Kavallerietuch Logo" class="logo">
+    <nav>
+      <a href="index.html">Home</a>
+      <div class="dropdown">
+        <a href="Gallerie.html">Gallerie</a>
+      </div>
+      <a href="wie-funktionierts.html">Wie funktioniert’s?</a>
+      <a href="uber-uns.html">Über uns</a>
+    </nav>
+    <div class="flags">
+      <img src="Schweizer Flagge.jpg" alt="Schweizer Flagge">
+      <img src="Grabünden Flagge.jpg" alt="Graubünden Flagge">
+    </div>
+  </header>
+
+  <main>
+    <a href="javascript:history.back()" class="back-button">Zurück</a>
+    <div class="search-bar">
+      <input type="text" id="search-input" placeholder="Polster suchen...">
+    </div>
+    <div class="category-nav">
+      <a href="index.html">Home</a>
+      <a href="Vorhänge.html">Vorhänge</a>
+      <a href="polster.html">Polster</a>
+      <a href="Betten.html">Betten</a>
+      <a href="kavallerietuch.html">Kavallerietuch</a>
+      <a href="Teppiche.html">Teppiche</a>
+      <a href="Sale.html" class="sale-link">Sale</a>
+    </div>
+    <div class="controls">
+      <div class="sort-options">
+        <select id="sort-select">
+          <option value="name-asc">Name (A-Z)</option>
+          <option value="name-desc">Name (Z-A)</option>
+          <option value="price-asc">Preis (aufsteigend)</option>
+          <option value="price-desc">Preis (absteigend)</option>
+        </select>
+      </div>
+    </div>
+    <h2>Unsere Polster</h2>
+    <div class="category-container" id="category-container"></div>
+    <button class="filter-toggle" id="filter-toggle">Filter anzeigen</button>
+    <aside class="filter-sidebar" id="filter-sidebar">
+      <h3>Filter</h3>
+      <div>
+        <h4>Typ</h4>
+        <label><input type="checkbox" class="filter-type" value="sitzpolster"> Sitzpolster</label>
+        <label><input type="checkbox" class="filter-type" value="rueckenpolster"> Rückenpolster</label>
+        <label><input type="checkbox" class="filter-type" value="dekorationspolster"> Dekorationspolster</label>
+        <label><input type="checkbox" class="filter-type" value="outdoorpolster"> Outdoor-Polster</label>
+        <label><input type="checkbox" class="filter-type" value="kissen"> Kissen</label>
+      </div>
+      <div>
+        <h4>Material</h4>
+        <label><input type="checkbox" class="filter-material" value="baumwolle"> Baumwolle</label>
+        <label><input type="checkbox" class="filter-material" value="polyester"> Polyester</label>
+        <label><input type="checkbox" class="filter-material" value="samt"> Samt</label>
+        <label><input type="checkbox" class="filter-material" value="leinen"> Leinen</label>
+      </div>
+      <div class="price-filter">
+        <h4>Preis</h4>
+        <input type="range" id="price-range" class="price-range" min="0" max="100" value="100">
+        <div id="price-value">Bis 100 €</div>
+      </div>
+    </aside>
+    <section class="process-section">
+      <h2>Wie unsere Möbel hergestellt werden</h2>
+      <div class="process-step">
+        <img src="Polster Planung.jpg" alt="Schritt 1: Design">
+        <div class="text">
+          <h3>1. Design & Planung</h3>
+          <p>Unsere Polstermöbel beginnen mit einem durchdachten Designprozess. Unsere Designer entwickeln einzigartige Konzepte, die Stil und Funktionalität vereinen, basierend auf den neuesten Trends und Kundenwünschen.</p>
+        </div>
+      </div>
+      <div class="process-step reverse">
+        <img src="Polster Material.jpg" alt="Schritt 2: Materialauswahl">
+        <div class="text">
+          <h3>2. Materialauswahl</h3>
+          <p>Wir wählen nur hochwertige Materialien wie nachhaltige Stoffe und robuste Holzrahmen aus. Jeder Stoff wird sorgfältig geprüft, um Langlebigkeit und Komfort zu gewährleisten.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <img src="Polster Herstellung.jpg" alt="Schritt 3: Produktion">
+        <div class="text">
+          <h3>3. Handwerkliche Fertigung</h3>
+          <p>In unserer Werkstatt in Graubünden setzen erfahrene Handwerker die Designs um. Mit Präzision und Sorgfalt werden die Polster gefertigt, genäht und montiert.</p>
+        </div>
+      </div>
+      <div class="process-step reverse">
+        <img src="Polster Qualität.jpg" alt="Schritt 4: Qualitätskontrolle">
+        <div class="text">
+          <h3>4. Qualitätskontrolle</h3>
+          <p>Vor der Auslieferung wird jedes Möbelstück einer strengen Qualitätsprüfung unterzogen, um sicherzustellen, dass es unseren hohen Standards entspricht.</p>
+        </div>
+      </div>
+    </section>
+    <section class="contact-card">
+      <h2>Kontaktieren Sie uns</h2>
+      <p>Kavallerietuch AG</p>
+      <p>Musterstraße 123, 7000 Chur, Schweiz</p>
+      <p>Telefon: +41 81 123 45 67</p>
+      <p>E-Mail: <a href="mailto:info@kavallerietuch.ch">info@kavallerietuch.ch</a></p>
+    </section>
+  </main>
+  <a href="#" class="back-to-top" id="back-to-top">Nach oben</a>
+  <footer>
+    <p>© 2025 Kavallerietuch</p>
+    <div class="footer-nav">
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutz</a>
+      <a href="Versand und Rückgabe.html">Versand & Rückgabe</a>
+      <a href="agb.html">AGB</a>
+    </div>
+    <div class="social-icons">
+      <a href="https://instagram.com" target="_blank" rel="noopener"><img src="instagram.png" alt="Instagram"></a>
+      <a href="https://facebook.com" target="_blank" rel="noopener"><img src="facebook.png" alt="Facebook"></a>
+      <a href="https://tiktok.com" target="_blank" rel="noopener"><img src="tiktok.png" alt="TikTok"></a>
+    </div>
+  </footer>
+  <script>
+    const categories = [
+      { type: "sitzpolster", material: "baumwolle", price: 30, name: "Stühle", image: "stühle.jpg", description: "Bequemes Polster für Stühle und Bänke.", link: "sitzpolster.html" },
+      { type: "rueckenpolster", material: "polyester", price: 40, name: "Sessel", image: "Sessel.jpg", description: "Unterstützung und Komfort für den Rücken.", link: "rueckenpolster.html" },
+      { type: "dekorationspolster", material: "samt", price: 25, name: "Recamieren", image: "Rekamiere.jpg", description: "Stilvolle Akzente für Ihr Zuhause.", link: "dekorationspolster.html" },
+      { type: "outdoorpolster", material: "polyester", price: 50, name: "Sofas", image: "Sofa.jpg", description: "Wetterbeständig und langlebig für draußen.", link: "outdoorpolster.html" },
+      { type: "kissen", material: "leinen", price: 20, name: "Hocker", image: "Hocker.jpg", description: "Weich und dekorativ für Sofa oder Bett.", link: "kissen.html" }
+    ];
+    const filterTypes = document.querySelectorAll('.filter-type');
+    const filterMaterials = document.querySelectorAll('.filter-material');
+    const priceRange = document.getElementById('price-range');
+    const priceValue = document.getElementById('price-value');
+    const searchInput = document.getElementById('search-input');
+    const sortSelect = document.getElementById('sort-select');
+    const backToTop = document.getElementById('back-to-top');
+    const container = document.getElementById('category-container');
+    const filterToggle = document.getElementById('filter-toggle');
+    const filterSidebar = document.getElementById('filter-sidebar');
+
+    function renderCategories(categoriesToRender) {
+      container.innerHTML = '';
+      categoriesToRender.forEach(category => {
+        const div = document.createElement('div');
+        div.classList.add('category');
+        div.setAttribute('data-type', category.type);
+        div.setAttribute('data-material', category.material);
+        div.setAttribute('data-price', category.price);
+        div.setAttribute('data-name', category.name);
+        div.innerHTML = `
+          <img src="${category.image}" alt="${category.name}">
+          <h3>${category.name}</h3>
+          <p>${category.description}</p>
+          <button onclick="window.location.href='${category.link}'">Mehr erfahren</button>
+        `;
+        container.appendChild(div);
+      });
+      applyFiltersAndSearch();
+    }
+
+    function applyFiltersAndSearch() {
+      const selectedTypes = Array.from(filterTypes).filter(cb => cb.checked).map(cb => cb.value);
+      const selectedMaterials = Array.from(filterMaterials).filter(cb => cb.checked).map(cb => cb.value);
+      const maxPrice = parseInt(priceRange.value);
+      const searchTerm = searchInput.value.toLowerCase();
+      const categoryElements = document.querySelectorAll('.category');
+
+      categoryElements.forEach(category => {
+        const type = category.getAttribute('data-type');
+        const material = category.getAttribute('data-material');
+        const price = parseInt(category.getAttribute('data-price'));
+        const name = category.getAttribute('data-name').toLowerCase();
+
+        const matchesType = selectedTypes.length === 0 || selectedTypes.includes(type);
+        const matchesMaterial = selectedMaterials.length === 0 || selectedMaterials.includes(material);
+        const matchesPrice = price <= maxPrice;
+        const matchesSearch = name.includes(searchTerm);
+
+        if (matchesType && matchesMaterial && matchesPrice && matchesSearch) {
+          category.classList.add('visible');
+        } else {
+          category.classList.remove('visible');
+        }
+      });
+    }
+
+    function sortCategories() {
+      const sortValue = sortSelect.value;
+      const sortedCategories = [...categories];
+      sortedCategories.sort((a, b) => {
+        if (sortValue === 'name-asc') return a.name.localeCompare(b.name);
+        if (sortValue === 'name-desc') return b.name.localeCompare(a.name);
+        if (sortValue === 'price-asc') return a.price - b.price;
+        if (sortValue === 'price-desc') return b.price - a.price;
+      });
+      renderCategories(sortedCategories);
+    }
+
+    filterToggle.addEventListener('click', () => {
+      if (filterSidebar.classList.contains('open')) {
+        filterSidebar.classList.remove('open');
+        filterToggle.textContent = 'Filter anzeigen';
+      } else {
+        filterSidebar.classList.add('open');
+        filterToggle.textContent = 'Filter ausblenden';
+      }
+    });
+
+    filterTypes.forEach(checkbox => checkbox.addEventListener('change', applyFiltersAndSearch));
+    filterMaterials.forEach(checkbox => checkbox.addEventListener('change', applyFiltersAndSearch));
+    priceRange.addEventListener('input', () => {
+      priceValue.textContent = `Bis ${priceRange.value} €`;
+      applyFiltersAndSearch();
+    });
+    searchInput.addEventListener('input', applyFiltersAndSearch);
+    sortSelect.addEventListener('change', sortCategories);
+    window.addEventListener('scroll', () => {
+      backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
+    });
+    backToTop.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    renderCategories(categories);
+  </script>
+</body>
+</html>

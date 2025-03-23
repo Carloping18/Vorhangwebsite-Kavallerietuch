@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leinenvorhang 2 - Kavallerietuch</title>
+  <!-- Google Fonts Montserrat einbinden -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap" rel="stylesheet">
+  <style>
+    /* Grunddesign */
+    body {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 100;
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
+      color: #000000;
+      overflow-x: hidden;
+    }
+    header {
+      background-color: #cfcfcf;
+      padding: 5px;
+      position: static;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 4px rgba(218, 218, 218, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+    header img.logo {
+      width: 50px;
+      height: 50px;
+      margin-left: 10px;
+      object-fit: cover;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      margin-left: auto;
+      margin-right: 10px;
+    }
+    nav a {
+      color: #fc0000;
+      text-decoration: none;
+      margin: 0 10px;
+      font-size: 0.9em;
+      font-weight: normal;
+      position: relative;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* Dropdown-Menü */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #ffffff;
+      min-width: 200px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1001;
+      border-radius: 8px;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .dropdown-content a {
+      color: #000000;
+      padding: 10px 15px;
+      text-decoration: none;
+      display: block;
+      font-weight: normal;
+      font-size: 0.9em;
+    }
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+      text-decoration: none;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    /* Flaggen */
+    .flags {
+      margin-right: 10px;
+      display: flex;
+      align-items: center;
+    }
+    .flags img {
+      width: 20px;
+      height: 20px;
+      margin-left: 10px;
+      object-fit: cover;
+    }
+
+    /* Zurück-Button */
+    .back-button {
+      display: block;
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 0 20px;
+    }
+    .back-button a {
+      padding: 10px 20px;
+      background-color: #444;
+      color: #fff;
+      font-size: 1em;
+      border-radius: 25px;
+      text-decoration: none;
+      transition: background-color 0.3s, transform 0.2s;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      display: inline-block;
+    }
+    .back-button a:hover {
+      background-color: #666;
+      transform: scale(1.05);
+    }
+
+    /* Hauptcontainer */
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 20px;
+      gap: 20px;
+      justify-content: center;
+      align-items: flex-start;
+      max-width: 1200px;
+      margin: 0 auto 40px auto;
+    }
+    .product-image {
+      flex: 1;
+      min-width: 300px;
+      max-width: 600px;
+    }
+    .product-image img.main {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .more-images {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .more-images img {
+      width: 250px;
+      height: 350px;
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+    }
+    .more-images img:hover {
+      transform: scale(1.05);
+    }
+
+    /* Produktdetails */
+    main {
+      flex: 1;
+      min-width: 300px;
+      max-width: 600px;
+      padding: 20px;
+    }
+    .product-details h1 {
+      font-size: 2em;
+      color: #333;
+      margin-bottom: 20px;
+    }
+    .product-details p {
+      font-size: 1.1em;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    .price {
+      font-size: 1.8em;
+      color: #444;
+      margin-bottom: 20px;
+    }
+    .options {
+      margin-bottom: 30px;
+    }
+    .options label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 1em;
+      color: #333;
+    }
+    .options input {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1em;
+      max-width: 200px;
+      margin-bottom: 15px;
+      background-color: #fff;
+      color: #666;
+    }
+    .order-button {
+      padding: 12px 24px;
+      border: none;
+      background-color: #444;
+      color: #fff;
+      font-size: 1.2em;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    .order-button:hover {
+      background-color: #666;
+      transform: scale(1.05);
+    }
+
+    /* Varianten */
+    .variant-section {
+      margin: 20px 0;
+    }
+    .variant-section h3 {
+      font-size: 1.4em;
+      color: #333;
+      margin-bottom: 15px;
+      text-align: left;
+    }
+    .variant-images {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .variant-images img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+    }
+    .variant-images img:hover {
+      transform: scale(1.05);
+    }
+
+    /* Zusätzliche Inhalte */
+    .additional-content {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+    .reviews-section {
+      margin-bottom: 40px;
+    }
+    .reviews-section h2 {
+      font-size: 1.8em;
+      color: #333;
+      margin-bottom: 20px;
+    }
+    .review {
+      background-color: #f9f9f9;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+    .review .stars {
+      color: #d4af37;
+      margin-bottom: 10px;
+    }
+    .review p {
+      font-size: 1em;
+      color: #666;
+      margin: 0;
+    }
+    .care-instructions {
+      margin-bottom: 40px;
+    }
+    .care-instructions h2 {
+      font-size: 1.8em;
+      color: #333;
+      margin-bottom: 20px;
+    }
+    .care-instructions p {
+      font-size: 1.1em;
+      color: #666;
+      line-height: 1.6;
+    }
+    .similar-products {
+      position: relative;
+    }
+    .similar-products h2 {
+      font-size: 1.8em;
+      color: #333;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .slider-container {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding: 10px;
+    }
+    .slider-item {
+      flex: 0 0 200px;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+    .slider-item img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .slider-item h4 {
+      font-size: 1em;
+      color: #333;
+      margin: 5px 0;
+    }
+    .slider-item a {
+      text-decoration: none;
+      color: #444;
+      font-size: 0.9em;
+      padding: 5px 10px;
+      border: 1px solid #444;
+      border-radius: 15px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .slider-item a:hover {
+      background-color: #444;
+      color: #fff;
+    }
+    .slider-arrow {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 50%;
+      z-index: 10;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 1em 0;
+      background-color: #cfcfcf;
+      color: #333;
+    }
+    .footer-nav {
+      margin: 10px 0;
+    }
+    .footer-nav a {
+      color: #333;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 0.9em;
+    }
+    .footer-nav a:hover {
+      text-decoration: underline;
+    }
+    .social-icons {
+      margin-top: 10px;
+    }
+    .social-icons img {
+      width: 35px;
+      height: 35px;
+      margin: 0 10px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .social-icons img:hover {
+      transform: scale(1.1);
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: center;
+      }
+      nav {
+        margin: 10px 0;
+      }
+      .container {
+        flex-direction: column;
+        align-items: center;
+      }
+      main, .product-image {
+        max-width: 90%;
+      }
+      .slider-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      .slider-item {
+        flex: 0 0 100%;
+        max-width: 300px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="Kavallerietuch.png" alt="Kavallerietuch Logo" class="logo">
+    <nav>
+      <a href="index.html">Home</a>
+      <div class="dropdown">
+        <a href="Produkte.html">Produkte</a>
+        <div class="dropdown-content">
+          <a href="Tagesvorhang.html">Vorhänge</a>
+          <a href="polster.html">Polster</a>
+          <a href="Betten.html">Betten</a>
+          <a href="produkt4.html">Kavallerietuch</a>
+          <a href="Teppiche.html">Böden</a>
+        </div>
+      </div>
+      <a href="wie-funktionierts.html">Wie funktioniert’s?</a>
+      <a href="über-uns.html">Über uns</a>
+    </nav>
+    <div class="flags">
+      <img src="Schweizer Flagge.jpg" alt="Schweizer Flagge">
+      <img src="Grabünden Flagge.jpg" alt="Graubünden Flagge">
+    </div>
+  </header>
+
+  <!-- Zurück-Button -->
+  <div class="back-button">
+    <a href="Leinenvorhang.html">Zurück</a>
+  </div>
+
+  <div class="container">
+    <div class="product-image">
+      <img src="Leinenvorhang 2.jpg" alt="Leinenvorhang 2" class="main">
+      <!-- Zusätzliche Bilder direkt unter dem Hauptbild -->
+      <div class="more-images">
+        <img src="Leinenvorhang 2.jpg" alt="Produkt 1">
+        <img src="Leinenvorhang_2_hover.jpg" alt="Produkt 2">
+        <img src="Leinenvorhang 2.jpg" alt="Produkt 3">
+        <img src="Leinenvorhang_2_hover.jpg" alt="Produkt 4">
+      </div>
+    </div>
+    <main>
+      <div class="product-details">
+        <h1>Leinenvorhang 2</h1>
+        <p>Dieser mittelschwere Leinenvorhang in Weiß bietet eine perfekte Balance zwischen Lichtdurchlässigkeit und Privatsphäre. Hergestellt aus hochwertigem Leinen, ideal für eine stilvolle und gemütliche Raumgestaltung.</p>
+        
+        <!-- Vorhangarten -->
+        <div class="variant-section">
+          <h3>Vorhangarten</h3>
+          <div class="variant-images">
+            <img src="clic.JPG" alt="Vorhangart 1">
+            <img src="ösen.JPG" alt="Vorhangart 2">
+            <img src="schlaufen.JPG" alt="Vorhangart 3">
+            <img src="wave.JPG" alt="Vorhangart 4">
+          </div>
+        </div>
+        
+        <!-- Gleiter und Aufhängungen -->
+        <div class="variant-section">
+          <h3>Gleiter und Aufhängungen</h3>
+          <div class="variant-images">
+            <img src="gleiter1.jpg" alt="Gleiter 1">
+            <img src="gleiter2.jpg" alt="Gleiter 2">
+            <img src="gleiter3.jpg" alt="Gleiter 3">
+            <img src="gleiter4.jpg" alt="Gleiter 4">
+          </div>
+        </div>
+        
+        <!-- Maßkonfigurator und Preis -->
+        <div class="options">
+          <div class="input-group">
+            <label for="width">Breite (in Metern):</label>
+            <input type="number" id="width" name="width" min="0.5" step="0.1" value="1.4" oninput="updatePrice()">
+          </div>
+          <div class="input-group">
+            <label for="height">Höhe (in Metern):</label>
+            <input type="number" id="height" name="height" min="0.5" step="0.1" value="2.4" oninput="updatePrice()">
+          </div>
+        </div>
+        <div class="price" id="price">0 Fr.</div>
+        <button class="order-button" onclick="addToCart()">Zum Warenkorb hinzufügen</button>
+      </div>
+    </main>
+  </div>
+
+  <!-- Zusätzliche Inhalte -->
+  <div class="additional-content">
+    <!-- Produktbewertungen -->
+    <div class="reviews-section">
+      <h2>Kundenbewertungen</h2>
+      <div class="review">
+        <div class="stars">★★★★☆</div>
+        <p>"Ein wunderschöner Vorhang, der mein Wohnzimmer aufhellt. Die Qualität ist top, nur die Lieferung hat etwas länger gedauert." - Anna S.</p>
+      </div>
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <p>"Perfekt für meine Bedürfnisse! Der weiße Stoff ist elegant und lässt genug Licht durch." - Peter M.</p>
+      </div>
+    </div>
+
+    <!-- Pflegehinweise -->
+    <div class="care-instructions">
+      <h2>Pflegehinweise</h2>
+      <p>Um die Langlebigkeit Ihres Leinenvorhangs zu gewährleisten, empfehlen wir eine schonende Handwäsche bei maximal 30°C mit einem milden Waschmittel. Vermeiden Sie das Trocknen im Trockner; lassen Sie den Vorhang an der Luft trocknen und bügeln Sie ihn bei niedriger Temperatur, um Falten zu entfernen.</p>
+    </div>
+
+    <!-- Ähnliche Produkte -->
+    <div class="similar-products">
+      <h2>Ähnliche Produkte</h2>
+      <div class="slider-container" id="similar-slider">
+        <div class="slider-item">
+          <img src="Leinenvorhang 1.jpg" alt="Leinenvorhang 1">
+          <h4>Leinenvorhang 1</h4>
+          <a href="Leinenvorhang 1.html">Mehr erfahren</a>
+        </div>
+        <div class="slider-item">
+          <img src="Leinenvorhang 3.jpg" alt="Leinenvorhang 3">
+          <h4>Leinenvorhang 3</h4>
+          <a href="Leinenvorhang_3.html">Mehr erfahren</a>
+        </div>
+        <div class="slider-item">
+          <img src="Leinenvorhang 4.jpg" alt="Leinenvorhang 4">
+          <h4>Leinenvorhang 4</h4>
+          <a href="Leinenvorhang_4.html">Mehr erfahren</a>
+        </div>
+        <div class="slider-item">
+          <img src="Leinenvorhang 5.jpg" alt="Leinenvorhang 5">
+          <h4>Leinenvorhang 5</h4>
+          <a href="Leinenvorhang_5.html">Mehr erfahren</a>
+        </div>
+      </div>
+      <button class="slider-arrow" id="slider-arrow">→</button>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 Kavallerietuch</p>
+    <div class="footer-nav">
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutz</a>
+      <a href="versand-rueckgabe.html">Versand & Rückgabe</a>
+      <a href="agb.html">AGB</a>
+    </div>
+    <div class="social-icons">
+        <a href="https://instagram.com" target="_blank" rel="noopener"><img src="instagram.png" alt="Instagram"></a>
+        <a href="https://facebook.com" target="_blank" rel="noopener"><img src="facebook.png" alt="Facebook"></a>
+        <a href="https://tiktok.com" target="_blank" rel="noopener"><img src="tiktok.png" alt="TikTok"></a>
+      </div>
+  </footer>
+
+  <script>
+    // Preis aktualisieren
+    function updatePrice() {
+      const width = parseFloat(document.getElementById("width").value) || 0;
+      const height = parseFloat(document.getElementById("height").value) || 0;
+      const priceElement = document.getElementById("price");
+      const pricePerSquareMeter = 25; // Preis pro Quadratmeter für Leinenvorhang 2
+      const area = width * height;
+      let totalPrice = area * pricePerSquareMeter;
+      const minPrice = 50; // Mindestpreis basierend auf Übersichtsseite
+      totalPrice = Math.max(totalPrice, minPrice);
+      priceElement.textContent = `${totalPrice.toFixed(2)} Fr.`;
+      return totalPrice;
+    }
+
+    // Zum Warenkorb hinzufügen
+    function addToCart() {
+      const name = document.querySelector(".product-details h1").textContent;
+      const price = updatePrice();
+      const width = parseFloat(document.getElementById("width").value) || 0;
+      const height = parseFloat(document.getElementById("height").value) || 0;
+
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push({ 
+        name: `${name} (${width}m x ${height}m)`, 
+        price: price 
+      });
+      localStorage.setItem('cart', JSON.stringify(cart));
+
+      alert(`${name} wurde zum Warenkorb hinzugefügt!`);
+      window.location.href = 'warenkorb.html';
+    }
+
+    // Slider-Funktionalität
+    const sliderContainer = document.getElementById('similar-slider');
+    const sliderArrow = document.getElementById('slider-arrow');
+    sliderArrow.addEventListener('click', () => {
+      const sliderItem = document.querySelector('.slider-item');
+      const itemWidth = sliderItem.offsetWidth + 20; // Breite + Abstand
+      sliderContainer.scrollBy({ left: itemWidth, behavior: 'smooth' });
+    });
+
+    // Initialer Preis beim Laden
+    window.onload = updatePrice;
+  </script>
+</body>
+</html>

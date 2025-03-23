@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sale - Kavallerietuch</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Roboto Condensed', sans-serif;
+      font-weight: 300;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      color: #2b2b2b;
+      overflow-x: hidden;
+    }
+    header {
+      background-color: #1a1a1a;
+      padding: 10px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background-color 0.3s;
+    }
+    header img.logo {
+      width: 60px;
+      height: 60px;
+      margin-left: 10px;
+      object-fit: cover;
+      filter: brightness(1.2);
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      margin-left: auto;
+      margin-right: 20px;
+    }
+    nav a {
+      color: #e0e0e0;
+      text-decoration: none;
+      margin: 0 10px;
+      font-size: 0.7em;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.3s;
+      line-height: 1;
+      vertical-align: middle;
+    }
+    nav a:hover {
+      color: #d4af37;
+    }
+    .dropdown {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+    .dropdown > a {
+      margin: 0 10px;
+      line-height: 1;
+      vertical-align: middle;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #1a1a1a;
+      min-width: 200px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      z-index: 1001;
+      border-radius: 8px;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .dropdown-content a {
+      color: #e0e0e0;
+      padding: 12px 15px;
+      text-decoration: none;
+      display: block;
+      font-weight: 400;
+      font-size: 0.7em;
+      transition: background-color 0.3s;
+    }
+    .dropdown-content a:hover {
+      background-color: #2b2b2b;
+      color: #d4af37;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    .flags {
+      margin-right: 20px;
+      display: flex;
+      align-items: center;
+    }
+    .flags img {
+      width: 20px;
+      height: 20px;
+      margin-left: 10px;
+      object-fit: cover;
+    }
+    .back-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+      padding: 10px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-size: 1em;
+      font-weight: 400;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      z-index: 1001;
+      transition: background-color 0.3s;
+    }
+    .back-button:hover {
+      background-color: #2b2b2b;
+    }
+    .sale-header {
+      text-align: center;
+      padding: 80px 20px 40px;
+      background: linear-gradient(135deg, #ff6f61, #ffcc00); /* Ursprünglicher Gradient-Hintergrund */
+      color: #fff;
+      border-radius: 0 0 20px 20px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+      position: relative;
+    }
+    .sale-header h1 {
+      font-size: 2.5em;
+      font-weight: 700;
+      margin: 0 0 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .sale-header p {
+      font-size: 1.2em;
+      margin: 0 0 20px;
+      font-weight: 300;
+    }
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .countdown-item {
+      background: rgba(255, 255, 255, 0.2); /* Ursprünglicher halbtransparenter Hintergrund */
+      padding: 10px 15px;
+      border-radius: 10px;
+      text-align: center;
+      min-width: 60px;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      animation: pulse 2s infinite;
+    }
+    .countdown-item span {
+      display: block;
+      font-size: 1.8em;
+      font-weight: 700;
+      color: #ff6f61; /* Orange für Zahlen */
+    }
+    .countdown-item small {
+      font-size: 0.8em;
+      color: #fff; /* Weiß für die Beschriftung wie ursprünglich */
+      font-weight: 400;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    .sale-container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+    .sale-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+    }
+    .sale-item {
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .sale-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    }
+    .sale-item img {
+      width: 100%;
+      max-width: 200px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      transition: transform 0.3s;
+    }
+    .sale-item:hover img {
+      transform: scale(1.05);
+    }
+    .sale-item h3 {
+      margin: 0 0 12px;
+      font-size: 1.4em;
+      color: #1a1a1a;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .sale-item p {
+      font-size: 0.95em;
+      color: #666;
+      margin: 0 0 15px;
+      line-height: 1.4;
+    }
+    .sale-item::before {
+      content: "SALE";
+      position: absolute;
+      top: 10px;
+      right: -40px;
+      background: #d4af37;
+      color: #1a1a1a;
+      padding: 5px 40px;
+      font-size: 0.9em;
+      font-weight: 700;
+      transform: rotate(45deg);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    .price-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 15px;
+      background: #f5f5f5;
+      padding: 8px 15px;
+      border-radius: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+    .original-price {
+      font-size: 1.1em;
+      color: #666;
+      text-decoration: line-through;
+      font-weight: 400;
+    }
+    .sale-price {
+      font-size: 1.5em;
+      color: #d4af37;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 10px;
+    }
+    .sale-item button {
+      padding: 10px 25px;
+      border: none;
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+      font-size: 1em;
+      font-weight: 400;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+    .sale-item button:hover {
+      background-color: #d4af37;
+      color: #1a1a1a;
+      transform: scale(1.05);
+    }
+    .pagination {
+      text-align: center;
+      margin: 40px 0;
+    }
+    .pagination a {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 0 5px;
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+      text-decoration: none;
+      border-radius: 25px;
+      font-size: 1em;
+      font-weight: 400;
+      transition: background-color 0.3s, transform 0.3s;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+    .pagination a:hover {
+      background-color: #d4af37;
+      color: #1a1a1a;
+      transform: scale(1.1);
+    }
+    .pagination a.active {
+      background-color: #d4af37;
+      color: #1a1a1a;
+      font-weight: 700;
+    }
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+      padding: 12px 24px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-size: 1em;
+      font-weight: 400;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      display: none;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+    .back-to-top:hover {
+      background-color: #d4af37;
+      color: #1a1a1a;
+      transform: scale(1.1);
+    }
+    footer {
+      text-align: center;
+      padding: 2em 0;
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+      box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.2);
+    }
+    .footer-nav {
+      margin: 15px 0;
+    }
+    .footer-nav a {
+      color: #e0e0e0;
+      text-decoration: none;
+      margin: 0 20px;
+      font-size: 0.9em;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.3s;
+    }
+    .footer-nav a:hover {
+      color: #d4af37;
+    }
+    .social-icons {
+      margin-top: 15px;
+    }
+    .social-icons img {
+      width: 35px;
+      height: 35px;
+      margin: 0 15px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .social-icons img:hover {
+      transform: scale(1.1);
+    }
+    @media (max-width: 1024px) {
+      .sale-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 768px) {
+      .sale-row {
+        grid-template-columns: 1fr;
+      }
+      .sale-item {
+        width: 80%;
+        max-width: 300px;
+        margin: 0 auto;
+      }
+      .sale-header h1 {
+        font-size: 2em;
+      }
+      .sale-header p {
+        font-size: 1em;
+      }
+      .countdown-item {
+        min-width: 50px;
+      }
+      .countdown-item span {
+        font-size: 1.5em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="Kavallerietuch.png" alt="Kavallerietuch Logo" class="logo">
+    <nav>
+      <a href="index.html">Home</a>
+      <div class="dropdown">
+        <a href="Gallerie.html">Gallerie</a>
+        <a href="wie-funktionierts.html">Wie funktioniert’s?</a>
+        <a href="uber-uns.html">Über uns</a>
+    </nav>
+    <div class="flags">
+      <img src="Schweizer Flagge.jpg" alt="Schweizer Flagge">
+      <img src="Grabünden Flagge.jpg" alt="Graubünden Flagge">
+    </div>
+  </header>
+
+  <main>
+    <div class="sale-header">
+      <a href="javascript:history.back()" class="back-button">Zurück</a>
+      <h1>SALE – Bis zu 50% Rabatt!</h1>
+      <p>Sichere dir jetzt unsere besten Angebote, bevor sie weg sind!</p>
+      <div class="countdown" id="countdown">
+        <div class="countdown-item">
+          <span id="days">00</span>
+          <small>Tage</small>
+        </div>
+        <div class="countdown-item">
+          <span id="hours">00</span>
+          <small>Stunden</small>
+        </div>
+        <div class="countdown-item">
+          <span id="minutes">00</span>
+          <small>Minuten</small>
+        </div>
+        <div class="countdown-item">
+          <span id="seconds">00</span>
+          <small>Sekunden</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="sale-container">
+      <div class="sale-row">
+        <div class="sale-item">
+          <img src="Tagesvorhang 1.jpg" alt="Tagesvorhang 1">
+          <h3>Tagesvorhang 1</h3>
+          <p>Einfacher Tüllvorhang.</p>
+          <div class="price-box">
+            <span class="original-price">30 Fr.</span>
+            <span class="sale-price">20 Fr.</span>
+          </div>
+          <button onclick="window.location.href='Tagesvorhang 1.html'">Jetzt kaufen</button>
+        </div>
+        <div class="sale-item">
+          <img src="Tagesvorhang 2.jpg" alt="Tagesvorhang 2">
+          <h3>Tagesvorhang 2</h3>
+          <p>Mittlere Qualität.</p>
+          <div class="price-box">
+            <span class="original-price">50 Fr.</span>
+            <span class="sale-price">35 Fr.</span>
+          </div>
+          <button onclick="window.location.href='Tagesvorhang 2.html'">Jetzt kaufen</button>
+        </div>
+        <div class="sale-item">
+          <img src="Tagesvorhang 3.jpg" alt="Tagesvorhang 3">
+          <h3>Tagesvorhang 3</h3>
+          <p>Beste Qualität.</p>
+          <div class="price-box">
+            <span class="original-price">70 Fr.</span>
+            <span class="sale-price">50 Fr.</span>
+          </div>
+          <button onclick="window.location.href='Tagesvorhang 3.html'">Jetzt kaufen</button>
+        </div>
+        <div class="sale-item">
+          <img src="Tagesvorhang 4.jpg" alt="Tagesvorhang 4">
+          <h3>Tagesvorhang 4</h3>
+          <p>Stilvolles Design.</p>
+          <div class="price-box">
+            <span class="original-price">45 Fr.</span>
+            <span class="sale-price">30 Fr.</span>
+          </div>
+          <button onclick="window.location.href='Tagesvorhang 4.html'">Jetzt kaufen</button>
+        </div>
+      </div>
+
+      <div class="sale-row">
+        <div class="sale-item">
+          <img src="Tagesvorhang 5.jpg" alt="Produkt 5">
+          <h3>Produkt 5</h3>
+          <p>Elegante Optik.</p>
+          <div class="price-box">
+            <span class="original-price">60 Fr.</span>
+            <span class="sale-price">45 Fr.</span>
+          </div>
+          <button onclick="window.location.href='Tagesvorhang 5.html'">Jetzt kaufen</button>
+        </div>
+        <div class="sale-item">
+          <img src="Tagesvorhang 6.jpg" alt="Produkt 6">
+          <h3>Produkt 6</h3>
+          <p>Modern & schlicht.</p>
+          <div class="price-box">
+            <span class="original-price">40 Fr.</span>
+            <span class="sale-price">25 Fr.</span>
+          </div>
+          <button onclick="window.location.href='produkt6.html'">Jetzt kaufen</button>
+        </div>
+        <div class="sale-item">
+          <img src="Tagesvorhang 7.jpg" alt="Produkt 7">
+          <h3>Produkt 7</h3>
+          <p>Zeitloser Stil.</p>
+          <div class="price-box">
+            <span class="original-price">55 Fr.</span>
+            <span class="sale-price">40 Fr.</span>
+          </div>
+          <button onclick="window.location.href='produkt7.html'">Jetzt kaufen</button>
+        </div>
+        <div class="sale-item">
+          <img src="Tagesvorhang 8.jpg" alt="Produkt 8">
+          <h3>Produkt 8</h3>
+          <p>Robustes Material.</p>
+          <div class="price-box">
+            <span class="original-price">65 Fr.</span>
+            <span class="sale-price">50 Fr.</span>
+          </div>
+          <button onclick="window.location.href='produkt8.html'">Jetzt kaufen</button>
+        </div>
+      </div>
+
+      <div class="sale-row">
+        <div class="sale-item">
+          <img src="Tagesvorhang 9.jpg" alt="Produkt 9">
+          <h3>Produkt 9</h3>
+          <p>Leichte Textur.</p>
+          <div class="price-box">
+            <span class="original-price">35 Fr.</span>
+            <span class="sale-price">20 Fr.</span>
+          </div>
+          <button onclick="window.location.href='produkt9.html'">Jetzt kaufen</button>
+        </div>
+        <div class="sale-item">
+          <img src="Tagesvorhang 10.jpg" alt="Produkt 10">
+          <h3>Produkt 10</h3>
+          <p>Luxuriöse Optik.</p>
+          <div class="price-box">
+            <span class="original-price">80 Fr.</span>
+            <span class="sale-price">60 Fr.</span>
+          </div>
+          <button onclick="window.location.href='produkt10.html'">Jetzt kaufen</button>
+        </div>
+        <div class="sale-item">
+          <img src="Tagesvorhang 11.jpg" alt="Produkt 11">
+          <h3>Produkt 11</h3>
+          <p>Minimalistisches Design.</p>
+          <div class="price-box">
+            <span class="original-price">50 Fr.</span>
+            <span class="sale-price">35 Fr.</span>
+          </div>
+          <button onclick="window.location.href='produkt11.html'">Jetzt kaufen</button>
+        </div>
+        <div class="sale-item">
+          <img src="Tagesvorhang 12.jpg" alt="Produkt 12">
+          <h3>Produkt 12</h3>
+          <p>Hohe Strapazierfähigkeit.</p>
+          <div class="price-box">
+            <span class="original-price">75 Fr.</span>
+            <span class="sale-price">55 Fr.</span>
+          </div>
+          <button onclick="window.location.href='produkt12.html'">Jetzt kaufen</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="pagination">
+      <a href="sale.html?page=1" class="active">1</a>
+      <a href="sale.html?page=2">2</a>
+      <a href="sale.html?page=3">3</a>
+    </div>
+  </main>
+
+  <a href="#" class="back-to-top" id="back-to-top">Nach oben</a>
+
+  <footer>
+    <p>© 2025 Kavallerietuch</p>
+    <div class="footer-nav">
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutz</a>
+      <a href="Versand und Rückgabe.html">Versand & Rückgabe</a>
+      <a href="agb.html">AGB</a>
+    </div>
+    <div class="social-icons">
+      <a href="https://instagram.com" target="_blank" rel="noopener"><img src="instagram.png" alt="Instagram"></a>
+      <a href="https://facebook.com" target="_blank" rel="noopener"><img src="facebook.png" alt="Facebook"></a>
+      <a href="https://tiktok.com" target="_blank" rel="noopener"><img src="tiktok.png" alt="TikTok"></a>
+    </div>
+  </footer>
+
+  <script>
+    const backToTop = document.getElementById('back-to-top');
+
+    window.addEventListener('scroll', () => {
+      backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
+    });
+
+    backToTop.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    function startCountdown() {
+      const endDate = new Date();
+      endDate.setDate(endDate.getDate() + 7);
+
+      function updateCountdown() {
+        const now = new Date();
+        const timeLeft = endDate - now;
+
+        if (timeLeft <= 0) {
+          document.getElementById('countdown').innerHTML = '<p>Angebot abgelaufen!</p>';
+          return;
+        }
+
+        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+        document.getElementById('days').textContent = String(days).padStart(2, '0');
+        document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+        document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+        document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+      }
+
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    }
+
+    startCountdown();
+  </script>
+</body>
+</html>

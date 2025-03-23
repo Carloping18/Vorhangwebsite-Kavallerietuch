@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Impressum - Kavallerietuch</title>
+  <!-- Google Fonts Roboto Condensed einbinden -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    /* Grunddesign */
+    body {
+      font-family: 'Roboto Condensed', sans-serif; /* Ähnlich wie Porsche Next */
+      font-weight: 300; /* Leichtes Gewicht für einen modernen Look */
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
+      color: #000000;
+      overflow-x: hidden;
+    }
+    header {
+      background-color: #cfcfcf;
+      padding: 5px;
+      position: static;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 4px rgba(218, 218, 218, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+    header img.logo {
+      width: 50px;
+      height: 50px;
+      margin-left: 10px;
+      object-fit: cover;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      margin-left: auto;
+      margin-right: 10px;
+    }
+    nav a {
+      color: #ffffff;
+      text-decoration: none;
+      margin: 0 10px;
+      font-size: 0.9em;
+      font-weight: 400;
+      position: relative;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* Dropdown-Menü */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #ffffff;
+      min-width: 200px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1001;
+      border-radius: 8px;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .dropdown-content a {
+      color: #000000;
+      padding: 10px 15px;
+      text-decoration: none;
+      display: block;
+      font-weight: 400;
+      font-size: 0.9em;
+    }
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+      text-decoration: none;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    /* Flaggen */
+    .flags {
+      margin-right: 10px;
+      display: flex;
+      align-items: center;
+    }
+    .flags img {
+      width: 20px;
+      height: 20px;
+      margin-left: 10px;
+      object-fit: cover;
+    }
+
+    /* Main-Bereich */
+    main {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 2em;
+      color: #333;
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: 700; /* Fett für Überschriften */
+    }
+    .impressum-content {
+      font-size: 1em;
+      color: #666;
+      line-height: 1.6;
+    }
+    .impressum-content h2 {
+      font-size: 1.4em;
+      color: #333;
+      margin: 20px 0 10px;
+      font-weight: 700; /* Fett für Unterüberschriften */
+    }
+    .impressum-content p {
+      margin: 10px 0;
+      font-weight: 300; /* Leicht für Fließtext */
+    }
+    .impressum-content a {
+      color: #fc0000;
+      text-decoration: none;
+    }
+    .impressum-content a:hover {
+      text-decoration: underline;
+    }
+
+    /* Zurück zum Anfang Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #444;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-size: 1em;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      display: none;
+      font-weight: 400;
+    }
+    .back-to-top:hover {
+      background-color: #666;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 1em 0;
+      background-color: #cfcfcf;
+      color: #333;
+    }
+    .footer-nav {
+      margin: 10px 0;
+    }
+    .footer-nav a {
+      color: #333;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 0.9em;
+      font-weight: 400;
+    }
+    .footer-nav a:hover {
+      text-decoration: underline;
+    }
+    .social-icons {
+      margin-top: 10px;
+    }
+    .social-icons img {
+      width: 35px;
+      height: 35px;
+      margin: 0 10px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .social-icons img:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="Kavallerietuch.png" alt="Kavallerietuch Logo" class="logo">
+    <nav>
+      <a href="index.html">Home</a>
+      <div class="dropdown">
+        <a href="Produkte.html">Produkte</a>
+        <div class="dropdown-content">
+          <a href="Tagesvorhang.html">Vorhänge</a>
+          <a href="polster.html">Polster</a>
+          <a href="Betten.html">Betten</a>
+          <a href="produkt4.html">Kavallerietuch</a>
+          <a href="Teppiche.html">Böden</a>
+        </div>
+      </div>
+      <a href="wie-funktionierts.html">Wie funktioniert’s?</a>
+      <a href="über-uns.html">Über uns</a>
+    </nav>
+    <div class="flags">
+      <img src="Schweizer Flagge.jpg" alt="Schweizer Flagge">
+      <img src="Grabünden Flagge.jpg" alt="Graubünden Flagge">
+    </div>
+  </header>
+
+  <main>
+    <h1>Impressum</h1>
+    <div class="impressum-content">
+      <h2>Kontaktangaben</h2>
+      <p>
+        Kavallerietuch AG<br>
+        Sustweg 3<br>
+        7302 Landquart<br>
+        Schweiz
+      </p>
+      
+      <p>
+        <strong>Vertretungsberechtigte Person:</strong><br>
+        Reto Pingeon (Geschäftsführer)
+      </p>
+      
+      <p>
+        <strong>Kontakt:</strong><br>
+        Telefon: +41 81 123 45 67<br>
+        E-Mail: <a href="mailto:info@kavallerietuch.ch">info@kavallerietuch.ch</a>
+      </p>
+      
+      <p>
+        <strong>Handelsregister:</strong><br>
+        Eingetragen im Handelsregister des Kantons Graubünden<br>
+        Handelsregisternummer: CH-123.4.567.890-1
+      </p>
+      
+      <p>
+        <strong>Mehrwertsteuer-Nummer:</strong><br>
+        CHE-123.456.789 MWST
+      </p>
+      
+      <h2>Haftungsausschluss</h2>
+      <p>
+        <strong>Haftung für Inhalte:</strong><br>
+        Die Inhalte dieser Webseite wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Wir behalten uns vor, jederzeit Änderungen oder Ergänzungen an den bereitgestellten Informationen vorzunehmen.
+      </p>
+      
+      <p>
+        <strong>Haftung für Links:</strong><br>
+        Unsere Webseite enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Für die Inhalte der verlinkten Seiten ist ausschließlich der jeweilige Anbieter oder Betreiber verantwortlich. Zum Zeitpunkt der Verlinkung wurden die verlinkten Seiten auf mögliche Rechtsverstöße geprüft; solche waren nicht erkennbar. Eine permanente Überprüfung der verlinkten Seiten ist ohne konkrete Anhaltspunkte nicht zumutbar.
+      </p>
+      
+      <h2>Urheberrecht</h2>
+      <p>
+        Die Inhalte und Werke auf dieser Webseite unterliegen dem schweizerischen Urheberrecht (URG). Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechts bedürfen der schriftlichen Zustimmung des jeweiligen Rechteinhabers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet.
+      </p>
+    </div>
+  </main>
+
+  <!-- Zurück zum Anfang Button -->
+  <a href="#" class="back-to-top" id="back-to-top">Nach oben</a>
+
+  <footer>
+    <p>© 2025 Kavallerietuch</p>
+    <div class="footer-nav">
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutz</a>
+      <a href="Versand und Rückgabe.html">Versand & Rückgabe</a>
+      <a href="agb.html">AGB</a>
+    </div>
+    <div class="social-icons">
+      <a href="https://instagram.com" target="_blank"><img src="instagram.png" alt="Instagram"></a>
+      <a href="https://facebook.com" target="_blank"><img src="facebook.png" alt="Facebook"></a>
+      <a href="https://tiktok.com" target="_blank"><img src="tiktok.png" alt="TikTok"></a>
+    </div>
+  </footer>
+
+  <!-- JavaScript für Zurück zum Anfang -->
+  <script>
+    const backToTop = document.getElementById('back-to-top');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTop.style.display = 'block';
+      } else {
+        backToTop.style.display = 'none';
+      }
+    });
+
+    backToTop.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>

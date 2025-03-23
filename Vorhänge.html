@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produktseite - Kavallerietuch</title>
+  <!-- Google Fonts Roboto Condensed einbinden -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Roboto Condensed', sans-serif;
+      font-weight: 300;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      color: #2b2b2b;
+      overflow-x: hidden;
+    }
+    header {
+      background-color: #1a1a1a;
+      padding: 10px 20px;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background-color 0.3s;
+    }
+    header img.logo {
+      width: 60px;
+      height: 60px;
+      margin-left: 10px;
+      object-fit: cover;
+      filter: brightness(1.2);
+    }
+    nav {
+      display: flex;
+      align-items: center; /* Vertikale Zentrierung */
+      margin-left: auto;
+      margin-right: 20px;
+    }
+    nav a {
+      color: #e0e0e0;
+      text-decoration: none;
+      margin: 0 10px;
+      font-size: 0.7em;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.3s;
+      line-height: 1; /* Einheitliche Zeilenhöhe */
+      vertical-align: middle; /* Vertikale Ausrichtung */
+    }
+    nav a:hover {
+      color: #d4af37;
+    }
+
+    /* Dropdown-Menü */
+    .dropdown {
+      position: relative;
+      display: inline-flex; /* Änderung zu inline-flex für bessere Ausrichtung */
+      align-items: center; /* Innerhalb des Dropdowns zentriert */
+    }
+    .dropdown > a { /* Direkter Link im Dropdown */
+      margin: 0 10px; /* Gleicher Abstand wie andere Links */
+      line-height: 1; /* Einheitliche Zeilenhöhe */
+      vertical-align: middle; /* Vertikale Ausrichtung */
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #1a1a1a;
+      min-width: 200px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      z-index: 1001;
+      border-radius: 8px;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .dropdown-content a {
+      color: #e0e0e0;
+      padding: 12px 15px;
+      text-decoration: none;
+      display: block;
+      font-weight: 400;
+      font-size: 0.7em;
+      transition: background-color 0.3s;
+    }
+    .dropdown-content a:hover {
+      background-color: #2b2b2b;
+      color: #d4af37;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    /* Flaggen */
+    .flags {
+      margin-right: 20px;
+      display: flex;
+      align-items: center;
+    }
+    .flags img {
+      width: 20px;
+      height: 20px;
+      margin-left: 10px;
+      object-fit: cover;
+    }
+
+    /* Suchleiste */
+    .search-bar {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 20px;
+      text-align: center;
+    }
+    .search-bar input {
+      width: 60%;
+      padding: 12px 20px;
+      font-size: 1.1em;
+      font-weight: 300;
+      border: none;
+      border-radius: 30px;
+      background-color: #ffffff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: width 0.3s, box-shadow 0.3s;
+    }
+    .search-bar input:focus {
+      width: 65%;
+      outline: none;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Kategorien-Navigation */
+    .category-nav {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 0 20px;
+      text-align: center;
+    }
+    .category-nav a {
+      color: #2b2b2b;
+      text-decoration: none;
+      margin: 0 20px;
+      font-size: 1.1em;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.3s;
+    }
+    .category-nav a:hover {
+      color: #d4af37;
+    }
+    .category-nav .sale-link {
+      color: #d4af37;
+    }
+    .category-nav .sale-link:hover {
+      color: #b8962e;
+    }
+
+    /* Zurück-Button */
+    .back-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+      padding: 10px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-size: 1em;
+      font-weight: 400;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      transition: background-color 0.3s;
+    }
+    .back-button:hover {
+      background-color: #2b2b2b;
+    }
+
+    /* Main-Bereich */
+    main {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+      position: relative;
+    }
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+    .sort-options select {
+      padding: 10px;
+      font-size: 1em;
+      font-weight: 400;
+      border: none;
+      border-radius: 8px;
+      background-color: #ffffff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      transition: box-shadow 0.3s;
+    }
+    .sort-options select:focus {
+      outline: none;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    h2 {
+      text-align: center;
+      font-size: 2.5em;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 40px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .category-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+    .category {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 12px;
+      width: 300px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s, box-shadow 0.3s;
+      text-align: center;
+      display: none;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    .category.visible {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    .category:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    }
+    .category img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      transition: transform 0.3s;
+    }
+    .category img:hover {
+      transform: scale(1.05);
+    }
+    .category h3 {
+      margin: 0 0 10px;
+      font-size: 1.6em;
+      font-weight: 700;
+      color: #1a1a1a;
+    }
+    .category p {
+      font-size: 1.1em;
+      font-weight: 300;
+      color: #666;
+      margin: 0 0 15px;
+    }
+    .category button {
+      padding: 12px 24px;
+      border: none;
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+      font-size: 1em;
+      font-weight: 400;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background-color 0.3s, box-shadow 0.3s;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    .category button:hover {
+      background-color: #d4af37;
+      color: #1a1a1a;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Messanleitung-Sektion */
+    .measuring-guide {
+      max-width: 1200px;
+      margin: 60px auto;
+      padding: 40px;
+      background-color: #e0e0e0;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+    .measuring-guide h2 {
+      font-size: 2.5em;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 30px;
+      color: #1a1a1a;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .guide-steps {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      gap: 30px;
+    }
+    .step {
+      width: 280px;
+      text-align: center;
+      padding: 20px;
+      background: #fafafa;
+      border-radius: 10px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .step:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    }
+    .step img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+    .step h3 {
+      font-size: 1.4em;
+      font-weight: 700;
+      margin: 0 0 10px;
+      color: #1a1a1a;
+    }
+    .step p {
+      font-size: 1em;
+      font-weight: 300;
+      color: #666;
+      margin: 0;
+    }
+
+    /* Zurück zum Anfang Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+      padding: 12px 24px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-size: 1em;
+      font-weight: 400;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      display: none;
+      transition: background-color 0.3s;
+    }
+    .back-to-top:hover {
+      background-color: #d4af37;
+      color: #1a1a1a;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2em 0;
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+      box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.2);
+    }
+    .footer-nav {
+      margin: 15px 0;
+    }
+    .footer-nav a {
+      color: #e0e0e0;
+      text-decoration: none;
+      margin: 0 20px;
+      font-size: 0.9em;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.3s;
+    }
+    .footer-nav a:hover {
+      color: #d4af37;
+    }
+    .social-icons {
+      margin-top: 15px;
+    }
+    .social-icons img {
+      width: 35px;
+      height: 35px;
+      margin: 0 15px;
+      cursor: pointer;
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="Kavallerietuch.png" alt="Kavallerietuch Logo" class="logo">
+    <nav>
+      <a href="index.html">Home</a>
+      <div class="dropdown">
+        <a href="Gallerie.html">Gallerie</a>
+        </div>
+      </div>
+      <a href="wie-funktionierts.html">Wie funktioniert’s?</a>
+      <a href="uber-uns.html">Über uns</a>
+    </nav>
+    <div class="flags">
+      <img src="Schweizer Flagge.jpg" alt="Schweizer Flagge">
+      <img src="Grabünden Flagge.jpg" alt="Graubünden Flagge">
+    </div>
+  </header>
+
+  <main>
+    <!-- Zurück-Button im Main-Bereich -->
+    <a href="javascript:history.back()" class="back-button">Zurück</a>
+
+    <!-- Suchleiste -->
+    <div class="search-bar">
+      <input type="text" id="search-input" placeholder="Kategorien suchen...">
+    </div>
+
+    <!-- Kategorien-Navigation -->
+    <div class="category-nav">
+      <a href="index.html">Home</a>
+      <a href="Vorhänge.html">Vorhänge</a>
+      <a href="polster.html">Polster</a>
+      <a href="Betten.html">Betten</a>
+      <a href="kavallerietuch.html">Kavallerietuch</a>
+      <a href="Teppiche.html">Teppiche</a>
+      <a href="Sale.html" class="sale-link">Sale</a>
+    </div>
+
+    <!-- Sortieroptionen und Titel -->
+    <div class="controls">
+      <div class="sort-options">
+        <select id="sort-select">
+          <option value="name-asc">Name (A-Z)</option>
+          <option value="name-desc">Name (Z-A)</option>
+          <option value="price-asc">Preis (aufsteigend)</option>
+          <option value="price-desc">Preis (absteigend)</option>
+        </select>
+      </div>
+    </div>
+    <h2>Unsere Kategorien</h2>
+    <div class="category-container">
+      <div class="category" data-type="tagesvorhang" data-material="polyester" data-price="20" data-name="Tagesvorhang">
+        <img src="Tagesvorhang.jpg" alt="Tagesvorhang">
+        <h3>Tagesvorhang</h3>
+        <p>Leichter Vorhang für eine sanfte Lichtdurchlässigkeit.</p>
+        <button onclick="window.location.href='tagesvorhang.html'">Mehr erfahren</button>
+      </div>
+      <div class="category" data-type="verdunklungsvorhang" data-material="polyester" data-price="35" data-name="Verdunklungsvorhang">
+        <img src="Verdunklungsvorhang.jpg" alt="Verdunklungsvorhang">
+        <h3>Verdunklungsvorhang</h3>
+        <p>Ideal für Schlafräume – blockiert das Licht effektiv.</p>
+        <button onclick="window.location.href='Nachtvorhänge.html'">Mehr erfahren</button>
+      </div>
+      <div class="category" data-type="leinenvorhang" data-material="leinen" data-price="50" data-name="Leinenvorhang">
+        <img src="Leinenvorhang.jpg" alt="Leinenvorhang">
+        <h3>Leinenvorhang</h3>
+        <p>Natürlicher Look mit atmungsaktivem Leinenstoff.</p>
+        <button onclick="window.location.href='Leinenvorhänge.html'">Mehr erfahren</button>
+      </div>
+      <div class="category" data-type="wollvorhang" data-material="wolle" data-price="60" data-name="Wollvorhang">
+        <img src="Wollvorhang.jpg" alt="Wollvorhang">
+        <h3>Wollvorhang</h3>
+        <p>Hochwertige Wärmeisolierung mit edlem Design.</p>
+        <button onclick="window.location.href='Wollvorhänge.html'">Mehr erfahren</button>
+      </div>
+      <div class="category" data-type="baumwollvorhang" data-material="baumwolle" data-price="25" data-name="Baumwollvorhang">
+        <img src="Baumwollvorhang.jpg" alt="Baumwollvorhang">
+        <h3>Baumwollvorhang</h3>
+        <p>Weich und pflegeleicht für eine gemütliche Atmosphäre.</p>
+        <button onclick="window.location.href='Baumwollvorhang.html'">Mehr erfahren</button>
+      </div>
+    </div>
+
+    <!-- Messanleitung-Sektion -->
+    <section class="measuring-guide">
+      <h2>So messen Sie Ihre Vorhänge richtig</h2>
+      <div class="guide-steps">
+        <div class="step">
+          <img src="schritt 1.jpg" alt="Schritt 1: Fensterbreite messen">
+          <h3>Schritt 1: Fensterbreite messen</h3>
+          <p>Messen Sie die Breite Ihres Fensters an der Stelle, an der der Vorhang hängen soll. Fügen Sie 10-15 cm auf jeder Seite hinzu, um Überstände zu gewährleisten.</p>
+        </div>
+        <div class="step">
+          <img src="schritt 2.jpg" alt="Schritt 2: Höhe bestimmen">
+          <h3>Schritt 2: Höhe bestimmen</h3>
+          <p>Messen Sie die Höhe vom oberen Befestigungspunkt bis zum gewünschten Ende (z. B. Boden oder Fensterbank). Berücksichtigen Sie die Stangenhöhe.</p>
+        </div>
+        <div class="step">
+          <img src="schritt 3.jpg" alt="Schritt 3: Faltenfaktor beachten">
+          <h3>Schritt 3: Faltenfaktor beachten</h3>
+          <p>Für ein volles Aussehen multiplizieren Sie die Breite mit einem Faltenfaktor von 1,5 bis 2, je nach gewünschtem Volumen.</p>
+        </div>
+        <div class="step">
+          <img src="schritt 4.jpg" alt="Schritt 4: Maße überprüfen">
+          <h3>Schritt 4: Maße überprüfen</h3>
+          <p>Überprüfen Sie die Maße nochmals und notieren Sie sie genau, um sicherzustellen, dass der Vorhang perfekt passt.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Zurück zum Anfang Button -->
+  <a href="#" class="back-to-top" id="back-to-top">Nach oben</a>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Kavallerietuch</p>
+    <div class="footer-nav">
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutz</a>
+      <a href="Versand und Rückgabe.html">Versand & Rückgabe</a>
+      <a href="agb.html">AGB</a>
+    </div>
+    <div class="social-icons">
+      <a href="https://instagram.com" target="_blank"><img src="instagram.png" alt="Instagram"></a>
+      <a href="https://facebook.com" target="_blank"><img src="facebook.png" alt="Facebook"></a>
+      <a href="https://tiktok.com" target="_blank"><img src="tiktok.png" alt="TikTok"></a>
+    </div>
+  </footer>
+
+  <!-- JavaScript für Sortierung, Suche und Zurück zum Anfang -->
+  <script>
+    const categories = document.querySelectorAll('.category');
+    const searchInput = document.getElementById('search-input');
+    const sortSelect = document.getElementById('sort-select');
+    const backToTop = document.getElementById('back-to-top');
+
+    function applySearch() {
+      const searchTerm = searchInput.value.toLowerCase();
+
+      categories.forEach(category => {
+        const name = category.getAttribute('data-name').toLowerCase();
+        const matchesSearch = name.includes(searchTerm);
+
+        if (matchesSearch) {
+          category.classList.add('visible');
+        } else {
+          category.classList.remove('visible');
+        }
+      });
+    }
+
+    function sortCategories() {
+      const sortValue = sortSelect.value;
+      const categoryArray = Array.from(categories);
+
+      categoryArray.sort((a, b) => {
+        if (sortValue === 'name-asc') {
+          return a.getAttribute('data-name').localeCompare(b.getAttribute('data-name'));
+        } else if (sortValue === 'name-desc') {
+          return b.getAttribute('data-name').localeCompare(a.getAttribute('data-name'));
+        } else if (sortValue === 'price-asc') {
+          return parseInt(a.getAttribute('data-price')) - parseInt(b.getAttribute('data-price'));
+        } else if (sortValue === 'price-desc') {
+          return parseInt(b.getAttribute('data-price')) - parseInt(a.getAttribute('data-price'));
+        }
+      });
+
+      const container = document.querySelector('.category-container');
+      categoryArray.forEach(category => container.appendChild(category));
+      applySearch();
+    }
+
+    // Event-Listener
+    searchInput.addEventListener('input', applySearch);
+    sortSelect.addEventListener('change', sortCategories);
+
+    // Zurück zum Anfang Button
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTop.style.display = 'block';
+      } else {
+        backToTop.style.display = 'none';
+      }
+    });
+
+    backToTop.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Initial alle Produkte anzeigen
+    applySearch();
+  </script>
+</body>
+</html>

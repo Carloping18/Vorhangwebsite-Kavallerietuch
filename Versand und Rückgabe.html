@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Versand & Rückgabe - Kavallerietuch</title>
+  <!-- Google Fonts Roboto Condensed einbinden -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    /* Grunddesign */
+    body {
+      font-family: 'Roboto Condensed', sans-serif; /* Ähnlich wie Porsche Next */
+      font-weight: 300; /* Leichtes Gewicht für Fließtext */
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
+      color: #000000;
+      overflow-x: hidden;
+    }
+    header {
+      background-color: #cfcfcf;
+      padding: 5px;
+      position: static;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 4px rgba(218, 218, 218, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+    header img.logo {
+      width: 50px;
+      height: 50px;
+      margin-left: 10px;
+      object-fit: cover;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      margin-left: auto;
+      margin-right: 10px;
+    }
+    nav a {
+      color: #ffffff;
+      text-decoration: none;
+      margin: 0 10px;
+      font-size: 0.9em;
+      font-weight: 400; /* Normales Gewicht für Navigation */
+      position: relative;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* Dropdown-Menü */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #ffffff;
+      min-width: 200px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1001;
+      border-radius: 8px;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .dropdown-content a {
+      color: #000000;
+      padding: 10px 15px;
+      text-decoration: none;
+      display: block;
+      font-weight: 400;
+      font-size: 0.9em;
+    }
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+      text-decoration: none;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    /* Flaggen */
+    .flags {
+      margin-right: 10px;
+      display: flex;
+      align-items: center;
+    }
+    .flags img {
+      width: 20px;
+      height: 20px;
+      margin-left: 10px;
+      object-fit: cover;
+    }
+
+    /* Main-Bereich */
+    main {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 2em;
+      color: #333;
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: 700; /* Fett für Hauptüberschrift */
+    }
+    .versand-content {
+      font-size: 1em;
+      color: #666;
+      line-height: 1.6;
+    }
+    .versand-content h2 {
+      font-size: 1.4em;
+      color: #333;
+      margin: 20px 0 10px;
+      font-weight: 700; /* Fett für Unterüberschriften */
+    }
+    .versand-content p {
+      margin: 10px 0;
+      font-weight: 300; /* Leicht für Fließtext */
+    }
+    .versand-content a {
+      color: #fc0000;
+      text-decoration: none;
+    }
+    .versand-content a:hover {
+      text-decoration: underline;
+    }
+
+    /* Zurück zum Anfang Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #444;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-size: 1em;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      display: none;
+      font-weight: 400;
+    }
+    .back-to-top:hover {
+      background-color: #666;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 1em 0;
+      background-color: #cfcfcf;
+      color: #333;
+    }
+    .footer-nav {
+      margin: 10px 0;
+    }
+    .footer-nav a {
+      color: #333;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 0.9em;
+      font-weight: 400;
+    }
+    .footer-nav a:hover {
+      text-decoration: underline;
+    }
+    .social-icons {
+      margin-top: 10px;
+    }
+    .social-icons img {
+      width: 35px;
+      height: 35px;
+      margin: 0 10px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .social-icons img:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="Kavallerietuch.png" alt="Kavallerietuch Logo" class="logo">
+    <nav>
+      <a href="index.html">Home</a>
+      <div class="dropdown">
+        <a href="Produkte.html">Produkte</a>
+        <div class="dropdown-content">
+          <a href="Tagesvorhang.html">Vorhänge</a>
+          <a href="polster.html">Polster</a>
+          <a href="Betten.html">Betten</a>
+          <a href="produkt4.html">Kavallerietuch</a>
+          <a href="Teppiche.html">Böden</a>
+        </div>
+      </div>
+      <a href="wie-funktionierts.html">Wie funktioniert’s?</a>
+      <a href="über-uns.html">Über uns</a>
+    </nav>
+    <div class="flags">
+      <img src="Schweizer Flagge.jpg" alt="Schweizer Flagge">
+      <img src="Grabünden Flagge.jpg" alt="Graubünden Flagge">
+    </div>
+  </header>
+
+  <main>
+    <h1>Versand & Rückgabe</h1>
+    <div class="versand-content">
+      <h2>1. Versandinformationen</h2>
+      <p>
+        Wir versenden Ihre Bestellung schnell und zuverlässig innerhalb der Schweiz und ins Ausland. Der Versand erfolgt in der Regel mit der Schweizerischen Post oder einem vergleichbaren Logistikdienstleister.
+      </p>
+      
+      <h2>2. Versandkosten</h2>
+      <p>
+        - **Schweiz**: CHF 7.90 (Standardversand). Ab einem Bestellwert von CHF 100.- ist der Versand kostenfrei.<br>
+        - **International**: CHF 15.00 (Standardversand). Die genauen Kosten werden im Checkout-Prozess angezeigt und variieren je nach Zielland.<br>
+        Versandkosten können bei sperrigen Artikeln (z. B. Betten) abweichen. Dies wird Ihnen vor Abschluss der Bestellung mitgeteilt.
+      </p>
+      
+      <h2>3. Lieferzeiten</h2>
+      <p>
+        - **Schweiz**: 2-5 Werktage nach Zahlungseingang.<br>
+        - **International**: 5-10 Werktage, abhängig vom Zielland.<br>
+        Bitte beachten Sie, dass sich die Lieferzeit bei personalisierten Produkten (z. B. maßgefertigten Vorhängen) um bis zu 10 Werktage verlängern kann. Sie erhalten eine Versandbestätigung mit Tracking-Nummer, sobald Ihre Bestellung unterwegs ist.
+      </p>
+      
+      <h2>4. Rückgaberecht</h2>
+      <p>
+        Sie haben ein Rückgaberecht von 14 Tagen ab Erhalt der Ware, sofern die Produkte unbenutzt, unbeschädigt und in der Originalverpackung zurückgesendet werden. Maßgefertigte Produkte (z. B. individuell angefertigte Vorhänge oder Betten) sind vom Rückgaberecht ausgeschlossen, da diese speziell für Sie hergestellt werden.
+      </p>
+      
+      <h2>5. Rückgabeprozess</h2>
+      <p>
+        1. Kontaktieren Sie uns innerhalb von 14 Tagen nach Erhalt der Ware per E-Mail an <a href="mailto:retouren@kavallerietuch.ch">retouren@kavallerietuch.ch</a> und geben Sie Ihre Bestellnummer an.<br>
+        2. Wir senden Ihnen ein Rücksendeetikett oder weitere Anweisungen.<br>
+        3. Verpacken Sie die Artikel sicher und senden Sie sie an:<br>
+        Kavallerietuch AG<br>
+        Retourenabteilung<br>
+        Musterstrasse 10<br>
+        7000 Chur<br>
+        Schweiz<br>
+        Die Rücksendekosten tragen Sie als Kunde, es sei denn, die Rücksendung erfolgt aufgrund eines Fehlers unsererseits (z. B. Falschlieferung oder Mangel).
+      </p>
+      
+      <h2>6. Rückerstattung</h2>
+      <p>
+        Nach Eingang und Prüfung der Rücksendung erstatten wir Ihnen den Kaufpreis innerhalb von 14 Tagen auf das ursprünglich verwendete Zahlungsmittel. Versandkosten werden nicht erstattet, es sei denn, die Rücksendung erfolgt aufgrund eines Mangels oder Fehlers.
+      </p>
+      
+      <h2>7. Beanstandungen und Mängel</h2>
+      <p>
+        Sollte ein Artikel beschädigt oder fehlerhaft geliefert werden, kontaktieren Sie uns bitte umgehend unter <a href="mailto:support@kavallerietuch.ch">support@kavallerietuch.ch</a> mit einer Beschreibung des Problems und Fotos des Mangels. Wir kümmern uns schnellstmöglich um einen Austausch oder eine Rückerstattung.
+      </p>
+      
+      <h2>8. Kontakt</h2>
+      <p>
+        Bei Fragen zu Versand oder Rückgabe wenden Sie sich an:<br>
+        Kavallerietuch AG<br>
+        Musterstrasse 10<br>
+        7000 Chur<br>
+        E-Mail: <a href="mailto:info@kavallerietuch.ch">info@kavallerietuch.ch</a><br>
+        Telefon: +41 81 123 45 67
+      </p>
+    </div>
+  </main>
+
+  <!-- Zurück zum Anfang Button -->
+  <a href="#" class="back-to-top" id="back-to-top">Nach oben</a>
+
+  <footer>
+    <p>© 2025 Kavallerietuch</p>
+    <div class="footer-nav">
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutz</a>
+      <a href="versand-rueckgabe.html">Versand & Rückgabe</a>
+      <a href="agb.html">AGB</a>
+    </div>
+    <div class="social-icons">
+      <a href="https://instagram.com" target="_blank"><img src="instagram.png" alt="Instagram"></a>
+      <a href="https://facebook.com" target="_blank"><img src="facebook.png" alt="Facebook"></a>
+      <a href="https://tiktok.com" target="_blank"><img src="tiktok.png" alt="TikTok"></a>
+    </div>
+  </footer>
+
+  <!-- JavaScript für Zurück zum Anfang -->
+  <script>
+    const backToTop = document.getElementById('back-to-top');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTop.style.display = 'block';
+      } else {
+        backToTop.style.display = 'none';
+      }
+    });
+
+    backToTop.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>

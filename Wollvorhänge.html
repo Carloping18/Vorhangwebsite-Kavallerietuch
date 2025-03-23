@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produkte - Wollvorhänge - Kavallerietuch</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    /* Grunddesign */
+    body {
+      font-family: 'Roboto Condensed', sans-serif;
+      font-weight: 300;
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
+      color: #000000;
+      overflow-x: hidden;
+    }
+    header {
+      background-color: #cfcfcf;
+      padding: 5px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 4px rgba(218, 218, 218, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+    header img.logo {
+      width: 50px;
+      height: 50px;
+      margin-left: 10px;
+      object-fit: cover;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      margin-left: auto;
+      margin-right: 10px;
+    }
+    nav a {
+      color: #ffffff;
+      text-decoration: none;
+      margin: 0 10px;
+      font-size: 0.9em;
+      font-weight: 400;
+      position: relative;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #ffffff;
+      min-width: 200px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1001;
+      border-radius: 8px;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .dropdown-content a {
+      color: #000000;
+      padding: 10px 15px;
+      text-decoration: none;
+      display: block;
+      font-weight: 400;
+      font-size: 0.9em;
+    }
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+      text-decoration: none;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    .flags {
+      margin-right: 10px;
+      display: flex;
+      align-items: center;
+    }
+    .flags img {
+      width: 20px;
+      height: 20px;
+      margin-left: 10px;
+      object-fit: cover;
+    }
+
+    /* Produktbild-Bereich */
+    .product-hero {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      position: relative;
+    }
+    .product-hero img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+    }
+    .product-hero-text {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 0 20px;
+      font-size: 1.1em;
+      font-weight: 300;
+      color: #666;
+      text-align: center;
+    }
+
+    /* Zurück-Button */
+    .back-button {
+      position: fixed;
+      top: 70px;
+      left: 20px;
+      background-color: #444;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-size: 1em;
+      font-weight: 400;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+    .back-button:hover {
+      background-color: #666;
+      transform: scale(1.05);
+    }
+
+    /* Suchleiste */
+    .search-bar {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 0 20px;
+      text-align: center;
+    }
+    .search-bar input {
+      width: 50%;
+      padding: 10px 20px;
+      font-size: 1em;
+      font-weight: 300;
+      border: 1px solid #ccc;
+      border-radius: 25px;
+      transition: width 0.3s;
+    }
+    .search-bar input:focus {
+      width: 60%;
+      outline: none;
+      border-color: #444;
+    }
+
+    /* Kategorien-Navigation */
+    .category-nav {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 30px auto;
+      position: sticky;
+      top: 70px;
+      z-index: 999;
+      background: #fff;
+      padding: 10px 0;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .category-nav a {
+      color: #000000;
+      text-decoration: none;
+      padding: 10px 20px;
+      background: #f9f9f9;
+      border-radius: 25px;
+      font-size: 1em;
+      font-weight: 400;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+    .category-nav a:hover, .category-nav a.active {
+      background: #444;
+      color: #fff;
+      transform: scale(1.05);
+    }
+
+    /* Main-Bereich */
+    main {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+      position: relative;
+    }
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .sort-options select {
+      padding: 8px;
+      font-size: 1em;
+      font-weight: 400;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      background-color: #fff;
+      color: #666;
+    }
+    h2 {
+      text-align: center;
+      font-size: 1.8em;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 30px;
+    }
+    .category-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+    .category {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      width: 280px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s, box-shadow 0.3s, opacity 0.3s;
+      text-align: center;
+      position: relative;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    .category.visible {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .category:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    }
+    .category.highlight {
+      border: 2px solid #d4af37;
+    }
+    .category.highlight::before {
+      content: 'Top';
+      position: absolute;
+      top: -10px;
+      left: 10px;
+      background: #d4af37;
+      color: #fff;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 0.8em;
+    }
+    .category img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      transition: opacity 0.3s;
+    }
+    .category .hover-image {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: calc(100% - 40px);
+      opacity: 0;
+    }
+    .category:hover .hover-image {
+      opacity: 1;
+    }
+    .category h3 {
+      margin: 0 0 10px;
+      font-size: 1.4em;
+      font-weight: 700;
+      color: #333;
+    }
+    .category p {
+      font-size: 1em;
+      font-weight: 300;
+      color: #666;
+      margin: 0 0 15px;
+    }
+    .category .stars {
+      color: #d4af37;
+      margin-bottom: 10px;
+    }
+    .category button {
+      padding: 10px 20px;
+      border: none;
+      background-color: #444;
+      color: #fff;
+      font-size: 1em;
+      font-weight: 400;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+    .category button:hover {
+      background-color: #666;
+      transform: scale(1.05);
+    }
+
+    /* Filter-Sidebar */
+    .filter-sidebar {
+      position: fixed;
+      top: 150px;
+      right: -300px;
+      width: 280px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      transition: right 0.3s ease;
+    }
+    .filter-sidebar.active {
+      right: 20px;
+    }
+    .filter-toggle {
+      position: fixed;
+      top: 120px;
+      right: 20px;
+      background-color: #444;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 25px;
+      border: none;
+      font-size: 1em;
+      font-weight: 400;
+      cursor: pointer;
+      z-index: 1001;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+    .filter-toggle:hover {
+      background-color: #666;
+      transform: scale(1.05);
+    }
+    .filter-section {
+      margin-bottom: 20px;
+    }
+    .filter-section h4 {
+      font-size: 1.2em;
+      font-weight: 700;
+      color: #333;
+      margin: 0 0 10px;
+      position: relative;
+    }
+    .filter-section h4::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 30px;
+      height: 2px;
+      background-color: #444;
+    }
+    .filter-options {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .filter-options label {
+      display: flex;
+      align-items: center;
+      font-size: 1em;
+      font-weight: 300;
+      color: #666;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .filter-options label:hover {
+      color: #333;
+    }
+    .color-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      margin-right: 10px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+    .count {
+      font-size: 0.8em;
+      color: #999;
+      margin-left: 5px;
+    }
+    .price-range-container {
+      position: relative;
+    }
+    .price-range {
+      width: 100%;
+      margin: 10px 0;
+      -webkit-appearance: none;
+      background: #ddd;
+      height: 4px;
+      border-radius: 2px;
+    }
+    .price-range::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      background: #444;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    .price-values {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9em;
+      color: #666;
+      margin-top: 10px;
+    }
+    .reset-filters {
+      width: 100%;
+      padding: 10px;
+      background-color: #444;
+      color: #fff;
+      border: none;
+      border-radius: 25px;
+      font-size: 1em;
+      font-weight: 400;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .reset-filters:hover {
+      background-color: #666;
+    }
+
+    /* Zurück zum Anfang Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #444;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-size: 1em;
+      font-weight: 400;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      display: none;
+      transition: background-color 0.3s;
+      z-index: 1000;
+    }
+    .back-to-top:hover {
+      background-color: #666;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 1em 0;
+      background-color: #cfcfcf;
+      color: #333;
+    }
+    .footer-nav {
+      margin: 10px 0;
+    }
+    .footer-nav a {
+      color: #333;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 0.9em;
+      font-weight: 400;
+    }
+    .footer-nav a:hover {
+      text-decoration: underline;
+    }
+    .social-icons {
+      margin-top: 10px;
+    }
+    .social-icons img {
+      width: 35px;
+      height: 35px;
+      margin: 0 10px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .social-icons img:hover {
+      transform: scale(1.1);
+    }
+
+    /* Responsives Design */
+    @media (max-width: 768px) {
+      .filter-sidebar {
+        top: 0;
+        right: -100%;
+        width: 80%;
+        height: 100%;
+        transition: right 0.3s ease;
+      }
+      .filter-sidebar.active {
+        right: 0;
+      }
+      .filter-toggle {
+        top: 80px;
+        right: 10px;
+      }
+      .category-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      .category {
+        width: 90%;
+      }
+      .search-bar input {
+        width: 80%;
+      }
+      .category-nav {
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+    }
+
+    /* Zusätzliche Elemente unter den Produkten */
+    .additional-content {
+      margin: 50px 0;
+    }
+    .image-text-section {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+    .image-text-section img {
+      max-width: 400px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+    .text-block {
+      max-width: 500px;
+    }
+    .text-block h3 {
+      font-size: 1.6em;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .text-block p {
+      font-size: 1em;
+      color: #666;
+      line-height: 1.6;
+    }
+    .product-slider-section {
+      position: relative;
+      margin-bottom: 40px;
+    }
+    .slider-title {
+      font-size: 1.4em;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .slider-container {
+      display: flex;
+      gap: 10px;
+      overflow: hidden;
+      scroll-behavior: smooth;
+      padding: 10px;
+    }
+    .slider-item {
+      flex: 0 0 calc((100% - 40px) / 5);
+      background-color: #f9f9f9;
+      border-radius: 10px;
+      padding: 10px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+    .slider-item img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 5px;
+    }
+    .slider-item h4 {
+      font-size: 0.9em;
+      font-weight: 700;
+      color: #333;
+      margin: 5px 0;
+    }
+    .slider-item a {
+      display: block;
+      text-decoration: none;
+      color: #444;
+      font-size: 0.9em;
+      margin-top: 5px;
+      padding: 5px;
+      border: 1px solid #444;
+      border-radius: 15px;
+      transition: background-color 0.3s;
+    }
+    .slider-item a:hover {
+      background-color: #444;
+      color: #fff;
+    }
+    .slider-arrow {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      background-color: rgba(0,0,0,0.5);
+      color: #fff;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 50%;
+      z-index: 10;
+    }
+    .contact-card-section {
+      text-align: center;
+      background-color: #f9f9f9;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+    .contact-card-section h3 {
+      font-size: 1.4em;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .contact-card-section p {
+      font-size: 1em;
+      color: #666;
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="Kavallerietuch.png" alt="Kavallerietuch Logo" class="logo">
+    <nav>
+      <a href="index.html">Home</a>
+      <div class="dropdown">
+        <a href="Produkte.html">Produkte</a>
+        <div class="dropdown-content">
+          <a href="Tagesvorhang.html">Vorhänge</a>
+          <a href="polster.html">Polster</a>
+          <a href="Betten.html">Betten</a>
+          <a href="produkt4.html">Kavallerietuch</a>
+          <a href="Teppiche.html">Böden</a>
+        </div>
+      </div>
+      <a href="wie-funktionierts.html">Wie funktioniert’s?</a>
+      <a href="über-uns.html">Über uns</a>
+    </nav>
+    <div class="flags">
+      <img src="Schweizer Flagge.jpg" alt="Schweizer Flagge">
+      <img src="Grabünden Flagge.jpg" alt="Graubünden Flagge">
+    </div>
+  </header>
+
+  <main>
+    <a href="javascript:history.back()" class="back-button">Zurück</a>
+    <div class="product-hero">
+      <img src="Wollvorhanghintergrund.jpg" alt="Wollvorhänge Übersicht">
+    </div>
+    <div class="product-hero-text">
+      <p>Entdecken Sie unsere hochwertigen Wollvorhänge – ideal für Wärme und Stil. Wählen Sie aus verschiedenen Designs und Qualitäten, die Komfort und Eleganz vereinen.</p>
+    </div>
+
+    <div class="search-bar">
+      <input type="text" id="search-input" placeholder="Produkte suchen...">
+    </div>
+
+    <div class="category-nav">
+      <a href="Tagesvorhang.html">Tagesvorhänge</a>
+      <a href="Nachtvorhänge.html">Nachtvorhänge</a>
+      <a href="Leinenvorhänge.html">Leinenvorhänge</a>
+      <a href="Wollvorhänge.html" class="active">Wollvorhänge</a>
+      <a href="Baumwollvorhänge.html">Baumwollvorhänge</a>
+    </div>
+
+    <div class="controls">
+      <div class="sort-options">
+        <select id="sort-select">
+          <option value="name-asc">Name (A-Z)</option>
+          <option value="name-desc">Name (Z-A)</option>
+          <option value="price-asc">Preis (aufsteigend)</option>
+          <option value="price-desc">Preis (absteigend)</option>
+        </select>
+      </div>
+    </div>
+    <h2>Wollvorhänge</h2>
+
+    <div class="category-container">
+      <div class="category highlight" data-color="grau" data-type="leicht" data-material="wolle" data-price="45" data-name="Wollvorhang 1" data-availability="sofort">
+        <img src="Wollvorhang1.jpg" alt="Wollvorhang 1">
+        <img src="Wollvorhang 1_hover.jpg" alt="Wollvorhang 1 Hover" class="hover-image">
+        <h3>Wollvorhang 1</h3>
+        <div class="stars">★★★★☆</div>
+        <p>Leichter Wollvorhang in Grau für eine moderne Atmosphäre.</p>
+        <button onclick="window.location.href='Wollvorhang1.html'">Mehr erfahren</button>
+      </div>
+      <div class="category" data-color="beige" data-type="mittel" data-material="wolle" data-price="60" data-name="Wollvorhang 2" data-availability="sofort">
+        <img src="Wollvorhang2.jpg" alt="Wollvorhang 2">
+        <img src="Wollvorhang 2_hover.jpg" alt="Wollvorhang 2 Hover" class="hover-image">
+        <h3>Wollvorhang 2</h3>
+        <div class="stars">★★★★★</div>
+        <p>Mittelschwerer Wollvorhang in Beige für gemütliche Räume.</p>
+        <button onclick="window.location.href='Wollvorhang2.html'">Mehr erfahren</button>
+      </div>
+      <div class="category" data-color="dunkelgrau" data-type="schwer" data-material="wolle" data-price="75" data-name="Wollvorhang 3" data-availability="vorbestellung">
+        <img src="Wollvorhang3.jpg" alt="Wollvorhang 3">
+        <img src="Wollvorhang 3_hover.jpg" alt="Wollvorhang 3 Hover" class="hover-image">
+        <h3>Wollvorhang 3</h3>
+        <div class="stars">★★★☆☆</div>
+        <p>Schwerer Wollvorhang in Dunkelgrau für maximale Wärme.</p>
+        <button onclick="window.location.href='Wollvorhang3.html'">Mehr erfahren</button>
+      </div>
+      <div class="category" data-color="weiß" data-type="leicht" data-material="wolle" data-price="50" data-name="Wollvorhang 4" data-availability="sofort">
+        <img src="Wollvorhang4.jpg" alt="Wollvorhang 4">
+        <img src="Wollvorhang 4_hover.jpg" alt="Wollvorhang 4 Hover" class="hover-image">
+        <h3>Wollvorhang 4</h3>
+        <div class="stars">★★★★☆</div>
+        <p>Leichter Wollvorhang in Weiß für helle Räume.</p>
+        <button onclick="window.location.href='Wollvorhang4.html'">Mehr erfahren</button>
+      </div>
+      <div class="category" data-color="braun" data-type="mittel" data-material="wolle" data-price="65" data-name="Wollvorhang 5" data-availability="sofort">
+        <img src="Wollvorhang5.jpg" alt="Wollvorhang 5">
+        <img src="Wollvorhang 5_hover.jpg" alt="Wollvorhang 5 Hover" class="hover-image">
+        <h3>Wollvorhang 5</h3>
+        <div class="stars">★★★★★</div>
+        <p>Mittelschwerer Wollvorhang in Braun für rustikalen Charme.</p>
+        <button onclick="window.location.href='Wollvorhang5.html'">Mehr erfahren</button>
+      </div>
+    </div>
+
+    <!-- Zusätzliche Inhalte unter den Produkten -->
+    <div class="additional-content">
+      <div class="image-text-section">
+        <img src="Bild_mit_Text_Wollvorhänge.jpg" alt="Beispielbild Wollvorhänge">
+        <div class="text-block">
+          <h3>Wärme und Eleganz</h3>
+          <p>
+            Unsere Wollvorhänge bieten hervorragende Wärmeisolierung und verleihen Ihren Räumen eine natürliche Eleganz. 
+            Perfekt für kalte Tage und stilbewusste Einrichtungen.
+          </p>
+        </div>
+      </div>
+
+      <div class="product-slider-section">
+        <h3 class="slider-title">Weitere interessante Produkte</h3>
+        <div class="slider-container" id="slider-container">
+          <div class="slider-item">
+            <img src="Wollvorhang 1.jpg" alt="Wollvorhang 1">
+            <h4>Wollvorhang 1</h4>
+            <a href="Wollvorhang_1.html">Mehr erfahren</a>
+          </div>
+          <div class="slider-item">
+            <img src="Leinenvorhang 1.jpg" alt="Leinenvorhang 2">
+            <h4>Leinenvorhang 2</h4>
+            <a href="Leinenvorhang1.html">Mehr erfahren</a>
+          </div>
+          <div class="slider-item">
+            <img src="Tagesvorhang 1.jpg" alt="Wollvorhang 3">
+            <h4>Wollvorhang 3</h4>
+            <a href="Tagesvorhang 1.html">Mehr erfahren</a>
+          </div>
+          <div class="slider-item">
+            <img src="Nachtvorhang 1.jpg" alt="Tagesvorhang 4">
+            <h4>Tagesvorhang 4</h4>
+            <a href="Verdunklungsvorhang 1.html">Mehr erfahren</a>
+          </div>
+          <div class="slider-item">
+            <img src="Wollvorhang 5.jpg" alt="Wollvorhang 5">
+            <h4>Wollvorhang 5</h4>
+            <a href="Wollvorhang_5.html">Mehr erfahren</a>
+          </div>
+          <div class="slider-item">
+            <img src="slider6.jpg" alt="Produkt 6">
+            <h4>Produkt 6</h4>
+            <a href="Produkt6.html">Mehr erfahren</a>
+          </div>
+          <div class="slider-item">
+            <img src="slider7.jpg" alt="Produkt 7">
+            <h4>Produkt 7</h4>
+            <a href="Produkt7.html">Mehr erfahren</a>
+          </div>
+          <div class="slider-item">
+            <img src="slider8.jpg" alt="Produkt 8">
+            <h4>Produkt 8</h4>
+            <a href="Produkt8.html">Mehr erfahren</a>
+          </div>
+          <div class="slider-item">
+            <img src="slider9.jpg" alt="Produkt 9">
+            <h4>Produkt 9</h4>
+            <a href="Produkt9.html">Mehr erfahren</a>
+          </div>
+          <div class="slider-item">
+            <img src="slider10.jpg" alt="Produkt 10">
+            <h4>Produkt 10</h4>
+            <a href="Produkt10.html">Mehr erfahren</a>
+          </div>
+        </div>
+        <button class="slider-arrow" id="slider-arrow">→</button>
+      </div>
+
+      <div class="contact-card-section">
+        <h3>Kontakt & Beratung</h3>
+        <p>Kavallerietuch GmbH</p>
+        <p>Bahnhofstrasse 1, 7000 Chur</p>
+        <p>Telefon: +41 (0)81 123 45 67</p>
+        <p>E-Mail: info@kavallerietuch.ch</p>
+        <p>Öffnungszeiten: Mo-Fr 09:00 - 18:00 Uhr</p>
+      </div>
+    </div>
+
+    <button class="filter-toggle" id="filter-toggle">Filter</button>
+    <aside class="filter-sidebar" id="filter-sidebar">
+      <h3>Filter</h3>
+      <div class="filter-section">
+        <h4>Farbe</h4>
+        <div class="filter-options color-options">
+          <label><span class="color-dot" style="background-color: #808080;"></span><input type="checkbox" class="filter-color" value="grau"> Grau <span class="count">(1)</span></label>
+          <label><span class="color-dot" style="background-color: #f5f5dc;"></span><input type="checkbox" class="filter-color" value="beige"> Beige <span class="count">(1)</span></label>
+          <label><span class="color-dot" style="background-color: #404040;"></span><input type="checkbox" class="filter-color" value="dunkelgrau"> Dunkelgrau <span class="count">(1)</span></label>
+          <label><span class="color-dot" style="background-color: #ffffff; border: 1px solid #ccc;"></span><input type="checkbox" class="filter-color" value="weiß"> Weiß <span class="count">(1)</span></label>
+          <label><span class="color-dot" style="background-color: #8b4513;"></span><input type="checkbox" class="filter-color" value="braun"> Braun <span class="count">(1)</span></label>
+        </div>
+      </div>
+      <div class="filter-section">
+        <h4>Art</h4>
+        <div class="filter-options">
+          <label><input type="checkbox" class="filter-type" value="leicht"> Leicht <span class="count">(2)</span></label>
+          <label><input type="checkbox" class="filter-type" value="mittel"> Mittel <span class="count">(2)</span></label>
+          <label><input type="checkbox" class="filter-type" value="schwer"> Schwer <span class="count">(1)</span></label>
+        </div>
+      </div>
+      <div class="filter-section">
+        <h4>Material</h4>
+        <div class="filter-options">
+          <label><input type="checkbox" class="filter-material" value="wolle"> Wolle <span class="count">(5)</span></label>
+        </div>
+      </div>
+      <div class="filter-section price-filter">
+        <h4>Preis</h4>
+        <div class="price-range-container">
+          <input type="range" id="price-min" class="price-range" min="0" max="100" value="0">
+          <input type="range" id="price-max" class="price-range" min="0" max="100" value="100">
+          <div class="price-values">
+            <span id="price-min-value">CHF 0</span> - <span id="price-max-value">CHF 100</span>
+          </div>
+        </div>
+      </div>
+      <div class="filter-section">
+        <h4>Verfügbarkeit</h4>
+        <div class="filter-options">
+          <label><input type="checkbox" class="filter-availability" value="sofort"> Sofort lieferbar</label>
+          <label><input type="checkbox" class="filter-availability" value="vorbestellung"> Vorbestellung</label>
+        </div>
+      </div>
+      <button class="reset-filters">Filter zurücksetzen</button>
+    </aside>
+
+    <a href="#" class="back-to-top" id="back-to-top">Nach oben</a>
+  </main>
+
+  <footer>
+    <p>© 2025 Kavallerietuch</p>
+    <div class="footer-nav">
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutz</a>
+      <a href="versand-rueckgabe.html">Versand & Rückgabe</a>
+      <a href="agb.html">AGB</a>
+    </div>
+    <div class="social-icons">
+      <a href="https://instagram.com" target="_blank"><img src="instagram.png" alt="Instagram"></a>
+      <a href="https://facebook.com" target="_blank"><img src="facebook.png" alt="Facebook"></a>
+      <a href="https://tiktok.com" target="_blank"><img src="tiktok.png" alt="TikTok"></a>
+    </div>
+  </footer>
+
+  <script>
+    const filterColors = document.querySelectorAll('.filter-color');
+    const filterTypes = document.querySelectorAll('.filter-type');
+    const filterMaterials = document.querySelectorAll('.filter-material');
+    const filterAvailability = document.querySelectorAll('.filter-availability');
+    const priceMin = document.getElementById('price-min');
+    const priceMax = document.getElementById('price-max');
+    const priceMinValue = document.getElementById('price-min-value');
+    const priceMaxValue = document.getElementById('price-max-value');
+    const categories = document.querySelectorAll('.category');
+    const searchInput = document.getElementById('search-input');
+    const sortSelect = document.getElementById('sort-select');
+    const backToTop = document.getElementById('back-to-top');
+    const resetFilters = document.querySelector('.reset-filters');
+    const filterToggle = document.getElementById('filter-toggle');
+    const filterSidebar = document.getElementById('filter-sidebar');
+
+    filterToggle.addEventListener('click', () => {
+      filterSidebar.classList.toggle('active');
+      filterToggle.textContent = filterSidebar.classList.contains('active') ? 'Filter schließen' : 'Filter';
+    });
+
+    function updatePriceValues() {
+      priceMinValue.textContent = `CHF ${priceMin.value}`;
+      priceMaxValue.textContent = `CHF ${priceMax.value}`;
+      applyFiltersAndSearch();
+    }
+
+    function resetAllFilters() {
+      filterColors.forEach(cb => cb.checked = false);
+      filterTypes.forEach(cb => cb.checked = false);
+      filterMaterials.forEach(cb => cb.checked = false);
+      filterAvailability.forEach(cb => cb.checked = false);
+      priceMin.value = 0;
+      priceMax.value = 100;
+      searchInput.value = '';
+      updatePriceValues();
+    }
+
+    function applyFiltersAndSearch() {
+      const selectedColors = Array.from(filterColors).filter(cb => cb.checked).map(cb => cb.value);
+      const selectedTypes = Array.from(filterTypes).filter(cb => cb.checked).map(cb => cb.value);
+      const selectedMaterials = Array.from(filterMaterials).filter(cb => cb.checked).map(cb => cb.value);
+      const selectedAvailability = Array.from(filterAvailability).filter(cb => cb.checked).map(cb => cb.value);
+      const minPrice = parseInt(priceMin.value);
+      const maxPrice = parseInt(priceMax.value);
+      const searchTerm = searchInput.value.toLowerCase();
+
+      categories.forEach(category => {
+        const color = category.getAttribute('data-color');
+        const type = category.getAttribute('data-type');
+        const material = category.getAttribute('data-material');
+        const price = parseInt(category.getAttribute('data-price'));
+        const name = category.getAttribute('data-name').toLowerCase();
+        const availability = category.getAttribute('data-availability') || 'sofort';
+
+        const matchesColor = selectedColors.length === 0 || selectedColors.includes(color);
+        const matchesType = selectedTypes.length === 0 || selectedTypes.includes(type);
+        const matchesMaterial = selectedMaterials.length === 0 || selectedMaterials.includes(material);
+        const matchesPrice = price >= minPrice && price <= maxPrice;
+        const matchesAvailability = selectedAvailability.length === 0 || selectedAvailability.includes(availability);
+        const matchesSearch = name.includes(searchTerm);
+
+        if (matchesColor && matchesType && matchesMaterial && matchesPrice && matchesAvailability && matchesSearch) {
+          category.classList.add('visible');
+        } else {
+          category.classList.remove('visible');
+        }
+      });
+    }
+
+    function sortCategories() {
+      const sortValue = sortSelect.value;
+      const categoryArray = Array.from(categories);
+
+      categoryArray.sort((a, b) => {
+        if (sortValue === 'name-asc') {
+          return a.getAttribute('data-name').localeCompare(b.getAttribute('data-name'));
+        } else if (sortValue === 'name-desc') {
+          return b.getAttribute('data-name').localeCompare(a.getAttribute('data-name'));
+        } else if (sortValue === 'price-asc') {
+          return parseInt(a.getAttribute('data-price')) - parseInt(b.getAttribute('data-price'));
+        } else if (sortValue === 'price-desc') {
+          return parseInt(b.getAttribute('data-price')) - parseInt(a.getAttribute('data-price'));
+        }
+      });
+
+      const container = document.querySelector('.category-container');
+      categoryArray.forEach(category => container.appendChild(category));
+      applyFiltersAndSearch();
+    }
+
+    filterColors.forEach(checkbox => checkbox.addEventListener('change', applyFiltersAndSearch));
+    filterTypes.forEach(checkbox => checkbox.addEventListener('change', applyFiltersAndSearch));
+    filterMaterials.forEach(checkbox => checkbox.addEventListener('change', applyFiltersAndSearch));
+    filterAvailability.forEach(cb => cb.addEventListener('change', applyFiltersAndSearch));
+    priceMin.addEventListener('input', updatePriceValues);
+    priceMax.addEventListener('input', updatePriceValues);
+    searchInput.addEventListener('input', applyFiltersAndSearch);
+    sortSelect.addEventListener('change', sortCategories);
+    resetFilters.addEventListener('click', resetAllFilters);
+
+    window.addEventListener('scroll', () => {
+      backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
+    });
+
+    backToTop.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    const sliderContainer = document.getElementById('slider-container');
+    const sliderArrow = document.getElementById('slider-arrow');
+    sliderArrow.addEventListener('click', () => {
+      const sliderItem = document.querySelector('.slider-item');
+      const itemWidth = sliderItem.offsetWidth + 10;
+      sliderContainer.scrollBy({ left: itemWidth, behavior: 'smooth' });
+    });
+
+    applyFiltersAndSearch();
+  </script>
+</body>
+</html>

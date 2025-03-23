@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Über uns - Kavallerietuch</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Roboto Condensed', sans-serif;
+      font-weight: 300;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      color: #2b2b2b;
+      overflow-x: hidden;
+    }
+    header {
+      background-color: #1a1a1a;
+      padding: 10px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background-color 0.3s;
+    }
+    header img.logo {
+      width: 60px;
+      height: 60px;
+      margin-left: 10px;
+      object-fit: cover;
+      filter: brightness(1.2);
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      margin-left: auto;
+      margin-right: 20px;
+    }
+    nav a {
+      color: #e0e0e0;
+      text-decoration: none;
+      margin: 0 10px;
+      font-size: 0.7em;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.3s;
+      line-height: 1;
+      vertical-align: middle;
+    }
+    nav a:hover {
+      color: #d4af37;
+    }
+    .dropdown {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+    .dropdown > a {
+      margin: 0 10px;
+      line-height: 1;
+      vertical-align: middle;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #1a1a1a;
+      min-width: 200px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      z-index: 1001;
+      border-radius: 8px;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .dropdown-content a {
+      color: #e0e0e0;
+      padding: 12px 15px;
+      text-decoration: none;
+      display: block;
+      font-weight: 400;
+      font-size: 0.7em;
+      transition: background-color 0.3s;
+    }
+    .dropdown-content a:hover {
+      background-color: #2b2b2b;
+      color: #d4af37;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    .flags {
+      margin-right: 20px;
+      display: flex;
+      align-items: center;
+    }
+    .flags img {
+      width: 20px;
+      height: 20px;
+      margin-left: 10px;
+      object-fit: cover;
+    }
+    .back-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+      padding: 10px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-size: 1em;
+      font-weight: 400;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      transition: background-color 0.3s;
+    }
+    .back-button:hover {
+      background-color: #2b2b2b;
+    }
+    main {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+      position: relative;
+    }
+    .about-section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 60px;
+      gap: 30px;
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .about-section:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    }
+    .about-text {
+      flex: 1;
+      min-width: 300px;
+      padding: 20px;
+    }
+    .about-text h2 {
+      font-size: 2.5em;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .about-text p {
+      font-size: 1.1em;
+      font-weight: 300;
+      color: #666;
+      line-height: 1.6;
+    }
+    .about-image {
+      flex: 1;
+      min-width: 300px;
+      text-align: center;
+    }
+    .about-image img {
+      max-width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+    }
+    .about-section:hover .about-image img {
+      transform: scale(1.05);
+    }
+    .team-section {
+      text-align: center;
+      margin-top: 60px;
+    }
+    .team-section h2 {
+      font-size: 2.5em;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 40px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .team-members {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+    .team-member {
+      width: 200px;
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .team-member:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    }
+    .team-member img {
+      width: 100%;
+      border-radius: 50%;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+    }
+    .team-member:hover img {
+      transform: scale(1.05);
+    }
+    .team-member h3 {
+      margin: 10px 0 5px;
+      font-size: 1.4em;
+      font-weight: 700;
+      color: #1a1a1a;
+    }
+    .team-member p {
+      font-size: 1em;
+      font-weight: 300;
+      color: #666;
+    }
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+      padding: 12px 24px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-size: 1em;
+      font-weight: 400;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      display: none;
+      transition: background-color 0.3s;
+    }
+    .back-to-top:hover {
+      background-color: #d4af37;
+      color: #1a1a1a;
+    }
+    footer {
+      text-align: center;
+      padding: 2em 0;
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+      box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.2);
+    }
+    .footer-nav {
+      margin: 15px 0;
+    }
+    .footer-nav a {
+      color: #e0e0e0;
+      text-decoration: none;
+      margin: 0 20px;
+      font-size: 0.9em;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.3s;
+    }
+    .footer-nav a:hover {
+      color: #d4af37;
+    }
+    .social-icons {
+      margin-top: 15px;
+    }
+    .social-icons img {
+      width: 35px;
+      height: 35px;
+      margin: 0 15px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .social-icons img:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="Kavallerietuch.png" alt="Kavallerietuch Logo" class="logo">
+    <nav>
+      <a href="index.html">Home</a>
+      <div class="dropdown">
+        <a href="Gallerie.html">Gallerie</a>
+        <a href="wie-funktionierts.html">Wie funktioniert’s?</a>
+        <a href="uber-uns.html">Über uns</a>
+    </nav>
+    <div class="flags">
+      <img src="Schweizer Flagge.jpg" alt="Schweizer Flagge">
+      <img src="Grabünden Flagge.jpg" alt="Graubünden Flagge">
+    </div>
+  </header>
+
+  <main>
+    <a href="javascript:history.back()" class="back-button">Zurück</a>
+    <section class="about-section">
+      <div class="about-text">
+        <h2>Über Kavallerietuch</h2>
+        <p>Wir bei Kavallerietuch haben uns der Kunst edler Vorhänge verschrieben. Unser Ziel ist es, zeitlose Eleganz mit höchster Qualität zu verbinden, um deinem Zuhause einen Hauch von Luxus zu verleihen. Mit jahrelanger Erfahrung und Leidenschaft für Design schaffen wir Vorhänge, die nicht nur funktional, sondern auch ein echtes Statement sind.</p>
+      </div>
+      <div class="about-image">
+        <img src="über kavallerietuch.jpg" alt="Eleganter Vorhang in einem Raum">
+      </div>
+    </section>
+
+    <section class="about-section" style="flex-direction: row-reverse;">
+      <div class="about-text">
+        <h2>Unsere Mission</h2>
+        <p>Unsere Mission ist es, individuelle Lösungen für jeden Kunden zu bieten. Von der Auswahl der Stoffe bis zur perfekten Passform – wir legen Wert auf jedes Detail. Deine Zufriedenheit ist unser Antrieb, und wir streben danach, mit jedem Projekt neue Maßstäbe zu setzen.</p>
+      </div>
+      <div class="about-image">
+        <img src="unsere mission.jpg" alt="Team bei der Arbeit">
+      </div>
+    </section>
+
+    <section class="team-section">
+      <h2>Unser Team</h2>
+      <div class="team-members">
+        <div class="team-member">
+          <img src="Teammitglied 1.jpg" alt="Teammitglied 1">
+          <h3>Anna Meier</h3>
+          <p>Designerin</p>
+        </div>
+        <div class="team-member">
+          <img src="Teammitglied 2.jpg" alt="Teammitglied 2">
+          <h3>Markus Schmid</h3>
+          <p>Produktionsleiter</p>
+        </div>
+        <div class="team-member">
+          <img src="Teammitglied 3.jpg" alt="Teammitglied 3">
+          <h3>Lena Berger</h3>
+          <p>Kundenservice</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <a href="#" class="back-to-top" id="back-to-top">Nach oben</a>
+  <footer>
+    <p>© 2025 Kavallerietuch</p>
+    <div class="footer-nav">
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutz</a>
+      <a href="Versand und Rückgabe.html">Versand & Rückgabe</a>
+      <a href="agb.html">AGB</a>
+    </div>
+    <div class="social-icons">
+      <a href="https://instagram.com" target="_blank" rel="noopener"><img src="instagram.png" alt="Instagram"></a>
+      <a href="https://facebook.com" target="_blank" rel="noopener"><img src="facebook.png" alt="Facebook"></a>
+      <a href="https://tiktok.com" target="_blank" rel="noopener"><img src="tiktok.png" alt="TikTok"></a>
+    </div>
+  </footer>
+
+  <script>
+    const backToTop = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+      backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
+    });
+    backToTop.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
+

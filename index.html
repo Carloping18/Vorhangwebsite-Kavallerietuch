@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kavallerietuch - Hauptseite</title>
+  <!-- Google Fonts Roboto Condensed einbinden -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Roboto Condensed', sans-serif;
+      font-weight: 300;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      color: #2b2b2b;
+      overflow-x: hidden;
+    }
+    header {
+      background-color: #1a1a1a;
+      padding: 10px 20px;
+      position: static;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    header img.logo {
+      width: 60px;
+      height: 60px;
+      margin-left: 10px;
+      object-fit: cover;
+      filter: brightness(1.2);
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      margin-left: auto;
+      margin-right: 20px;
+    }
+    nav a {
+      color: #e0e0e0;
+      text-decoration: none;
+      margin: 0 10px;
+      font-size: 0.7em;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.3s;
+      line-height: 1;
+      vertical-align: middle;
+    }
+    nav a:hover {
+      color: #d4af37;
+    }
+    /* Dropdown-Menü */
+    .dropdown {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+    .dropdown > a {
+      margin: 0 10px;
+      line-height: 1;
+      vertical-align: middle;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #1a1a1a;
+      min-width: 200px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      z-index: 1001;
+      border-radius: 8px;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .dropdown-content a {
+      color: #e0e0e0;
+      padding: 12px 15px;
+      text-decoration: none;
+      display: block;
+      font-weight: 400;
+      font-size: 0.7em;
+      transition: background-color 0.3s;
+    }
+    .dropdown-content a:hover {
+      background-color: #2b2b2b;
+      color: #d4af37;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    /* Flaggen */
+    .flags {
+      margin-right: 20px;
+      display: flex;
+      align-items: center;
+    }
+    .flags img {
+      width: 20px;
+      height: 20px;
+      margin-left: 10px;
+      object-fit: cover;
+    }
+    /* Suchleiste */
+    .search-bar {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 20px;
+      text-align: center;
+    }
+    .search-bar input {
+      width: 60%;
+      padding: 12px 20px;
+      font-size: 1.1em;
+      font-weight: 300;
+      border: none;
+      border-radius: 30px;
+      background-color: #ffffff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: width 0.3s, box-shadow 0.3s;
+    }
+    .search-bar input:focus {
+      width: 65%;
+      outline: none;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    }
+    /* Kategorien-Navigation */
+    .category-nav {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 0 20px;
+      text-align: center;
+    }
+    .category-nav a {
+      color: #2b2b2b;
+      text-decoration: none;
+      margin: 0 20px;
+      font-size: 1.1em;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.3s;
+    }
+    .category-nav a:hover {
+      color: #d4af37;
+    }
+    .category-nav .sale-link {
+      color: #d4af37;
+    }
+    .category-nav .sale-link:hover {
+      color: #b8962e;
+    }
+    /* Top-Controls & Warenkorb */
+    .top-controls {
+      max-width: 1200px;
+      margin: 10px auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .controls {
+      display: flex;
+      align-items: center;
+    }
+    .sort-options select {
+      padding: 10px;
+      font-size: 1em;
+      font-weight: 400;
+      border: none;
+      border-radius: 8px;
+      background-color: #ffffff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      transition: box-shadow 0.3s;
+    }
+    .sort-options select:focus {
+      outline: none;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    .cart {
+      display: flex;
+      align-items: center;
+      background-color: #1a1a1a;
+      padding: 8px 15px;
+      border-radius: 25px;
+      transition: background-color 0.3s, transform 0.2s;
+      cursor: pointer;
+      position: relative;
+    }
+    .cart:hover {
+      background-color: #2b2b2b;
+      transform: scale(1.05);
+    }
+    .cart img {
+      width: 25px;
+      height: 25px;
+      margin-right: 10px;
+      filter: brightness(1.2);
+    }
+    .cart span {
+      font-size: 1em;
+      font-weight: 400;
+      color: #e0e0e0;
+    }
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background-color: #d4af37;
+      color: #fff;
+      font-size: 0.8em;
+      font-weight: 700;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    /* Produktbereich */
+    .products {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 30px;
+      gap: 20px;
+    }
+    .product {
+      background-color: #ffffff;
+      border-radius: 8px;
+      padding: 15px;
+      width: 280px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .product img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      transition: transform 0.3s;
+    }
+    .product img:hover {
+      transform: scale(1.05);
+    }
+    .product h2 {
+      font-size: 1.6em;
+      font-weight: 700;
+      margin: 0 0 10px;
+      color: #1a1a1a;
+    }
+    .product p {
+      font-size: 1.1em;
+      font-weight: 300;
+      color: #666;
+      margin: 0 0 15px;
+    }
+    .product .price {
+      font-weight: 700;
+      color: #333;
+    }
+    .product button.add-to-cart {
+      padding: 12px 24px;
+      border: none;
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+      font-size: 1em;
+      font-weight: 400;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background-color 0.3s, box-shadow 0.3s;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    .product button.add-to-cart:hover {
+      background-color: #d4af37;
+      color: #1a1a1a;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    }
+    /* Bestseller-Badge */
+    .bestseller {
+      position: relative;
+    }
+    .bestseller::after {
+      content: "Bestseller";
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: #d4af37;
+      color: #fff;
+      font-size: 0.8em;
+      font-weight: 400;
+      padding: 4px 10px;
+      border-radius: 12px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      text-transform: uppercase;
+    }
+    /* Scroll-Galerie */
+    .scroll-gallery {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 50px;
+    }
+    .gallery-item {
+      position: relative;
+      width: 80%;
+      max-width: 1200px;
+      margin-bottom: 20px;
+    }
+    .gallery-item img {
+      width: 100%;
+      border-radius: 10px;
+      display: block;
+    }
+    .gallery-button {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 18px;
+      font-weight: 400;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
+    }
+    .gallery-button:hover {
+      background-color: rgba(0, 0, 0, 0.9);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      transform: translateX(-50%) translateY(-5px);
+    }
+    .gallery-text {
+      position: absolute;
+      font-family: 'Roboto Condensed', sans-serif;
+      font-size: 1em;
+      font-weight: 300;
+      color: #ffffff;
+      padding: 10px;
+      z-index: 10;
+      background: transparent;
+      border: none;
+      outline: none;
+      cursor: text;
+    }
+    .gallery-text:empty::before {
+      content: attr(data-placeholder);
+      color: #666;
+    }
+    .gallery-item:nth-child(1) .gallery-text {
+      top: 20px;
+      left: 20px;
+      width: 200px;
+    }
+    .gallery-item:nth-child(2) .gallery-text {
+      bottom: 60px;
+      right: 20px;
+      width: 180px;
+    }
+    .gallery-item:nth-child(3) .gallery-text {
+      top: 50%;
+      left: 20px;
+      transform: translateY(-50%);
+      width: 220px;
+    }
+    .gallery-item:nth-child(4) .gallery-text {
+      bottom: 20px;
+      left: 20px;
+      width: 200px;
+    }
+    .gallery-product-card {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+      padding: 20px;
+      width: 300px;
+      z-index: 11;
+      text-align: center;
+    }
+    .gallery-product-card.visible {
+      display: block;
+    }
+    .gallery-product-card img {
+      max-width: 100%;
+      border-radius: 8px;
+    }
+    .gallery-product-card h3 {
+      font-size: 1.4em;
+      font-weight: 700;
+      color: #333;
+      margin: 10px 0;
+    }
+    .gallery-product-card p {
+      font-size: 1em;
+      font-weight: 300;
+      color: #666;
+      margin: 0 0 10px;
+    }
+    .gallery-product-card .price {
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 15px;
+    }
+    .gallery-product-card button {
+      padding: 10px 20px;
+      border: none;
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+      font-size: 16px;
+      font-weight: 400;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .gallery-product-card button:hover {
+      background-color: #d4af37;
+    }
+    /* Über uns Sektion */
+    .about-section {
+      max-width: 1200px;
+      margin: 50px auto;
+      padding: 0 20px;
+      text-align: center;
+    }
+    .about-section h2 {
+      font-size: 2em;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 20px;
+    }
+    .about-section p {
+      font-size: 1.1em;
+      font-weight: 300;
+      color: #666;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    /* Neue Sektion im SilentArt-Stil */
+    .silentart-style-section {
+      max-width: 1200px;
+      margin: 50px auto;
+      padding: 30px 20px;
+      text-align: center;
+      background-color: #ffffff;
+    }
+    .silentart-style-section h2 {
+      font-size: 2.5em;
+      font-weight: 700;
+      color: #333333;
+      margin-bottom: 20px;
+    }
+    .silentart-style-section p {
+      font-size: 1.1em;
+      font-weight: 400;
+      color: #666;
+      max-width: 800px;
+      margin: 0 auto 30px;
+      line-height: 1.6;
+    }
+    .silentart-style-section .feature-container {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .silentart-style-section .feature {
+      max-width: 340px; /* Angepasst für größere Bilder */
+      text-align: center;
+    }
+    .silentart-style-section .feature img {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 10px;
+    }
+    .silentart-style-section .feature .large-feature-img {
+      width: 320px !important;
+      height: 320px !important;
+      margin-bottom: 15px;
+      display: block;
+    }
+    .silentart-style-section .feature h3 {
+      font-size: 1.2em;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .silentart-style-section .feature p {
+      font-size: 1em;
+      font-weight: 300;
+      color: #666;
+      margin: 0;
+    }
+    /* Kontaktkarte */
+    .contact-card {
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 30px;
+      background-color: #f9f9f9;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    .contact-card h2 {
+      font-size: 1.8em;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 20px;
+    }
+    .contact-card p {
+      font-size: 1em;
+      font-weight: 400;
+      color: #666;
+      margin: 10px 0;
+    }
+    .contact-card a {
+      color: #d4af37;
+      text-decoration: none;
+      font-weight: 400;
+    }
+    .contact-card a:hover {
+      text-decoration: underline;
+    }
+    /* Zurück zum Anfang Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+      padding: 12px 24px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-size: 1em;
+      font-weight: 400;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      display: none;
+      transition: background-color 0.3s;
+    }
+    .back-to-top:hover {
+      background-color: #d4af37;
+      color: #1a1a1a;
+    }
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2em 0;
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+      box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.2);
+    }
+    .footer-nav {
+      margin: 15px 0;
+    }
+    .footer-nav a {
+      color: #e0e0e0;
+      text-decoration: none;
+      margin: 0 20px;
+      font-size: 0.9em;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.3s;
+    }
+    .footer-nav a:hover {
+      color: #d4af37;
+    }
+    .social-icons {
+      margin-top: 15px;
+    }
+    .social-icons img {
+      width: 35px;
+      height: 35px;
+      margin: 0 15px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .social-icons img:hover {
+      transform: scale(1.1);
+    }
+    /* Animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="Kavallerietuch.png" alt="Kavallerietuch Logo" class="logo">
+    <nav>
+      <a href="index.html">Home</a>
+      <div class="dropdown">
+        <a href="Gallerie.html">Gallerie</a>
+      </div>
+      <a href="wie-funktionierts.html">Wie funktioniert’s?</a>
+      <a href="über-uns.html">Über uns</a>
+    </nav>
+    <div class="flags">
+      <img src="Schweizer Flagge.jpg" alt="Schweizer Flagge">
+      <img src="Grabünden Flagge.jpg" alt="Graubünden Flagge">
+    </div>
+  </header>
+  
+  <main>
+    <!-- Top-Controls & Warenkorb -->
+    <div class="top-controls">
+      <div class="controls">
+        <div class="sort-options">
+          <select id="sort-select">
+            <option value="name-asc">Name (A-Z)</option>
+            <option value="name-desc">Name (Z-A)</option>
+            <option value="price-asc">Preis (aufsteigend)</option>
+            <option value="price-desc">Preis (absteigend)</option>
+          </select>
+        </div>
+      </div>
+      <div class="cart" onclick="window.location.href='Warenkorb.html'">
+        <img src="cart-icon.png" alt="Warenkorb">
+        <span>Warenkorb</span>
+        <div class="cart-count" id="cart-count">0</div>
+      </div>
+    </div>
+
+    <!-- Suchleiste -->
+    <div class="search-bar">
+      <input type="text" id="search-input" placeholder="Produkte suchen...">
+    </div>
+
+    <!-- Kategorien-Navigation -->
+    <div class="category-nav">
+      <a href="Vorhänge.html">Vorhänge</a>
+      <a href="polster.html">Polster</a>
+      <a href="Betten.html">Betten</a>
+      <a href="kavallerietuch.html">Kavallerietuch</a>
+      <a href="Teppiche.html">Teppich</a>
+      <a href="Sale.html" class="sale-link">Sale</a>
+    </div>
+
+    <section class="products">
+      <article class="product bestseller" data-name="Tagesvorhang 1" data-price="20" data-category="vorhaenge">
+        <img src="Tagesvorhang 1.jpg" alt="Tagesvorhang 1">
+        <h2>Tagesvorhang 1</h2>
+        <p>Eleganter Vorhang in modernem Design.</p>
+        <p class="price">ab 19.95Fr</p>
+        <button class="add-to-cart" data-product="Tagesvorhang 1">Bestellen</button>
+      </article>
+      <article class="product bestseller" data-name="Blauer Vorhang" data-price="30" data-category="vorhaenge">
+        <img src="Sessel.jpg" alt="Blauer Vorhang">
+        <h2>Sessel</h2>
+        <p>Klassischer Stil für jeden Raum.</p>
+        <p class="price">ab 30Fr</p>
+        <button class="add-to-cart" data-product="Sessel">Bestellen</button>
+      </article>
+      <article class="product bestseller" data-name="Roter Vorhang" data-price="40" data-category="vorhaenge">
+        <img src="Matratzen.jpg" alt="Matratzen">
+        <h2>Matratzen</h2>
+        <p>Moderner Vorhang mit feinem Muster.</p>
+        <p class="price">ab 40Fr</p>
+        <button class="add-to-cart" data-product="Matratzen">Bestellen</button>
+      </article>
+      <article class="product bestseller" data-name="Gelber Vorhang" data-price="50" data-category="vorhaenge">
+        <img src="Orientteppich.jpg" alt="Orientteppich">
+        <h2>Orientteppich</h2>
+        <p>Stilvoll und funktional.</p>
+        <p class="price">ab 50Fr</p>
+        <button class="add-to-cart" data-product="Orientteppich">Bestellen</button>
+      </article>
+      <article class="product bestseller" data-name="Weißer Vorhang" data-price="60" data-category="vorhaenge">
+        <img src="weiss.jpg" alt="Weißer Vorhang">
+        <h2>Weißer Vorhang</h2>
+        <p>Schlichter Vorhang für zeitlose Eleganz.</p>
+        <p class="price">ab 60Fr</p>
+        <button class="add-to-cart" data-product="Weißer Vorhang">Bestellen</button>
+      </article>
+    </section>
+
+    <section class="scroll-gallery">
+      <div class="gallery-item">
+        <img src="galleriebild 1.jpg" alt="Galeriebild 1">
+        <div class="gallery-text" contenteditable="true" data-placeholder="Text hier eingeben...">Finde den perfekten Vorhang für dein Zuhause!</div>
+        <button class="gallery-button" data-target="product-card-1">Produkt anzeigen</button>
+        <div class="gallery-product-card" id="product-card-1">
+          <img src="Tagesvorhang 1.jpg" alt="Tagesvorhang 1">
+          <h3>Tagesvorhang 1</h3>
+          <p>Eleganter Vorhang in modernem Design.</p>
+          <p class="price">ab 19.95Fr</p>
+          <button class="add-to-cart" data-product="Tagesvorhang 1">Kaufen</button>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="galleriebild 2.jpg" alt="Galeriebild 2">
+        <div class="gallery-text" contenteditable="true" data-placeholder="Text hier eingeben...">Mehr Privatsphäre und Lichtschutz!</div>
+        <button class="gallery-button" data-target="product-card-2">Produkt anzeigen</button>
+        <div class="gallery-product-card" id="product-card-2">
+          <img src="Sessel.jpg" alt="Sessel">
+          <h3>Sessel</h3>
+          <p>Klassischer Stil für jeden Raum.</p>
+          <p class="price">ab 30Fr</p>
+          <button class="add-to-cart" data-product="Sessel">Kaufen</button>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="galleriebild 3.jpg" alt="Galeriebild 3">
+        <div class="gallery-text" contenteditable="true" data-placeholder="Text hier eingeben...">Leichte, transparente Gardinen!</div>
+        <button class="gallery-button" data-target="product-card-3">Produkt anzeigen</button>
+        <div class="gallery-product-card" id="product-card-3">
+          <img src="Matratzen.jpg" alt="Matratzen">
+          <h3>Matratzen</h3>
+          <p>Moderner Vorhang mit feinem Muster.</p>
+          <p class="price">ab 40Fr</p>
+          <button class="add-to-cart" data-product="Matratzen">Kaufen</button>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="galleriebild 4.jpg" alt="Galeriebild 4">
+        <div class="gallery-text" contenteditable="true" data-placeholder="Text hier eingeben...">Nachhaltig wohnen mit Stil!</div>
+        <button class="gallery-button" data-target="product-card-4">Produkt anzeigen</button>
+        <div class="gallery-product-card" id="product-card-4">
+          <img src="Orientteppich.jpg" alt="Orientteppich">
+          <h3>Orientteppich</h3>
+          <p>Stilvoll und funktional.</p>
+          <p class="price">ab 50Fr</p>
+          <button class="add-to-cart" data-product="Orientteppich">Kaufen</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Neue Sektion im SilentArt-Stil -->
+    <section class="silentart-style-section">
+      <h2>Kavallerietuch Erlebnis</h2>
+      <p>Erleben Sie ein Zuhause, das Stil und Komfort vereint. Mit maßgeschneiderten Lösungen und hochwertiger Handwerkskunst aus Graubünden schaffen wir Räume, die Ihre Persönlichkeit widerspiegeln.</p>
+      <div class="feature-container">
+        <div class="feature">
+          <img src="Exclusive Designs.jpg" alt="Exklusivität" class="large-feature-img">
+          <h3>Exklusive Designs</h3>
+          <p>Wählen Sie aus individuellen Kollektionen oder lassen Sie ein einzigartiges Kunstwerk für Sie gestalten.</p>
+        </div>
+        <div class="feature">
+          <img src="Nachhaltiges Wohnen.jpg" alt="Nachhaltigkeit" class="large-feature-img">
+          <h3>Nachhaltiges Wohnen</h3>
+          <p>Genießen Sie 100% natürliche Materialien für ein gesundes Raumklima und eine gemütliche Atmosphäre.</p>
+        </div>
+        <div class="feature">
+          <img src="Personalisierte Beratung.jpg" alt="Beratung" class="large-feature-img">
+          <h3>Personalisierte Beratung</h3>
+          <p>Profitieren Sie von fachkundiger Beratung, die auf Ihre Bedürfnisse zugeschnitten ist.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Kontaktkarte -->
+    <section class="contact-card">
+      <h2>Kontaktieren Sie uns</h2>
+      <p>Kavallerietuch AG</p>
+      <p>Musterstraße 123, 7000 Chur, Schweiz</p>
+      <p>Telefon: +41 81 123 45 67</p>
+      <p>E-Mail: <a href="mailto:info@kavallerietuch.ch">info@kavallerietuch.ch</a></p>
+    </section>
+  </main>
+
+  <!-- Zurück zum Anfang Button -->
+  <a href="#" class="back-to-top" id="back-to-top">Nach oben</a>
+
+  <footer>
+    <p>© 2025 Kavallerietuch</p>
+    <div class="footer-nav">
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutz</a>
+      <a href="Versand und Rückgabe.html">Versand & Rückgabe</a>
+      <a href="agb.html">AGB</a>
+    </div>
+    <div class="social-icons">
+      <a href="https://instagram.com" target="_blank" rel="noopener"><img src="instagram.png" alt="Instagram"></a>
+      <a href="https://facebook.com" target="_blank" rel="noopener"><img src="facebook.png" alt="Facebook"></a>
+      <a href="https://tiktok.com" target="_blank" rel="noopener"><img src="tiktok.png" alt="TikTok"></a>
+    </div>
+  </footer>
+
+  <!-- JavaScript für Suche, Sortierung, Warenkorb, Produktkarten und Zurück zum Anfang -->
+  <script>
+    const products = document.querySelectorAll('.product');
+    const searchInput = document.getElementById('search-input');
+    const sortSelect = document.getElementById('sort-select');
+    const backToTop = document.getElementById('back-to-top');
+    const cartCount = document.getElementById('cart-count');
+    const addToCartButtons = document.querySelectorAll('.add-to-cart');
+    const galleryButtons = document.querySelectorAll('.gallery-button');
+
+    let cartItems = 0;
+
+    function applySearch() {
+      const searchTerm = searchInput.value.toLowerCase();
+
+      products.forEach(product => {
+        const name = product.getAttribute('data-name').toLowerCase();
+        const matchesSearch = name.includes(searchTerm);
+
+        if (matchesSearch) {
+          product.style.display = 'block';
+        } else {
+          product.style.display = 'none';
+        }
+      });
+    }
+
+    function sortProducts() {
+      const sortValue = sortSelect.value;
+      const productArray = Array.from(products);
+
+      productArray.sort((a, b) => {
+        if (sortValue === 'name-asc') {
+          return a.getAttribute('data-name').localeCompare(b.getAttribute('data-name'));
+        } else if (sortValue === 'name-desc') {
+          return b.getAttribute('data-name').localeCompare(a.getAttribute('data-name'));
+        } else if (sortValue === 'price-asc') {
+          return parseInt(a.getAttribute('data-price')) - parseInt(b.getAttribute('data-price'));
+        } else if (sortValue === 'price-desc') {
+          return parseInt(b.getAttribute('data-price')) - parseInt(a.getAttribute('data-price'));
+        }
+      });
+
+      const container = document.querySelector('.products');
+      productArray.forEach(product => container.appendChild(product));
+      applySearch();
+    }
+
+    // Warenkorb-Funktionalität
+    addToCartButtons.forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        cartItems++;
+        cartCount.textContent = cartItems;
+        alert(button.getAttribute('data-product') + " wurde zum Warenkorb hinzugefügt!");
+      });
+    });
+
+    // Produktkarten ein- und ausblenden
+    galleryButtons.forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = button.getAttribute('data-target');
+        const productCard = document.getElementById(targetId);
+
+        if (productCard.classList.contains('visible')) {
+          productCard.classList.remove('visible');
+          button.textContent = 'Produkt anzeigen';
+        } else {
+          productCard.classList.add('visible');
+          button.textContent = 'Produkt ausblenden';
+        }
+      });
+    });
+
+    // Event-Listener
+    searchInput.addEventListener('input', applySearch);
+    sortSelect.addEventListener('change', sortProducts);
+
+    // Zurück zum Anfang Button
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTop.style.display = 'block';
+      } else {
+        backToTop.style.display = 'none';
+      }
+    });
+
+    backToTop.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
