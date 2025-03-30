@@ -4,12 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Produktseite - Polster - Kavallerietuch</title>
-  <!-- Google Fonts Roboto Condensed einbinden -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
   <style>
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
     body {
       font-family: 'Roboto Condensed', sans-serif;
       font-weight: 300;
@@ -38,6 +35,16 @@
       object-fit: cover;
       filter: brightness(1.2);
     }
+    .header-title {
+      font-size: 2em;
+      font-weight: 700;
+      color: #e0e0e0;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
     nav {
       display: flex;
       align-items: center;
@@ -56,9 +63,7 @@
       line-height: 1;
       vertical-align: middle;
     }
-    nav a:hover {
-      color: #d4af37;
-    }
+    nav a:hover { color: #d4af37; }
     .dropdown {
       position: relative;
       display: inline-flex;
@@ -94,9 +99,7 @@
       background-color: #2b2b2b;
       color: #d4af37;
     }
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
+    .dropdown:hover .dropdown-content { display: block; }
     .flags {
       margin-right: 20px;
       display: flex;
@@ -146,15 +149,9 @@
       letter-spacing: 1px;
       transition: color 0.3s;
     }
-    .category-nav a:hover {
-      color: #d4af37;
-    }
-    .category-nav .sale-link {
-      color: #d4af37;
-    }
-    .category-nav .sale-link:hover {
-      color: #b8962e;
-    }
+    .category-nav a:hover { color: #d4af37; }
+    .category-nav .sale-link { color: #d4af37; }
+    .category-nav .sale-link:hover { color: #b8962e; }
     .back-button {
       position: absolute;
       top: 20px;
@@ -170,9 +167,7 @@
       z-index: 1000;
       transition: background-color 0.3s;
     }
-    .back-button:hover {
-      background-color: #2b2b2b;
-    }
+    .back-button:hover { background-color: #2b2b2b; }
     main {
       max-width: 1200px;
       margin: 40px auto;
@@ -482,6 +477,7 @@
 <body>
   <header>
     <img src="Kavallerietuch.png" alt="Kavallerietuch Logo" class="logo">
+    <div class="header-title">Kavallerietuch</div>
     <nav>
       <a href="index.html">Home</a>
       <div class="dropdown">
@@ -532,6 +528,7 @@
         <label><input type="checkbox" class="filter-type" value="dekorationspolster"> Dekorationspolster</label>
         <label><input type="checkbox" class="filter-type" value="outdoorpolster"> Outdoor-Polster</label>
         <label><input type="checkbox" class="filter-type" value="kissen"> Kissen</label>
+        <label><input type="checkbox" class="filter-type" value="custom"> Custom</label>
       </div>
       <div>
         <h4>Material</h4>
@@ -606,7 +603,8 @@
       { type: "rueckenpolster", material: "polyester", price: 40, name: "Sessel", image: "Sessel.jpg", description: "Unterstützung und Komfort für den Rücken.", link: "rueckenpolster.html" },
       { type: "dekorationspolster", material: "samt", price: 25, name: "Recamieren", image: "Rekamiere.jpg", description: "Stilvolle Akzente für Ihr Zuhause.", link: "dekorationspolster.html" },
       { type: "outdoorpolster", material: "polyester", price: 50, name: "Sofas", image: "Sofa.jpg", description: "Wetterbeständig und langlebig für draußen.", link: "outdoorpolster.html" },
-      { type: "kissen", material: "leinen", price: 20, name: "Hocker", image: "Hocker.jpg", description: "Weich und dekorativ für Sofa oder Bett.", link: "kissen.html" }
+      { type: "kissen", material: "leinen", price: 20, name: "Hocker", image: "Hocker.jpg", description: "Weich und dekorativ für Sofa oder Bett.", link: "kissen.html" },
+      { type: "custom", material: "samt", price: 60, name: "Custom", image: "Custom.jpg", description: "Individuell anpassbare Polster nach Ihren Wünschen.", link: "custom-polster.html" }
     ];
     const filterTypes = document.querySelectorAll('.filter-type');
     const filterMaterials = document.querySelectorAll('.filter-material');

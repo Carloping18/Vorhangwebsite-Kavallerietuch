@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kavallerietuch - Kassa</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    /* Der gesamte Stil wird direkt aus index.html übernommen */
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Roboto Condensed', sans-serif;
+      font-weight: 300;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      color: #2b2b2b;
+      overflow-x: hidden;
+    }
+    header {
+      background-color: #1a1a1a;
+      padding: 10px 20px;
+      position: static;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    header img.logo {
+      width: 60px;
+      height: 60px;
+      margin-left: 10px;
+      object-fit: cover;
+      filter: brightness(1.2);
+    }
+    .header-title {
+      font-size: 2em;
+      font-weight: 700;
+      color: #e0e0e0;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      margin-left: auto;
+      margin-right: 20px;
+    }
+    nav a {
+      color: #e0e0e0;
+      text-decoration: none;
+      margin: 0 10px;
+      font-size: 0.7em;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #d4af37;
+    }
+    .flags {
+      margin-right: 20px;
+      display: flex;
+      align-items: center;
+    }
+    .flags img {
+      width: 20px;
+      height: 20px;
+      margin-left: 10px;
+      object-fit: cover;
+    }
+    .checkout-section {
+      max-width: 1200px;
+      margin: 50px auto;
+      padding: 0 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+    .checkout-form, .cart-summary {
+      flex: 1;
+      min-width: 300px;
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+    .checkout-form h2, .cart-summary h2 {
+      font-size: 1.8em;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 20px;
+    }
+    .checkout-form label {
+      display: block;
+      font-size: 1em;
+      font-weight: 400;
+      color: #333;
+      margin: 10px 0 5px;
+    }
+    .checkout-form input, .checkout-form select {
+      width: 100%;
+      padding: 10px;
+      font-size: 1em;
+      font-weight: 300;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-sizing: border-box;
+      margin-bottom: 15px;
+    }
+    .checkout-form input:focus, .checkout-form select:focus {
+      outline: none;
+      border-color: #d4af37;
+      box-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
+    }
+    .cart-summary ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 20px;
+    }
+    .cart-summary li {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+    }
+    .cart-summary .total {
+      font-size: 1.2em;
+      font-weight: 700;
+      color: #d4af37;
+      text-align: right;
+      margin-top: 20px;
+    }
+    .complete-order-btn {
+      width: 100%;
+      padding: 12px;
+      background-color: #d4af37;
+      color: #1a1a1a;
+      border: none;
+      border-radius: 25px;
+      font-size: 1.1em;
+      font-weight: 400;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .complete-order-btn:hover {
+      background-color: #b8962e;
+    }
+    footer {
+      text-align: center;
+      padding: 2em 0;
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+      box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.2);
+    }
+    .footer-nav {
+      margin: 15px 0;
+    }
+    .footer-nav a {
+      color: #e0e0e0;
+      text-decoration: none;
+      margin: 0 20px;
+      font-size: 0.9em;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.3s;
+    }
+    .footer-nav a:hover {
+      color: #d4af37;
+    }
+    .social-icons {
+      margin-top: 15px;
+    }
+    .social-icons img {
+      width: 35px;
+      height: 35px;
+      margin: 0 15px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .social-icons img:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="Kavallerietuch.png" alt="Kavallerietuch Logo" class="logo">
+    <div class="header-title">Kavallerietuch</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="Gallerie.html">Gallerie</a>
+      <a href="wie-funktionierts.html">Wie funktioniert’s?</a>
+      <a href="über-uns.html">Über uns</a>
+    </nav>
+    <div class="flags">
+      <img src="Schweizer Flagge.jpg" alt="Schweizer Flagge">
+      <img src="Grabünden Flagge.jpg" alt="Graubünden Flagge">
+    </div>
+  </header>
+
+  <main>
+    <section class="checkout-section">
+      <div class="checkout-form">
+        <h2>Versand- und Zahlungsinformationen</h2>
+        <form id="checkout-form">
+          <label for="name">Name</label>
+          <input type="text" id="name" required>
+
+          <label for="address">Adresse</label>
+          <input type="text" id="address" required>
+
+          <label for="city">Stadt</label>
+          <input type="text" id="city" required>
+
+          <label for="zip">PLZ</label>
+          <input type="text" id="zip" required>
+
+          <label for="country">Land</label>
+          <select id="country" required>
+            <option value="CH">Schweiz</option>
+            <option value="DE">Deutschland</option>
+            <option value="AT">Österreich</option>
+          </select>
+
+          <label for="payment">Zahlungsmethode</label>
+          <select id="payment" required>
+            <option value="credit">Kreditkarte</option>
+            <option value="paypal">PayPal</option>
+            <option value="invoice">Rechnung</option>
+          </select>
+        </form>
+      </div>
+
+      <div class="cart-summary">
+        <h2>Bestellübersicht</h2>
+        <ul id="cart-items"></ul>
+        <div class="total">Gesamtsumme: <span id="total-amount">0.00Fr</span></div>
+        <button class="complete-order-btn" id="complete-order">Bestellung abschließen</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Kavallerietuch</p>
+    <div class="footer-nav">
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutz</a>
+      <a href="Versand und Rückgabe.html">Versand & Rückgabe</a>
+      <a href="agb.html">AGB</a>
+    </div>
+    <div class="social-icons">
+      <a href="https://instagram.com" target="_blank" rel="noopener"><img src="instagram.png" alt="Instagram"></a>
+      <a href="https://facebook.com" target="_blank" rel="noopener"><img src="facebook.png" alt="Facebook"></a>
+      <a href="https://tiktok.com" target="_blank" rel="noopener"><img src="tiktok.png" alt="TikTok"></a>
+    </div>
+  </footer>
+
+  <script>
+    const cartItemsList = document.getElementById('cart-items');
+    const totalAmount = document.getElementById('total-amount');
+    const completeOrderBtn = document.getElementById('complete-order');
+    const checkoutForm = document.getElementById('checkout-form');
+
+    let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+
+    function updateCartSummary() {
+      cartItemsList.innerHTML = '';
+      if (cartItems.length === 0) {
+        cartItemsList.innerHTML = '<li>Der Warenkorb ist leer</li>';
+        totalAmount.textContent = '0.00Fr';
+      } else {
+        cartItems.forEach(item => {
+          const li = document.createElement('li');
+          li.innerHTML = `
+            <span>${item.name} (${item.quantity || 1}x)</span>
+            <span>${(item.price * (item.quantity || 1)).toFixed(2)}Fr</span>
+          `;
+          cartItemsList.appendChild(li);
+        });
+        const total = cartItems.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
+        totalAmount.textContent = `${total.toFixed(2)}Fr`;
+      }
+    }
+
+    completeOrderBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (checkoutForm.checkValidity() && cartItems.length > 0) {
+        alert('Vielen Dank für Ihre Bestellung!');
+        localStorage.removeItem('cart');
+        cartItems = [];
+        updateCartSummary();
+        checkoutForm.reset();
+      } else if (cartItems.length === 0) {
+        alert('Ihr Warenkorb ist leer!');
+      } else {
+        alert('Bitte füllen Sie alle erforderlichen Felder aus.');
+      }
+    });
+
+    updateCartSummary();
+  </script>
+</body>
+</html>

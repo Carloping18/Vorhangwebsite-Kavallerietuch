@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kavallerietuch - Hauptseite</title>
-  <!-- Google Fonts Roboto Condensed einbinden -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
   <style>
     html {
@@ -37,6 +36,16 @@
       object-fit: cover;
       filter: brightness(1.2);
     }
+    .header-title {
+      font-size: 2em;
+      font-weight: 700;
+      color: #e0e0e0;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
     nav {
       display: flex;
       align-items: center;
@@ -58,7 +67,6 @@
     nav a:hover {
       color: #d4af37;
     }
-    /* Dropdown-Menü */
     .dropdown {
       position: relative;
       display: inline-flex;
@@ -97,7 +105,6 @@
     .dropdown:hover .dropdown-content {
       display: block;
     }
-    /* Flaggen */
     .flags {
       margin-right: 20px;
       display: flex;
@@ -109,7 +116,29 @@
       margin-left: 10px;
       object-fit: cover;
     }
-    /* Suchleiste */
+    .contact-info {
+      color: #e0e0e0;
+      font-size: 0.8em;
+      font-weight: 300;
+      opacity: 0;
+      transform: translateX(-100px);
+      transition: all 0.5s ease;
+      margin-left: 20px;
+    }
+    .contact-info.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .contact-info p {
+      margin: 2px 0;
+    }
+    .contact-info a {
+      color: #d4af37;
+      text-decoration: none;
+    }
+    .contact-info a:hover {
+      text-decoration: underline;
+    }
     .search-bar {
       max-width: 1200px;
       margin: 30px auto;
@@ -132,7 +161,6 @@
       outline: none;
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
     }
-    /* Kategorien-Navigation */
     .category-nav {
       max-width: 1200px;
       margin: 20px auto;
@@ -158,7 +186,6 @@
     .category-nav .sale-link:hover {
       color: #b8962e;
     }
-    /* Top-Controls & Warenkorb */
     .top-controls {
       max-width: 1200px;
       margin: 10px auto;
@@ -183,39 +210,32 @@
     }
     .sort-options select:focus {
       outline: none;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 4px 12px rgba(0, 0, 0 
+   
+, 0.15);
     }
     .cart {
+      position: relative;
       display: flex;
       align-items: center;
-      background-color: #1a1a1a;
-      padding: 8px 15px;
-      border-radius: 25px;
-      transition: background-color 0.3s, transform 0.2s;
+      background: none;
+      padding: 0;
       cursor: pointer;
-      position: relative;
-    }
-    .cart:hover {
-      background-color: #2b2b2b;
-      transform: scale(1.05);
     }
     .cart img {
-      width: 25px;
-      height: 25px;
-      margin-right: 10px;
+      width: 50px;
+      height: 50px;
       filter: brightness(1.2);
     }
     .cart span {
-      font-size: 1em;
-      font-weight: 400;
-      color: #e0e0e0;
+      display: none;
     }
     .cart-count {
       position: absolute;
       top: -8px;
       right: -8px;
       background-color: #d4af37;
-      color: #fff;
+      color: #1a1a1a;
       font-size: 0.8em;
       font-weight: 700;
       width: 20px;
@@ -224,8 +244,82 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
-    /* Produktbereich */
+    .cart-dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: #ffffff;
+      min-width: 300px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      z-index: 1001;
+      padding: 15px;
+      margin-top: 10px;
+    }
+    .cart:hover .cart-dropdown {
+      display: block;
+    }
+    .cart-dropdown h3 {
+      font-size: 1.2em;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin: 0 0 10px;
+    }
+    .cart-dropdown ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .cart-dropdown li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+    }
+    .cart-dropdown li:last-child {
+      border-bottom: none;
+    }
+    .cart-dropdown .item-name {
+      font-size: 1em;
+      color: #333;
+    }
+    .cart-dropdown .item-price {
+      font-size: 1em;
+      font-weight: 700;
+      color: #d4af37;
+    }
+    .cart-dropdown .remove-item {
+      background: none;
+      border: none;
+      color: #d4af37;
+      font-size: 0.9em;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+    .cart-dropdown .remove-item:hover {
+      color: #b8962e;
+    }
+    .cart-dropdown .checkout-btn {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      background-color: #d4af37;
+      color: #1a1a1a;
+      border: none;
+      border-radius: 25px;
+      font-size: 1em;
+      font-weight: 400;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .cart-dropdown .checkout-btn:hover {
+      background-color: #b8962e;
+    }
     .products {
       display: flex;
       flex-wrap: wrap;
@@ -246,10 +340,6 @@
       max-width: 100%;
       border-radius: 8px;
       margin-bottom: 15px;
-      transition: transform 0.3s;
-    }
-    .product img:hover {
-      transform: scale(1.05);
     }
     .product h2 {
       font-size: 1.6em;
@@ -284,7 +374,6 @@
       color: #1a1a1a;
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
     }
-    /* Bestseller-Badge */
     .bestseller {
       position: relative;
     }
@@ -302,7 +391,6 @@
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
       text-transform: uppercase;
     }
-    /* Scroll-Galerie */
     .scroll-gallery {
       display: flex;
       flex-direction: column;
@@ -430,7 +518,6 @@
     .gallery-product-card button:hover {
       background-color: #d4af37;
     }
-    /* Über uns Sektion */
     .about-section {
       max-width: 1200px;
       margin: 50px auto;
@@ -451,7 +538,6 @@
       max-width: 800px;
       margin: 0 auto;
     }
-    /* Neue Sektion im SilentArt-Stil */
     .silentart-style-section {
       max-width: 1200px;
       margin: 50px auto;
@@ -480,7 +566,7 @@
       flex-wrap: wrap;
     }
     .silentart-style-section .feature {
-      max-width: 340px; /* Angepasst für größere Bilder */
+      max-width: 340px;
       text-align: center;
     }
     .silentart-style-section .feature img {
@@ -506,7 +592,6 @@
       color: #666;
       margin: 0;
     }
-    /* Kontaktkarte */
     .contact-card {
       max-width: 600px;
       margin: 50px auto;
@@ -536,7 +621,6 @@
     .contact-card a:hover {
       text-decoration: underline;
     }
-    /* Zurück zum Anfang Button */
     .back-to-top {
       position: fixed;
       bottom: 20px;
@@ -556,7 +640,6 @@
       background-color: #d4af37;
       color: #1a1a1a;
     }
-    /* Footer */
     footer {
       text-align: center;
       padding: 2em 0;
@@ -593,7 +676,6 @@
     .social-icons img:hover {
       transform: scale(1.1);
     }
-    /* Animation */
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
@@ -603,6 +685,11 @@
 <body>
   <header>
     <img src="Kavallerietuch.png" alt="Kavallerietuch Logo" class="logo">
+    <div class="contact-info" id="contact-info">
+      <p>Tel: +41 81 123 45 67</p>
+      <p>E-Mail: <a href="mailto:info@kavallerietuch.ch">info@kavallerietuch.ch</a></p>
+    </div>
+    <div class="header-title">Kavallerietuch</div>
     <nav>
       <a href="index.html">Home</a>
       <div class="dropdown">
@@ -618,7 +705,6 @@
   </header>
   
   <main>
-    <!-- Top-Controls & Warenkorb -->
     <div class="top-controls">
       <div class="controls">
         <div class="sort-options">
@@ -630,63 +716,65 @@
           </select>
         </div>
       </div>
-      <div class="cart" onclick="window.location.href='Warenkorb.html'">
-        <img src="cart-icon.png" alt="Warenkorb">
-        <span>Warenkorb</span>
+      <div class="cart" id="cart">
+        <img src="cart.png" alt="Warenkorb">
         <div class="cart-count" id="cart-count">0</div>
+        <div class="cart-dropdown" id="cart-dropdown">
+          <h3>Ihr Warenkorb</h3>
+          <ul id="cart-items"></ul>
+          <button class="checkout-btn" onclick="window.location.href='Warenkorb.html'">Zur Kasse</button>
+        </div>
       </div>
     </div>
 
-    <!-- Suchleiste -->
     <div class="search-bar">
       <input type="text" id="search-input" placeholder="Produkte suchen...">
     </div>
 
-    <!-- Kategorien-Navigation -->
     <div class="category-nav">
       <a href="Vorhänge.html">Vorhänge</a>
       <a href="polster.html">Polster</a>
       <a href="Betten.html">Betten</a>
-      <a href="kavallerietuch.html">Kavallerietuch</a>
-      <a href="Teppiche.html">Teppich</a>
-      <a href="Sale.html" class="sale-link">Sale</a>
+      <a href="Teppiche.html">Teppiche</a>
+      <a href="kavallerietuch.html">Zubehör</a>
+      <a href="Sale.html" class="sale-link">Sale%</a>
     </div>
 
     <section class="products">
-      <article class="product bestseller" data-name="Tagesvorhang 1" data-price="20" data-category="vorhaenge">
+      <article class="product bestseller" data-name="Tagesvorhang 1" data-price="19.95" data-category="vorhaenge">
         <img src="Tagesvorhang 1.jpg" alt="Tagesvorhang 1">
         <h2>Tagesvorhang 1</h2>
         <p>Eleganter Vorhang in modernem Design.</p>
         <p class="price">ab 19.95Fr</p>
-        <button class="add-to-cart" data-product="Tagesvorhang 1">Bestellen</button>
+        <button class="add-to-cart" data-product="Tagesvorhang 1" data-price="19.95">Bestellen</button>
       </article>
-      <article class="product bestseller" data-name="Blauer Vorhang" data-price="30" data-category="vorhaenge">
-        <img src="Sessel.jpg" alt="Blauer Vorhang">
+      <article class="product bestseller" data-name="Sessel" data-price="30" data-category="vorhaenge">
+        <img src="Sessel.jpg" alt="Sessel">
         <h2>Sessel</h2>
         <p>Klassischer Stil für jeden Raum.</p>
-        <p class="price">ab 30Fr</p>
-        <button class="add-to-cart" data-product="Sessel">Bestellen</button>
+        <p class="price">ab 2200Fr</p>
+        <button class="add-to-cart" data-product="Sessel" data-price="2200">Bestellen</button>
       </article>
-      <article class="product bestseller" data-name="Roter Vorhang" data-price="40" data-category="vorhaenge">
+      <article class="product bestseller" data-name="Matratzen" data-price="40" data-category="vorhaenge">
         <img src="Matratzen.jpg" alt="Matratzen">
         <h2>Matratzen</h2>
         <p>Moderner Vorhang mit feinem Muster.</p>
         <p class="price">ab 40Fr</p>
-        <button class="add-to-cart" data-product="Matratzen">Bestellen</button>
+        <button class="add-to-cart" data-product="Matratzen" data-price="40">Bestellen</button>
       </article>
-      <article class="product bestseller" data-name="Gelber Vorhang" data-price="50" data-category="vorhaenge">
+      <article class="product bestseller" data-name="Orientteppich" data-price="50" data-category="vorhaenge">
         <img src="Orientteppich.jpg" alt="Orientteppich">
         <h2>Orientteppich</h2>
         <p>Stilvoll und funktional.</p>
         <p class="price">ab 50Fr</p>
-        <button class="add-to-cart" data-product="Orientteppich">Bestellen</button>
+        <button class="add-to-cart" data-product="Orientteppich" data-price="50">Bestellen</button>
       </article>
       <article class="product bestseller" data-name="Weißer Vorhang" data-price="60" data-category="vorhaenge">
         <img src="weiss.jpg" alt="Weißer Vorhang">
         <h2>Weißer Vorhang</h2>
         <p>Schlichter Vorhang für zeitlose Eleganz.</p>
         <p class="price">ab 60Fr</p>
-        <button class="add-to-cart" data-product="Weißer Vorhang">Bestellen</button>
+        <button class="add-to-cart" data-product="Weißer Vorhang" data-price="60">Bestellen</button>
       </article>
     </section>
 
@@ -700,7 +788,7 @@
           <h3>Tagesvorhang 1</h3>
           <p>Eleganter Vorhang in modernem Design.</p>
           <p class="price">ab 19.95Fr</p>
-          <button class="add-to-cart" data-product="Tagesvorhang 1">Kaufen</button>
+          <button class="add-to-cart" data-product="Tagesvorhang 1" data-price="19.95">Kaufen</button>
         </div>
       </div>
       <div class="gallery-item">
@@ -712,7 +800,7 @@
           <h3>Sessel</h3>
           <p>Klassischer Stil für jeden Raum.</p>
           <p class="price">ab 30Fr</p>
-          <button class="add-to-cart" data-product="Sessel">Kaufen</button>
+          <button class="add-to-cart" data-product="Sessel" data-price="30">Kaufen</button>
         </div>
       </div>
       <div class="gallery-item">
@@ -724,7 +812,7 @@
           <h3>Matratzen</h3>
           <p>Moderner Vorhang mit feinem Muster.</p>
           <p class="price">ab 40Fr</p>
-          <button class="add-to-cart" data-product="Matratzen">Kaufen</button>
+          <button class="add-to-cart" data-product="Matratzen" data-price="40">Kaufen</button>
         </div>
       </div>
       <div class="gallery-item">
@@ -735,13 +823,12 @@
           <img src="Orientteppich.jpg" alt="Orientteppich">
           <h3>Orientteppich</h3>
           <p>Stilvoll und funktional.</p>
-          <p class="price">ab 50Fr</p>
-          <button class="add-to-cart" data-product="Orientteppich">Kaufen</button>
+          <p class="price">ab 400Fr</p>
+          <button class="add-to-cart" data-product="Orientteppich" data-price="400">Kaufen</button>
         </div>
       </div>
     </section>
 
-    <!-- Neue Sektion im SilentArt-Stil -->
     <section class="silentart-style-section">
       <h2>Kavallerietuch Erlebnis</h2>
       <p>Erleben Sie ein Zuhause, das Stil und Komfort vereint. Mit maßgeschneiderten Lösungen und hochwertiger Handwerkskunst aus Graubünden schaffen wir Räume, die Ihre Persönlichkeit widerspiegeln.</p>
@@ -764,7 +851,6 @@
       </div>
     </section>
 
-    <!-- Kontaktkarte -->
     <section class="contact-card">
       <h2>Kontaktieren Sie uns</h2>
       <p>Kavallerietuch AG</p>
@@ -774,7 +860,6 @@
     </section>
   </main>
 
-  <!-- Zurück zum Anfang Button -->
   <a href="#" class="back-to-top" id="back-to-top">Nach oben</a>
 
   <footer>
@@ -792,30 +877,36 @@
     </div>
   </footer>
 
-  <!-- JavaScript für Suche, Sortierung, Warenkorb, Produktkarten und Zurück zum Anfang -->
   <script>
+    // Debugging und Animation
+    const contactInfo = document.getElementById('contact-info');
+    if (!contactInfo) {
+      console.error("Element mit ID 'contact-info' wurde nicht gefunden!");
+    } else {
+      console.log("Kontaktinformationen gefunden, warte 10 Sekunden...");
+      setTimeout(() => {
+        console.log("Füge 'visible'-Klasse hinzu...");
+        contactInfo.classList.add('visible');
+      }, 10000); // 10 Sekunden
+    }
+
     const products = document.querySelectorAll('.product');
     const searchInput = document.getElementById('search-input');
     const sortSelect = document.getElementById('sort-select');
     const backToTop = document.getElementById('back-to-top');
     const cartCount = document.getElementById('cart-count');
+    const cartItemsList = document.getElementById('cart-items');
+    const cart = document.getElementById('cart');
     const addToCartButtons = document.querySelectorAll('.add-to-cart');
     const galleryButtons = document.querySelectorAll('.gallery-button');
 
-    let cartItems = 0;
+    let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
 
     function applySearch() {
       const searchTerm = searchInput.value.toLowerCase();
-
       products.forEach(product => {
         const name = product.getAttribute('data-name').toLowerCase();
-        const matchesSearch = name.includes(searchTerm);
-
-        if (matchesSearch) {
-          product.style.display = 'block';
-        } else {
-          product.style.display = 'none';
-        }
+        product.style.display = name.includes(searchTerm) ? 'block' : 'none';
       });
     }
 
@@ -824,15 +915,10 @@
       const productArray = Array.from(products);
 
       productArray.sort((a, b) => {
-        if (sortValue === 'name-asc') {
-          return a.getAttribute('data-name').localeCompare(b.getAttribute('data-name'));
-        } else if (sortValue === 'name-desc') {
-          return b.getAttribute('data-name').localeCompare(a.getAttribute('data-name'));
-        } else if (sortValue === 'price-asc') {
-          return parseInt(a.getAttribute('data-price')) - parseInt(b.getAttribute('data-price'));
-        } else if (sortValue === 'price-desc') {
-          return parseInt(b.getAttribute('data-price')) - parseInt(a.getAttribute('data-price'));
-        }
+        if (sortValue === 'name-asc') return a.getAttribute('data-name').localeCompare(b.getAttribute('data-name'));
+        if (sortValue === 'name-desc') return b.getAttribute('data-name').localeCompare(a.getAttribute('data-name'));
+        if (sortValue === 'price-asc') return parseFloat(a.getAttribute('data-price')) - parseFloat(b.getAttribute('data-price'));
+        if (sortValue === 'price-desc') return parseFloat(b.getAttribute('data-price')) - parseFloat(a.getAttribute('data-price'));
       });
 
       const container = document.querySelector('.products');
@@ -840,58 +926,80 @@
       applySearch();
     }
 
-    // Warenkorb-Funktionalität
+    function updateCart() {
+      cartCount.textContent = cartItems.reduce((sum, item) => sum + (item.quantity || 1), 0);
+      cartItemsList.innerHTML = '';
+      if (cartItems.length === 0) {
+        cartItemsList.innerHTML = '<li>Der Warenkorb ist leer</li>';
+      } else {
+        cartItems.forEach((item, index) => {
+          const li = document.createElement('li');
+          li.innerHTML = `
+            <span class="item-name">${item.name} (${item.quantity || 1}x)</span>
+            <span class="item-price">${(item.price * (item.quantity || 1)).toFixed(2)}Fr</span>
+            <button class="remove-item" data-index="${index}">Entfernen</button>
+          `;
+          cartItemsList.appendChild(li);
+        });
+      }
+
+      const removeButtons = cartItemsList.querySelectorAll('.remove-item');
+      removeButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const index = parseInt(e.target.getAttribute('data-index'));
+          cartItems.splice(index, 1);
+          localStorage.setItem('cart', JSON.stringify(cartItems));
+          updateCart();
+        });
+      });
+    }
+
     addToCartButtons.forEach(button => {
       button.addEventListener('click', (e) => {
         e.preventDefault();
-        cartItems++;
-        cartCount.textContent = cartItems;
-        alert(button.getAttribute('data-product') + " wurde zum Warenkorb hinzugefügt!");
+        const productName = button.getAttribute('data-product');
+        const productPrice = parseFloat(button.getAttribute('data-price'));
+        const existingItem = cartItems.find(item => item.name === productName);
+        if (existingItem) {
+          existingItem.quantity = (existingItem.quantity || 1) + 1;
+        } else {
+          cartItems.push({ name: productName, price: productPrice, quantity: 1 });
+        }
+        localStorage.setItem('cart', JSON.stringify(cartItems));
+        updateCart();
+        alert(`${productName} wurde zum Warenkorb hinzugefügt!`);
       });
     });
 
-    // Produktkarten ein- und ausblenden
+    cart.addEventListener('click', (e) => {
+      if (e.target.closest('.cart-dropdown') || e.target.classList.contains('remove-item')) return;
+      window.location.href = 'Warenkorb.html';
+    });
+
     galleryButtons.forEach(button => {
       button.addEventListener('click', (e) => {
         e.preventDefault();
         const targetId = button.getAttribute('data-target');
         const productCard = document.getElementById(targetId);
-
-        if (productCard.classList.contains('visible')) {
-          productCard.classList.remove('visible');
-          button.textContent = 'Produkt anzeigen';
-        } else {
-          productCard.classList.add('visible');
-          button.textContent = 'Produkt ausblenden';
-        }
+        productCard.classList.toggle('visible');
+        button.textContent = productCard.classList.contains('visible') ? 'Produkt ausblenden' : 'Produkt anzeigen';
       });
     });
 
-    // Event-Listener
     searchInput.addEventListener('input', applySearch);
     sortSelect.addEventListener('change', sortProducts);
 
-    // Zurück zum Anfang Button
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 300) {
-        backToTop.style.display = 'block';
-      } else {
-        backToTop.style.display = 'none';
-      }
+      backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
     });
 
     backToTop.addEventListener('click', (e) => {
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
+
+    updateCart();
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-

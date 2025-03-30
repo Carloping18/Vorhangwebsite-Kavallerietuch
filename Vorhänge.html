@@ -4,12 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Produktseite - Kavallerietuch</title>
-  <!-- Google Fonts Roboto Condensed einbinden -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
   <style>
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
     body {
       font-family: 'Roboto Condensed', sans-serif;
       font-weight: 300;
@@ -18,16 +15,22 @@
       background-color: #f5f5f5;
       color: #2b2b2b;
       overflow-x: hidden;
+      background: url('Gallerie7.jpg') no-repeat center top / cover;
+      background-size: 100% auto;
+      background-attachment: fixed;
     }
     header {
-      background-color: #1a1a1a;
+      background-color: rgba(26, 26, 26, 0.9);
       padding: 10px 20px;
       z-index: 1000;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      transition: background-color 0.3s;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
     }
     header img.logo {
       width: 60px;
@@ -36,9 +39,19 @@
       object-fit: cover;
       filter: brightness(1.2);
     }
+    .header-title {
+      font-size: 2em;
+      font-weight: 700;
+      color: #e0e0e0;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
     nav {
       display: flex;
-      align-items: center; /* Vertikale Zentrierung */
+      align-items: center;
       margin-left: auto;
       margin-right: 20px;
     }
@@ -51,23 +64,19 @@
       text-transform: uppercase;
       letter-spacing: 1px;
       transition: color 0.3s;
-      line-height: 1; /* Einheitliche Zeilenhöhe */
-      vertical-align: middle; /* Vertikale Ausrichtung */
+      line-height: 1;
+      vertical-align: middle;
     }
-    nav a:hover {
-      color: #d4af37;
-    }
-
-    /* Dropdown-Menü */
+    nav a:hover { color: #d4af37; }
     .dropdown {
       position: relative;
-      display: inline-flex; /* Änderung zu inline-flex für bessere Ausrichtung */
-      align-items: center; /* Innerhalb des Dropdowns zentriert */
+      display: inline-flex;
+      align-items: center;
     }
-    .dropdown > a { /* Direkter Link im Dropdown */
-      margin: 0 10px; /* Gleicher Abstand wie andere Links */
-      line-height: 1; /* Einheitliche Zeilenhöhe */
-      vertical-align: middle; /* Vertikale Ausrichtung */
+    .dropdown > a {
+      margin: 0 10px;
+      line-height: 1;
+      vertical-align: middle;
     }
     .dropdown-content {
       display: none;
@@ -94,11 +103,7 @@
       background-color: #2b2b2b;
       color: #d4af37;
     }
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-
-    /* Flaggen */
+    .dropdown:hover .dropdown-content { display: block; }
     .flags {
       margin-right: 20px;
       display: flex;
@@ -110,11 +115,9 @@
       margin-left: 10px;
       object-fit: cover;
     }
-
-    /* Suchleiste */
     .search-bar {
       max-width: 1200px;
-      margin: 30px auto;
+      margin: 80px auto 20px;
       padding: 0 20px;
       text-align: center;
     }
@@ -134,8 +137,121 @@
       outline: none;
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
     }
-
-    /* Kategorien-Navigation */
+    .controls-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 30px;
+      margin-bottom: 20px;
+      padding: 0 20px;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .back-button {
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+      padding: 10px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-size: 1em;
+      font-weight: 400;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s;
+    }
+    .back-button:hover { background-color: #2b2b2b; }
+    .cart {
+      position: relative;
+      display: flex;
+      align-items: center;
+      background: none;
+      padding: 0;
+      cursor: pointer;
+    }
+    .cart img {
+      width: 70px;
+      height: 70px;
+      filter: brightness(1.2);
+    }
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background-color: #d4af37;
+      color: #1a1a1a;
+      font-size: 0.8em;
+      font-weight: 700;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    .cart-dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: #ffffff;
+      min-width: 300px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      z-index: 1001;
+      padding: 15px;
+      margin-top: 10px;
+    }
+    .cart:hover .cart-dropdown { display: block; }
+    .cart-dropdown h3 {
+      font-size: 1.2em;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin: 0 0 10px;
+    }
+    .cart-dropdown ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .cart-dropdown li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+    }
+    .cart-dropdown li:last-child { border-bottom: none; }
+    .cart-dropdown .item-name { font-size: 1em; color: #333; }
+    .cart-dropdown .item-price {
+      font-size: 1em;
+      font-weight: 700;
+      color: #d4af37;
+    }
+    .cart-dropdown .remove-item {
+      background: none;
+      border: none;
+      color: #d4af37;
+      font-size: 0.9em;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+    .cart-dropdown .remove-item:hover { color: #b8962e; }
+    .cart-dropdown .checkout-btn {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      background-color: #d4af37;
+      color: #1a1a1a;
+      border: none;
+      border-radius: 25px;
+      font-size: 1em;
+      font-weight: 400;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .cart-dropdown .checkout-btn:hover { background-color: #b8962e; }
     .category-nav {
       max-width: 1200px;
       margin: 20px auto;
@@ -152,62 +268,14 @@
       letter-spacing: 1px;
       transition: color 0.3s;
     }
-    .category-nav a:hover {
-      color: #d4af37;
-    }
-    .category-nav .sale-link {
-      color: #d4af37;
-    }
-    .category-nav .sale-link:hover {
-      color: #b8962e;
-    }
-
-    /* Zurück-Button */
-    .back-button {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      background-color: #1a1a1a;
-      color: #e0e0e0;
-      padding: 10px 20px;
-      border-radius: 25px;
-      text-decoration: none;
-      font-size: 1em;
-      font-weight: 400;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      z-index: 1000;
-      transition: background-color 0.3s;
-    }
-    .back-button:hover {
-      background-color: #2b2b2b;
-    }
-
-    /* Main-Bereich */
+    .category-nav a:hover { color: #d4af37; }
+    .category-nav .sale-link { color: #d4af37; }
+    .category-nav .sale-link:hover { color: #b8962e; }
     main {
       max-width: 1200px;
       margin: 40px auto;
       padding: 20px;
       position: relative;
-    }
-    .controls {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 30px;
-    }
-    .sort-options select {
-      padding: 10px;
-      font-size: 1em;
-      font-weight: 400;
-      border: none;
-      border-radius: 8px;
-      background-color: #ffffff;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-      transition: box-shadow 0.3s;
-    }
-    .sort-options select:focus {
-      outline: none;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
     h2 {
       text-align: center;
@@ -223,14 +291,13 @@
       flex-wrap: wrap;
       justify-content: center;
       gap: 30px;
+      margin-top: 20px;
     }
     .category {
-      background: #ffffff;
       padding: 20px;
       border-radius: 12px;
       width: 300px;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-      transition: transform 0.3s, box-shadow 0.3s;
       text-align: center;
       display: none;
       opacity: 0;
@@ -242,18 +309,10 @@
       transform: translateY(0);
       animation: fadeIn 0.5s ease-in-out;
     }
-    .category:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-    }
     .category img {
       width: 100%;
       border-radius: 10px;
       margin-bottom: 15px;
-      transition: transform 0.3s;
-    }
-    .category img:hover {
-      transform: scale(1.05);
     }
     .category h3 {
       margin: 0 0 10px;
@@ -284,62 +343,166 @@
       color: #1a1a1a;
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
     }
-
-    /* Messanleitung-Sektion */
+    .category[data-name="Tagesvorhang"] { background-color: #fafcf3; }
+    .category[data-name="Verdunklungsvorhang"] { background-color: #f4ffff; }
+    .category[data-name="Leinenvorhang"] { background-color: #fff6ec; }
+    .category[data-name="Wollvorhang"] { background-color: #e2e2e2; }
+    .category[data-name="Baumwollvorhang"] { background-color: #ffffff; }
     .measuring-guide {
       max-width: 1200px;
       margin: 60px auto;
       padding: 40px;
-      background-color: #e0e0e0;
+      background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
       border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      position: relative;
     }
     .measuring-guide h2 {
       font-size: 2.5em;
       font-weight: 700;
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 40px;
       color: #1a1a1a;
       text-transform: uppercase;
       letter-spacing: 2px;
     }
-    .guide-steps {
+    .tabs-container {
+      position: relative;
+    }
+    .tabs {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: space-around;
-      gap: 30px;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 30px;
     }
-    .step {
-      width: 280px;
-      text-align: center;
-      padding: 20px;
-      background: #fafafa;
-      border-radius: 10px;
-      transition: transform 0.3s, box-shadow 0.3s;
+    .tab-button {
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 25px;
+      font-size: 1.1em;
+      font-weight: 400;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
     }
-    .step:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-    }
-    .step img {
-      width: 100%;
-      border-radius: 8px;
-      margin-bottom: 15px;
-    }
-    .step h3 {
-      font-size: 1.4em;
-      font-weight: 700;
-      margin: 0 0 10px;
+    .tab-button:hover {
+      background-color: #d4af37;
       color: #1a1a1a;
     }
-    .step p {
-      font-size: 1em;
+    .tab-button.active {
+      background-color: #d4af37;
+      color: #1a1a1a;
+      transform: scale(1.05);
+    }
+    .tab-content {
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+    .tab WALPane {
+      display: none;
+      text-align: center;
+    }
+    .tab-pane.active {
+      display: block;
+      animation: slideIn 0.5s ease;
+    }
+    .tab-pane img {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    .tab-pane h3 {
+      font-size: 1.6em;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin: 0 0 15px;
+    }
+    .tab-pane p {
+      font-size: 1.1em;
       font-weight: 300;
       color: #666;
       margin: 0;
+      line-height: 1.6;
     }
-
-    /* Zurück zum Anfang Button */
+    .product-preview {
+      max-width: 1200px;
+      margin: 60px auto;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+    }
+    .product-preview h2 {
+      font-size: 2em;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 30px;
+    }
+    .preview-wrapper {
+      position: relative;
+      overflow: hidden;
+    }
+    .preview-container {
+      display: flex;
+      transition: transform 0.5s ease;
+      width: 100%;
+    }
+    .preview-item {
+      background: #ffffff;
+      padding: 15px;
+      border-radius: 8px;
+      width: 200px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+      flex: 0 0 auto;
+      margin-right: 20px;
+    }
+    .preview-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    }
+    .preview-item img {
+      width: 100%;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+    .preview-item h3 {
+      font-size: 1.2em;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin: 0 0 5px;
+    }
+    .preview-item p {
+      font-size: 0.9em;
+      font-weight: 400;
+      color: #d4af37;
+      margin: 0;
+    }
+    .preview-nav {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+    }
+    .preview-nav button {
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.2em;
+      transition: background-color 0.3s;
+    }
+    .preview-nav button:hover {
+      background-color: #d4af37;
+      color: #1a1a1a;
+    }
     .back-to-top {
       position: fixed;
       bottom: 20px;
@@ -359,8 +522,6 @@
       background-color: #d4af37;
       color: #1a1a1a;
     }
-
-    /* Footer */
     footer {
       text-align: center;
       padding: 2em 0;
@@ -368,9 +529,7 @@
       color: #e0e0e0;
       box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.2);
     }
-    .footer-nav {
-      margin: 15px 0;
-    }
+    .footer-nav { margin: 15px 0; }
     .footer-nav a {
       color: #e0e0e0;
       text-decoration: none;
@@ -381,21 +540,19 @@
       letter-spacing: 1px;
       transition: color 0.3s;
     }
-    .footer-nav a:hover {
-      color: #d4af37;
-    }
-    .social-icons {
-      margin-top: 15px;
-    }
+    .footer-nav a:hover { color: #d4af37; }
+    .social-icons { margin-top: 15px; }
     .social-icons img {
-      width: 35px;
-      height: 35px;
+      width: 20px;
+      height: 20px;
       margin: 0 15px;
       cursor: pointer;
     }
-
-    /* Animation */
     @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
@@ -404,11 +561,11 @@
 <body>
   <header>
     <img src="Kavallerietuch.png" alt="Kavallerietuch Logo" class="logo">
+    <div class="header-title">Kavallerietuch</div>
     <nav>
       <a href="index.html">Home</a>
       <div class="dropdown">
         <a href="Gallerie.html">Gallerie</a>
-        </div>
       </div>
       <a href="wie-funktionierts.html">Wie funktioniert’s?</a>
       <a href="uber-uns.html">Über uns</a>
@@ -420,15 +577,21 @@
   </header>
 
   <main>
-    <!-- Zurück-Button im Main-Bereich -->
-    <a href="javascript:history.back()" class="back-button">Zurück</a>
-
-    <!-- Suchleiste -->
     <div class="search-bar">
       <input type="text" id="search-input" placeholder="Kategorien suchen...">
     </div>
-
-    <!-- Kategorien-Navigation -->
+    <div class="controls-container">
+      <a href="javascript:history.back()" class="back-button">Zurück</a>
+      <div class="cart" id="cart">
+        <img src="cart.png" alt="Warenkorb">
+        <div class="cart-count" id="cart-count">0</div>
+        <div class="cart-dropdown" id="cart-dropdown">
+          <h3>Ihr Warenkorb</h3>
+          <ul id="cart-items"></ul>
+          <button class="checkout-btn" onclick="window.location.href='Warenkorb.html'">Zur Kasse</button>
+        </div>
+      </div>
+    </div>
     <div class="category-nav">
       <a href="index.html">Home</a>
       <a href="Vorhänge.html">Vorhänge</a>
@@ -438,19 +601,7 @@
       <a href="Teppiche.html">Teppiche</a>
       <a href="Sale.html" class="sale-link">Sale</a>
     </div>
-
-    <!-- Sortieroptionen und Titel -->
-    <div class="controls">
-      <div class="sort-options">
-        <select id="sort-select">
-          <option value="name-asc">Name (A-Z)</option>
-          <option value="name-desc">Name (Z-A)</option>
-          <option value="price-asc">Preis (aufsteigend)</option>
-          <option value="price-desc">Preis (absteigend)</option>
-        </select>
-      </div>
-    </div>
-    <h2>Unsere Kategorien</h2>
+    <h2></h2>
     <div class="category-container">
       <div class="category" data-type="tagesvorhang" data-material="polyester" data-price="20" data-name="Tagesvorhang">
         <img src="Tagesvorhang.jpg" alt="Tagesvorhang">
@@ -483,39 +634,102 @@
         <button onclick="window.location.href='Baumwollvorhang.html'">Mehr erfahren</button>
       </div>
     </div>
-
-    <!-- Messanleitung-Sektion -->
     <section class="measuring-guide">
-      <h2>So messen Sie Ihre Vorhänge richtig</h2>
-      <div class="guide-steps">
-        <div class="step">
-          <img src="schritt 1.jpg" alt="Schritt 1: Fensterbreite messen">
-          <h3>Schritt 1: Fensterbreite messen</h3>
-          <p>Messen Sie die Breite Ihres Fensters an der Stelle, an der der Vorhang hängen soll. Fügen Sie 10-15 cm auf jeder Seite hinzu, um Überstände zu gewährleisten.</p>
+      <h2>Perfekte Vorhänge messen – Schritt für Schritt</h2>
+      <div class="tabs-container">
+        <div class="tabs">
+          <button class="tab-button active" data-tab="step1">Breite</button>
+          <button class="tab-button" data-tab="step2">Höhe</button>
+          <button class="tab-button" data-tab="step3">Falten</button>
+          <button class="tab-button" data-tab="step4">Kontrolle</button>
         </div>
-        <div class="step">
-          <img src="schritt 2.jpg" alt="Schritt 2: Höhe bestimmen">
-          <h3>Schritt 2: Höhe bestimmen</h3>
-          <p>Messen Sie die Höhe vom oberen Befestigungspunkt bis zum gewünschten Ende (z. B. Boden oder Fensterbank). Berücksichtigen Sie die Stangenhöhe.</p>
+        <div class="tab-content">
+          <div class="tab-pane active" id="step1">
+            <img src="schritt 1.jpg" alt="Schritt 1: Fensterbreite messen">
+            <h3>1. Fensterbreite ermitteln</h3>
+            <p>Nehmen Sie ein Maßband und messen Sie die Breite Ihres Fensters an der Stelle, wo der Vorhang später hängen soll. Addieren Sie auf jeder Seite 10-15 cm hinzu, damit der Vorhang das Fenster vollständig abdeckt.</p>
+          </div>
+          <div class="tab-pane" id="step2">
+            <img src="schritt 2.jpg" alt="Schritt 2: Höhe bestimmen">
+            <h3>2. Höhe festlegen</h3>
+            <p>Messen Sie vom oberen Punkt der Befestigung (z. B. Vorhangschiene) bis zur gewünschten Länge – etwa bis zum Boden oder zur Fensterbank. Notieren Sie das Maß genau.</p>
+          </div>
+          <div class="tab-pane" id="step3">
+            <img src="schritt 3.jpg" alt="Schritt 3: Faltenfaktor beachten">
+            <h3>3. Falten für mehr Volumen</h3>
+            <p>Damit Ihr Vorhang schön fällt, multiplizieren Sie die gemessene Breite mit einem Faktor von 1,5 bis 2. Das sorgt für eine elegante Optik mit sanften Falten.</p>
+          </div>
+          <div class="tab-pane" id="step4">
+            <img src="schritt 4.jpg" alt="Schritt 4: Maße überprüfen">
+            <h3>4. Alles doppelt checken</h3>
+            <p>Überprüfen Sie Ihre Maße sorgfältig und vergleichen Sie sie mit den Anforderungen Ihrer Vorhangstange oder -schiene, um sicherzugehen, dass alles passt.</p>
+          </div>
         </div>
-        <div class="step">
-          <img src="schritt 3.jpg" alt="Schritt 3: Faltenfaktor beachten">
-          <h3>Schritt 3: Faltenfaktor beachten</h3>
-          <p>Für ein volles Aussehen multiplizieren Sie die Breite mit einem Faltenfaktor von 1,5 bis 2, je nach gewünschtem Volumen.</p>
+      </div>
+    </section>
+    <section class="product-preview">
+      <h2>Produktvorschau</h2>
+      <div class="preview-wrapper">
+        <div class="preview-container" id="preview-container">
+          <div class="preview-item">
+            <img src="Tagesvorhang 3.jpg" alt="Produkt 1">
+            <h3>Tagesvorhang 3</h3>
+            <p>89.95Fr</p>
+          </div>
+          <div class="preview-item">
+            <img src="Stühle.jpg" alt="Produkt 2">
+            <h3>Stuhl</h3>
+            <p>850Fr</p>
+          </div>
+          <div class="preview-item">
+            <img src="Baumwollvorhang2.jpg" alt="Produkt 3">
+            <h3>Produkt 3</h3>
+            <p>69.95Fr</p>
+          </div>
+          <div class="preview-item">
+            <img src="Tagesvorhang 5.jpg" alt="Produkt 4">
+            <h3>Produkt 4</h3>
+            <p>49.95Fr</p>
+          </div>
+          <div class="preview-item">
+            <img src="Rekamiere.jpg" alt="Produkt 5">
+            <h3>Produkt 5</h3>
+            <p>3400Fr</p>
+          </div>
+          <div class="preview-item">
+            <img src="hocker.jpg" alt="Produkt 6">
+            <h3>Produkt 6</h3>
+            <p>350Fr</p>
+          </div>
+          <div class="preview-item">
+            <img src="Wollvorhang3.jpg" alt="Produkt 7">
+            <h3>Produkt 7</h3>
+            <p>78.80Fr</p>
+          </div>
+          <div class="preview-item">
+            <img src="Tagesvorhang 5.jpg" alt="Produkt 8">
+            <h3>Produkt 8</h3>
+            <p>97Fr</p>
+          </div>
+          <div class="preview-item">
+            <img src="Baumwollvorhang1.jpg" alt="Produkt 9">
+            <h3>Produkt 9</h3>
+            <p>87Fr</p>
+          </div>
+          <div class="preview-item">
+            <img src="Sofa.jpg" alt="Produkt 10">
+            <h3>Produkt 10</h3>
+            <p>4500Fr</p>
+          </div>
         </div>
-        <div class="step">
-          <img src="schritt 4.jpg" alt="Schritt 4: Maße überprüfen">
-          <h3>Schritt 4: Maße überprüfen</h3>
-          <p>Überprüfen Sie die Maße nochmals und notieren Sie sie genau, um sicherzustellen, dass der Vorhang perfekt passt.</p>
+        <div class="preview-nav">
+          <button id="prev-btn">←</button>
+          <button id="next-btn">→</button>
         </div>
       </div>
     </section>
   </main>
-
-  <!-- Zurück zum Anfang Button -->
   <a href="#" class="back-to-top" id="back-to-top">Nach oben</a>
-
-  <!-- Footer -->
   <footer>
     <p>© 2025 Kavallerietuch</p>
     <div class="footer-nav">
@@ -525,75 +739,108 @@
       <a href="agb.html">AGB</a>
     </div>
     <div class="social-icons">
-      <a href="https://instagram.com" target="_blank"><img src="instagram.png" alt="Instagram"></a>
-      <a href="https://facebook.com" target="_blank"><img src="facebook.png" alt="Facebook"></a>
-      <a href="https://tiktok.com" target="_blank"><img src="tiktok.png" alt="TikTok"></a>
+      <a href="https://instagram.com" target="_blank" rel="noopener"><img src="instagram.png" alt="Instagram"></a>
+      <a href="https://facebook.com" target="_blank" rel="noopener"><img src="facebook.png" alt="Facebook"></a>
+      <a href="https://tiktok.com" target="_blank" rel="noopener"><img src="tiktok.png" alt="TikTok"></a>
     </div>
   </footer>
 
-  <!-- JavaScript für Sortierung, Suche und Zurück zum Anfang -->
   <script>
     const categories = document.querySelectorAll('.category');
     const searchInput = document.getElementById('search-input');
-    const sortSelect = document.getElementById('sort-select');
     const backToTop = document.getElementById('back-to-top');
+    const cartCount = document.getElementById('cart-count');
+    const cartItemsList = document.getElementById('cart-items');
+    const cart = document.getElementById('cart');
+    const previewContainer = document.getElementById('preview-container');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabPanes = document.querySelectorAll('.tab-pane');
+    let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    let currentIndex = 0;
 
     function applySearch() {
       const searchTerm = searchInput.value.toLowerCase();
-
       categories.forEach(category => {
         const name = category.getAttribute('data-name').toLowerCase();
-        const matchesSearch = name.includes(searchTerm);
-
-        if (matchesSearch) {
-          category.classList.add('visible');
-        } else {
-          category.classList.remove('visible');
-        }
+        category.classList.toggle('visible', name.includes(searchTerm));
       });
     }
 
-    function sortCategories() {
-      const sortValue = sortSelect.value;
-      const categoryArray = Array.from(categories);
-
-      categoryArray.sort((a, b) => {
-        if (sortValue === 'name-asc') {
-          return a.getAttribute('data-name').localeCompare(b.getAttribute('data-name'));
-        } else if (sortValue === 'name-desc') {
-          return b.getAttribute('data-name').localeCompare(a.getAttribute('data-name'));
-        } else if (sortValue === 'price-asc') {
-          return parseInt(a.getAttribute('data-price')) - parseInt(b.getAttribute('data-price'));
-        } else if (sortValue === 'price-desc') {
-          return parseInt(b.getAttribute('data-price')) - parseInt(a.getAttribute('data-price'));
-        }
+    function updateCart() {
+      cartCount.textContent = cartItems.reduce((sum, item) => sum + (item.quantity || 1), 0);
+      cartItemsList.innerHTML = cartItems.length === 0 ? '<li>Der Warenkorb ist leer</li>' : '';
+      cartItems.forEach((item, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <span class="item-name">${item.name} (${item.quantity || 1}x)</span>
+          <span class="item-price">${(item.price * (item.quantity || 1)).toFixed(2)}Fr</span>
+          <button class="remove-item" data-index="${index}">Entfernen</button>
+        `;
+        cartItemsList.appendChild(li);
       });
-
-      const container = document.querySelector('.category-container');
-      categoryArray.forEach(category => container.appendChild(category));
-      applySearch();
+      const removeButtons = cartItemsList.querySelectorAll('.remove-item');
+      removeButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const index = parseInt(e.target.getAttribute('data-index'));
+          cartItems.splice(index, 1);
+          localStorage.setItem('cart', JSON.stringify(cartItems));
+          updateCart();
+        });
+      });
     }
 
-    // Event-Listener
-    searchInput.addEventListener('input', applySearch);
-    sortSelect.addEventListener('change', sortCategories);
+    cart.addEventListener('click', (e) => {
+      if (e.target.closest('.cart-dropdown') || e.target.classList.contains('remove-item')) return;
+      window.location.href = 'Warenkorb.html';
+    });
 
-    // Zurück zum Anfang Button
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 300) {
-        backToTop.style.display = 'block';
-      } else {
-        backToTop.style.display = 'none';
+    function updatePreview() {
+      const itemWidth = 220;
+      const maxIndex = Math.max(0, previewContainer.children.length - 5);
+      currentIndex = Math.max(0, Math.min(currentIndex, maxIndex));
+      previewContainer.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+    }
+
+    prevBtn.addEventListener('click', () => {
+      if (currentIndex > 0) {
+        currentIndex--;
+        updatePreview();
       }
     });
 
+    nextBtn.addEventListener('click', () => {
+      if (currentIndex < previewContainer.children.length - 5) {
+        currentIndex++;
+        updatePreview();
+      }
+    });
+
+    tabButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        tabPanes.forEach(pane => pane.classList.remove('active'));
+
+        button.classList.add('active');
+        const tabId = button.getAttribute('data-tab');
+        document.getElementById(tabId).classList.add('active');
+      });
+    });
+
+    searchInput.addEventListener('input', applySearch);
+    window.addEventListener('scroll', () => {
+      backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
+    });
     backToTop.addEventListener('click', (e) => {
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // Initial alle Produkte anzeigen
+    updateCart();
     applySearch();
+    updatePreview();
   </script>
 </body>
 </html>
