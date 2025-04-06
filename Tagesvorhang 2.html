@@ -3,485 +3,197 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Produkte - Kavallerietuch</title>
-  <!-- Google Fonts Montserrat einbinden -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap" rel="stylesheet">
-  <style>
-    /* Grunddesign */
-    body {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 100;
-      margin: 0;
-      padding: 0;
-      background-color: #ffffff;
-      color: #000000;
-      overflow-x: hidden;
-    }
-    header {
-      background-color: #cfcfcf;
-      padding: 5px;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 2px 4px rgba(218, 218, 218, 0.1);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 60px;
-    }
-    header img.logo {
-      width: 50px;
-      height: 50px;
-      margin-left: 10px;
-      object-fit: cover;
-    }
-    nav {
-      display: flex;
-      align-items: center;
-      margin-left: auto;
-      margin-right: 10px;
-    }
-    nav a {
-      color: #ffffff;
-      text-decoration: none;
-      margin: 0 10px;
-      font-size: 0.9em;
-      font-weight: normal;
-      position: relative;
-    }
-    nav a:hover {
-      text-decoration: underline;
-    }
-
-    /* Dropdown-Menü */
-    .dropdown {
-      position: relative;
-      display: inline-block;
-    }
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: #ffffff;
-      min-width: 200px;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-      z-index: 1001;
-      border-radius: 8px;
-      top: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-    .dropdown-content a {
-      color: #000000;
-      padding: 10px 15px;
-      text-decoration: none;
-      display: block;
-      font-weight: normal;
-      font-size: 0.9em;
-    }
-    .dropdown-content a:hover {
-      background-color: #f1f1f1;
-      text-decoration: none;
-    }
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-
-    /* Flaggen */
-    .flags {
-      margin-right: 10px;
-      display: flex;
-      align-items: center;
-    }
-    .flags img {
-      width: 20px;
-      height: 20px;
-      margin-left: 10px;
-      object-fit: cover;
-    }
-
-    /* Produktbild-Bereich */
-    .product-hero {
-      width: 100%;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-    }
-    .product-hero img {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-      display: block;
-    }
-    .product-hero-text {
-      max-width: 1200px;
-      margin: 20px auto;
-      padding: 0 20px;
-      font-size: 1.1em;
-      color: #666;
-      text-align: center;
-    }
-
-    /* Zurück-Button */
-    .back-button {
-      position: absolute;
-      top: -50px; /* Etwas mehr Abstand zum Bild */
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: #444;
-      color: #fff;
-      padding: 10px 20px;
-      border-radius: 25px;
-      text-decoration: none;
-      font-size: 1em;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-      z-index: 1000;
-      transition: background-color 0.3s, transform 0.2s;
-    }
-    .back-button:hover {
-      background-color: #666;
-      transform: translateX(-50%) scale(1.05); /* Zentrierung bleibt bei Hover */
-    }
-
-    /* Suchleiste */
-    .search-bar {
-      max-width: 1200px;
-      margin: 20px auto;
-      padding: 0 20px;
-      text-align: center;
-    }
-    .search-bar input {
-      width: 50%;
-      padding: 10px;
-      font-size: 1em;
-      border: 1px solid #ccc;
-      border-radius: 25px;
-    }
-
-    /* Kategorien-Navigation */
-    .category-nav {
-      max-width: 1200px;
-      margin: 20px auto;
-      padding: 0 20px;
-      text-align: center;
-    }
-    .category-nav a {
-      color: #000000;
-      text-decoration: none;
-      margin: 0 15px;
-      font-size: 1em;
-    }
-    .category-nav a:hover {
-      text-decoration: underline;
-    }
-
-    /* Main-Bereich */
-    main {
-      max-width: 1200px;
-      margin: 40px auto;
-      padding: 20px;
-      position: relative;
-    }
-    .controls {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-    .sort-options select {
-      padding: 8px;
-      font-size: 1em;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      background-color: #fff;
-      color: #666;
-    }
-    h2 {
-      text-align: center;
-      font-size: 1.8em;
-      color: #333;
-      margin-bottom: 30px;
-    }
-    .category-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 30px;
-    }
-    .category {
-      background: #ffffff;
-      padding: 20px;
-      border-radius: 10px;
-      width: 280px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s, box-shadow 0.3s;
-      text-align: center;
-      display: none;
-      position: relative; /* Hinzugefügt für den Zurück-Button im ersten Produkt */
-    }
-    .category.visible {
-      display: block;
-    }
-    .category:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-    }
-    .category img {
-      width: 100%;
-      border-radius: 10px;
-      margin-bottom: 15px;
-    }
-    .category h3 {
-      margin: 0 0 10px;
-      font-size: 1.4em;
-      color: #333;
-    }
-    .category p {
-      font-size: 1em;
-      color: #666;
-      margin: 0 0 15px;
-    }
-    .category button {
-      padding: 10px 20px;
-      border: none;
-      background-color: #444;
-      color: #fff;
-      font-size: 1em;
-      border-radius: 25px;
-      cursor: pointer;
-      transition: background-color 0.3s, transform 0.2s;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-    }
-    .category button:hover {
-      background-color: #666;
-      transform: scale(1.05);
-    }
-
-    /* Filter-Sidebar */
-    .filter-sidebar {
-      position: absolute;
-      top: 400px;
-      right: -300px;
-      width: 250px;
-      background: #f9f9f9;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      z-index: 10;
-    }
-    .filter-sidebar h3 {
-      margin-top: 0;
-      font-size: 1.2em;
-      color: #333;
-    }
-    .filter-sidebar h4 {
-      margin: 20px 0 10px;
-      font-size: 1.1em;
-      color: #333;
-    }
-    .filter-sidebar label {
-      display: block;
-      margin: 10px 0;
-      font-size: 1em;
-    }
-    .filter-sidebar input[type="checkbox"] {
-      margin-right: 10px;
-    }
-    .color-dot {
-      display: inline-block;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      margin-right: 8px;
-    }
-    .price-filter {
-      margin-top: 20px;
-    }
-    .price-range {
-      width: 100%;
-    }
-    #price-value {
-      margin-top: 10px;
-      font-size: 1em;
-      color: #666;
-    }
-
-    /* Zurück zum Anfang Button */
-    .back-to-top {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #444;
-      color: #fff;
-      padding: 10px 20px;
-      border-radius: 25px;
-      text-decoration: none;
-      font-size: 1em;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-      display: none;
-    }
-    .back-to-top:hover {
-      background-color: #666;
-    }
-
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 1em 0;
-      background-color: #cfcfcf;
-      color: #333;
-    }
-    .footer-nav {
-      margin: 10px 0;
-    }
-    .footer-nav a {
-      color: #333;
-      text-decoration: none;
-      margin: 0 15px;
-      font-size: 0.9em;
-    }
-    .footer-nav a:hover {
-      text-decoration: underline;
-    }
-    .social-icons {
-      margin-top: 10px;
-    }
-    .social-icons img {
-      width: 35px;
-      height: 35px;
-      margin: 0 10px;
-      cursor: pointer;
-      transition: transform 0.3s;
-    }
-    .social-icons img:hover {
-      transform: scale(1.1);
-    }
-  </style>
+  <title>Tagesvorhang 2 - Kavallerietuch</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles vorhänge.css">
 </head>
 <body>
   <header>
     <img src="Kavallerietuch.png" alt="Kavallerietuch Logo" class="logo">
-    <nav>
-      <a href="index.html">Home</a>
-      <div class="dropdown">
-        <a href="Produkte.html">Produkte</a>
-        <div class="dropdown-content">
-          <a href="Tagesvorhang.html">Vorhänge</a>
-          <a href="polster.html">Polster</a>
-          <a href="Betten.html">Betten</a>
-          <a href="produkt4.html">Kavallerietuch</a>
-          <a href="Teppiche.html">Böden</a>
-        </div>
+    <div class="header-title">Kavallerietuch</div>
+    <div class="hamburger-menu">
+      <div class="hamburger-icon">
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
-      <a href="wie-funktionierts.html">Wie funktioniert’s?</a>
-      <a href="über-uns.html">Über uns</a>
-    </nav>
+      <div class="menu-content">
+        <a href="index.html">Home</a>
+        <a href="Gallerie.html">Galerie</a>
+        <a href="wie-funktionierts.html">Wie funktioniert’s?</a>
+        <a href="über-uns.html">Über uns</a>
+      </div>
+    </div>
     <div class="flags">
       <img src="Schweizer Flagge.jpg" alt="Schweizer Flagge">
       <img src="Grabünden Flagge.jpg" alt="Graubünden Flagge">
     </div>
   </header>
 
+  <div class="controls-container">
+    <a href="Tagesvorhang.html" class="back-button">Zurück</a>
+    <div class="cart" id="cart">
+      <img src="cart.png" alt="Warenkorb">
+      <div class="cart-count" id="cart-count">0</div>
+      <div class="cart-dropdown" id="cart-dropdown">
+        <h3>Ihr Warenkorb</h3>
+        <ul id="cart-items"></ul>
+        <button class="checkout-btn" onclick="window.location.href='Warenkorb.html'">Zur Kasse</button>
+      </div>
+    </div>
+  </div>
+
   <main>
-    <!-- Produktbild-Bereich -->
-    <div class="product-hero">
-      <img src="hintergrund Tagesvorhang.jpg" alt="Tagesvorhänge Übersicht">
-    </div>
-    <div class="product-hero-text">
-      <p>Entdecken Sie unsere hochwertigen Tagesvorhänge – perfekt für jeden Raum. Wählen Sie aus verschiedenen Designs und Qualitäten, die Licht und Privatsphäre optimal kombinieren.</p>
+    <div class="product-container">
+      <div class="product-image">
+        <div class="image-slider">
+          <div class="image-container" id="image-container">
+            <img src="Tagesvorhang 2.jpg" alt="Tagesvorhang 2">
+            <img src="Gallerie1.jpg" alt="Tagesvorhang 2 Bild 2">
+            <img src="Gallerie7.jpg" alt="Tagesvorhang 2 Bild 3">
+            <img src="Gallerie3.jpg" alt="Tagesvorhang 2 Bild 4">
+          </div>
+          <div class="slider-nav">
+            <button id="prev-btn">←</button>
+            <button id="next-btn">→</button>
+          </div>
+        </div>
+        <div class="thumbnails">
+          <img src="Tagesvorhang 2.jpg" alt="Thumbnail 1" class="active" onclick="goToImage(0)">
+          <img src="Gallerie1.jpg" alt="Thumbnail 2" onclick="goToImage(1)">
+          <img src="Gallerie7.jpg" alt="Thumbnail 3" onclick="goToImage(2)">
+          <img src="Gallerie3.jpg" alt="Thumbnail 4" onclick="goToImage(3)">
+        </div>
+      </div>
+      <div class="product-details">
+        <h1>Tagesvorhang 2</h1>
+        <div class="rating">★★★★☆</div>
+        <p>Dieser elegante Tagesvorhang bringt modernen Stil und eine beruhigende Atmosphäre in jeden Raum. Hergestellt aus hochwertigem, lichtdurchlässigem Stoff – perfekt für Wohnzimmer oder Schlafzimmer.</p>
+        <div class="price" id="price">
+          <span class="current-price">0 Fr.</span>
+        </div>
+        <div class="options">
+          <label for="variant">Vorhangart:</label>
+          <div class="hover-container">
+            <select id="variant" onchange="updatePrice()">
+              <option value="clic">Clic</option>
+              <option value="ösen">Ösen</option>
+              <option value="schlaufen">Schlaufen</option>
+              <option value="wave">Wave</option>
+            </select>
+            <div class="hover-images">
+              <div onclick="document.getElementById('variant').value='clic'; updatePrice();"><img src="clic.JPG" alt="Clic"><span>Clic</span></div>
+              <div onclick="document.getElementById('variant').value='ösen'; updatePrice();"><img src="ösen.JPG" alt="Ösen"><span>Ösen</span></div>
+              <div onclick="document.getElementById('variant').value='schlaufen'; updatePrice();"><img src="schlaufen.JPG" alt="Schlaufen"><span>Schlaufen</span></div>
+              <div onclick="document.getElementById('variant').value='wave'; updatePrice();"><img src="wave.JPG" alt="Wave"><span>Wave</span></div>
+            </div>
+          </div>
+
+          <label for="gleiter">Gleiter/Aufhängung:</label>
+          <div class="hover-container">
+            <select id="gleiter" onchange="updatePrice()">
+              <option value="gleiter1">Gleiter 1</option>
+              <option value="gleiter2">Gleiter 2</option>
+              <option value="gleiter3">Gleiter 3</option>
+              <option value="gleiter4">Gleiter 4</option>
+            </select>
+            <div class="hover-images">
+              <div onclick="document.getElementById('gleiter').value='gleiter1'; updatePrice();"><img src="gleiter1.jpg" alt="Gleiter 1"><span>Gleiter 1</span></div>
+              <div onclick="document.getElementById('gleiter').value='gleiter2'; updatePrice();"><img src="gleiter2.jpg" alt="Gleiter 2"><span>Gleiter 2</span></div>
+              <div onclick="document.getElementById('gleiter').value='gleiter3'; updatePrice();"><img src="gleiter3.jpg" alt="Gleiter 3"><span>Gleiter 3</span></div>
+              <div onclick="document.getElementById('gleiter').value='gleiter4'; updatePrice();"><img src="gleiter4.jpg" alt="Gleiter 4"><span>Gleiter 4</span></div>
+            </div>
+          </div>
+
+          <label for="color">Farbe:</label>
+          <div class="hover-container">
+            <select id="color" onchange="updatePrice()">
+              <option value="weiss">Weiß</option>
+              <option value="grau">Grau</option>
+              <option value="beige">Beige</option>
+              <option value="blau">Blau</option>
+            </select>
+            <div class="hover-images color-images">
+              <div onclick="document.getElementById('color').value='weiss'; updatePrice();"><img src="weiss.jpg" alt="Weiß"><span>Weiß</span></div>
+              <div onclick="document.getElementById('color').value='grau'; updatePrice();"><img src="grau.jpg" alt="Grau"><span>Grau</span></div>
+              <div onclick="document.getElementById('color').value='beige'; updatePrice();"><img src="beige.jpg" alt="Beige"><span>Beige</span></div>
+              <div onclick="document.getElementById('color').value='blau'; updatePrice();"><img src="blau.jpg" alt="Blau"><span>Blau</span></div>
+            </div>
+          </div>
+
+          <label for="width">Breite (in Metern):</label>
+          <input type="number" id="width" name="width" min="0.5" step="0.1" value="1.4" oninput="updatePrice()">
+          <label for="height">Höhe (in Metern):</label>
+          <input type="number" id="height" name="height" min="0.5" step="0.1" value="2.4" oninput="updatePrice()">
+        </div>
+        <button class="order-button" onclick="addToCart()">Zum Warenkorb hinzufügen</button>
+      </div>
     </div>
 
-    <!-- Suchleiste -->
-    <div class="search-bar">
-      <input type="text" id="search-input" placeholder="Produkte suchen...">
-    </div>
+    <section class="text-section">
+      <p>Stilvoller Sichtschutz & gemütliches Wohngefühl – unser Tagesvorhang<br>
+Entdecke den perfekten Tagesvorhang für dein Zuhause – eine Kombination aus Eleganz, Funktionalität und Komfort. Dieser Vorhang sorgt für sanftes Licht und eine angenehme Atmosphäre.<br><br>
+🌿 Zeitloses Design: Passt zu jedem Einrichtungsstil.<br>
+🌞 Lichtdurchlässigkeit: Ideal für helle, freundliche Räume.<br>
+🧵 Hochwertige Qualität: Langlebig und pflegeleicht.<br>
+🛠️ Einfache Montage: Schnell und unkompliziert anzubringen.<br><br>
+Verleihe deinem Raum das gewisse Extra – mit einem Vorhang, der mehr als nur dekoriert.</p>
+    </section>
 
-    <!-- Kategorien-Navigation -->
-    <div class="category-nav">
-      <a href="#tagesvorhaenge">Tagesvorhänge</a>
-      <a href="#nachtvorhaenge">Nachtvorhänge</a>
-      <a href="#rollos">Rollos</a>
-    </div>
+    <section class="image-gallery">
+      <div class="gallery-row">
+        <div class="gallery-item">
+          <img src="Tagesvorhang 1.jpg" alt="Gallery Image 1">
+          <button onclick="window.location.href='tagesvorhang.html'">Mehr erfahren</button>
+        </div>
+        <div class="gallery-item">
+          <img src="Tagesvorhang 4.jpg" alt="Gallery Image 2">
+          <button onclick="window.location.href='tagesvorhang.html'">Mehr erfahren</button>
+        </div>
+      </div>
+      <div class="gallery-row">
+        <div class="gallery-item">
+          <img src="Tagesvorhang 5.jpg" alt="Gallery Image 3">
+          <button onclick="window.location.href='Tagesvorhang 5.html'">Mehr erfahren</button>
+        </div>
+        <div class="gallery-item">
+          <img src="Tagesvorhang 2.jpg" alt="Gallery Image 4">
+          <button onclick="window.location.href='tagesvorhang.html'">Mehr erfahren</button>
+        </div>
+      </div>
+    </section>
 
-    <!-- Sortieroptionen und Titel -->
-    <div class="controls">
-      <div class="sort-options">
-        <select id="sort-select">
-          <option value="name-asc">Name (A-Z)</option>
-          <option value="name-desc">Name (Z-A)</option>
-          <option value="price-asc">Preis (aufsteigend)</option>
-          <option value="price-desc">Preis (absteigend)</option>
-        </select>
+    <section class="measuring-guide">
+      <h2>Perfekte Vorhänge messen – Schritt für Schritt</h2>
+      <div class="tabs">
+        <button class="tab-button active" data-tab="step1">Breite</button>
+        <button class="tab-button" data-tab="step2">Höhe</button>
+        <button class="tab-button" data-tab="step3">Falten</button>
+        <button class="tab-button" data-tab="step4">Kontrolle</button>
       </div>
-    </div>
-    <h2>Tagesvorhänge</h2>
-    <div class="category-container">
-      <div class="category" data-color="weiß" data-type="tüll" data-material="baumwolle" data-price="20" data-name="Tagesvorhang 1">
-        <!-- Zurück-Button direkt über Tagesvorhang 1 -->
-        <a href="javascript:history.back()" class="back-button">Zurück</a>
-        <img src="Tagesvorhang 1.jpg" alt="Produkt 1">
-        <h3>Tagesvorhang 1</h3>
-        <p>Einfacher Tüllvorhang.</p>
-        <button onclick="window.location.href='Tagesvorhang 1.html'">Mehr erfahren</button>
+      <div class="tab-content">
+        <div class="tab-pane active" id="step1">
+          <img src="schritt 1.jpg" alt="Schritt 1: Fensterbreite messen">
+          <h3>1. Fensterbreite ermitteln</h3>
+          <p>Nehmen Sie ein Maßband und messen Sie die Breite Ihres Fensters an der Stelle, wo der Vorhang später hängen soll. Addieren Sie auf jeder Seite 10-15 cm hinzu, damit der Vorhang das Fenster vollständig abdeckt.</p>
+        </div>
+        <div class="tab-pane" id="step2">
+          <img src="schritt 2.jpg" alt="Schritt 2: Höhe bestimmen">
+          <h3>2. Höhe festlegen</h3>
+          <p>Messen Sie vom oberen Punkt der Befestigung (z. B. Vorhangschiene) bis zur gewünschten Länge – etwa bis zum Boden oder zur Fensterbank. Notieren Sie das Maß genau.</p>
+        </div>
+        <div class="tab-pane" id="step3">
+          <img src="schritt 3.jpg" alt="Schritt 3: Faltenfaktor beachten">
+          <h3>3. Falten für mehr Volumen</h3>
+          <p>Damit Ihr Vorhang schön fällt, multiplizieren Sie die gemessene Breite mit einem Faktor von 1,5 bis 2. Das sorgt für eine elegante Optik mit sanften Falten.</p>
+        </div>
+        <div class="tab-pane" id="step4">
+          <img src="schritt 4.jpg" alt="Schritt 4: Maße überprüfen">
+          <h3>4. Alles doppelt checken</h3>
+          <p>Überprüfen Sie Ihre Maße sorgfältig und vergleichen Sie sie mit den Anforderungen Ihrer Vorhangstange oder -schiene, um sicherzugehen, dass alles passt.</p>
+        </div>
       </div>
-      <div class="category" data-color="grau" data-type="mittel" data-material="polyester" data-price="35" data-name="Tagesvorhang 2">
-        <img src="Tagesvorhang 2.jpg" alt="Produkt 2">
-        <h3>Tagesvorhang 2</h3>
-        <p>Tagesvorhang, mittlerer Qualität.</p>
-        <button onclick="window.location.href='Tagesvorhang 2.html'">Mehr erfahren</button>
-      </div>
-      <div class="category" data-color="weiß" data-type="hoch" data-material="leinen" data-price="50" data-name="Tagesvorhang 3">
-        <img src="Tagesvorhang 3.jpg" alt="Produkt 3">
-        <h3>Tagesvorhang 3</h3>
-        <p>Top Tagesvorhang, beste Qualität.</p>
-        <button onclick="window.location.href='Tagesvorhang 3.html'">Mehr erfahren</button>
-      </div>
-      <div class="category" data-color="beige" data-type="mittel" data-material="baumwolle" data-price="30" data-name="Tagesvorhang 4">
-        <img src="Tagesvorhang 4.jpg" alt="Produkt 4">
-        <h3>Tagesvorhang 4</h3>
-        <p>Beschreibung für Produkt 4.</p>
-        <button onclick="window.location.href='Tagesvorhang 4.html'">Mehr erfahren</button>
-      </div>
-      <div class="category" data-color="blau" data-type="hoch" data-material="polyester" data-price="45" data-name="Produkt 5">
-        <img src="Tagesvorhang 5.jpg" alt="Produkt 5">
-        <h3>Produkt 5</h3>
-        <p>Beschreibung für Produkt 5.</p>
-        <button onclick="window.location.href='Tagesvorhang 5.html'">Mehr erfahren</button>
-      </div>
-    </div>
-
-    <!-- Filter-Sidebar -->
-    <aside class="filter-sidebar">
-      <h3>Filter</h3>
-      <div>
-        <h4>Farbe</h4>
-        <label><span class="color-dot" style="background-color: #ffffff; border: 1px solid #ccc;"></span><input type="checkbox" class="filter-color" value="weiß"> Weiß</label>
-        <label><span class="color-dot" style="background-color: #808080;"></span><input type="checkbox" class="filter-color" value="grau"> Grau</label>
-        <label><span class="color-dot" style="background-color: #f5f5dc;"></span><input type="checkbox" class="filter-color" value="beige"> Beige</label>
-        <label><span class="color-dot" style="background-color: #0000ff;"></span><input type="checkbox" class="filter-color" value="blau"> Blau</label>
-        <label><span class="color-dot" style="background-color: #ff0000;"></span><input type="checkbox" class="filter-color" value="rot"> Rot</label>
-        <label><span class="color-dot" style="background-color: #008000;"></span><input type="checkbox" class="filter-color" value="grün"> Grün</label>
-      </div>
-      <div>
-        <h4>Art</h4>
-        <label><input type="checkbox" class="filter-type" value="tüll"> Tüll</label>
-        <label><input type="checkbox" class="filter-type" value="mittel"> Mittel</label>
-        <label><input type="checkbox" class="filter-type" value="hoch"> Hoch</label>
-      </div>
-      <div>
-        <h4>Material</h4>
-        <label><input type="checkbox" class="filter-material" value="baumwolle"> Baumwolle</label>
-        <label><input type="checkbox" class="filter-material" value="polyester"> Polyester</label>
-        <label><input type="checkbox" class="filter-material" value="leinen"> Leinen</label>
-      </div>
-      <div class="price-filter">
-        <h4>Preis</h4>
-        <input type="range" id="price-range" class="price-range" min="0" max="100" value="100">
-        <div id="price-value">Bis CHF 100</div>
-      </div>
-    </aside>
-
-    <!-- Zurück zum Anfang Button -->
-    <a href="#" class="back-to-top" id="back-to-top">Nach oben</a>
+    </section>
   </main>
 
   <footer>
@@ -489,7 +201,7 @@
     <div class="footer-nav">
       <a href="impressum.html">Impressum</a>
       <a href="datenschutz.html">Datenschutz</a>
-      <a href="versand-rueckgabe.html">Versand & Rückgabe</a>
+      <a href="Versand und Rückgabe.html">Versand & Rückgabe</a>
       <a href="agb.html">AGB</a>
     </div>
     <div class="social-icons">
@@ -498,91 +210,6 @@
       <a href="https://tiktok.com" target="_blank" rel="noopener"><img src="tiktok.png" alt="TikTok"></a>
     </div>
   </footer>
-
-  <!-- JavaScript für Filter, Sortierung, Suche und Buttons -->
-  <script>
-    const filterColors = document.querySelectorAll('.filter-color');
-    const filterTypes = document.querySelectorAll('.filter-type');
-    const filterMaterials = document.querySelectorAll('.filter-material');
-    const priceRange = document.getElementById('price-range');
-    const priceValue = document.getElementById('price-value');
-    const categories = document.querySelectorAll('.category');
-    const searchInput = document.getElementById('search-input');
-    const sortSelect = document.getElementById('sort-select');
-    const backToTop = document.getElementById('back-to-top');
-
-    function applyFiltersAndSearch() {
-      const selectedColors = Array.from(filterColors).filter(cb => cb.checked).map(cb => cb.value);
-      const selectedTypes = Array.from(filterTypes).filter(cb => cb.checked).map(cb => cb.value);
-      const selectedMaterials = Array.from(filterMaterials).filter(cb => cb.checked).map(cb => cb.value);
-      const maxPrice = parseInt(priceRange.value);
-      const searchTerm = searchInput.value.toLowerCase();
-
-      categories.forEach(category => {
-        const color = category.getAttribute('data-color');
-        const type = category.getAttribute('data-type');
-        const material = category.getAttribute('data-material');
-        const price = parseInt(category.getAttribute('data-price'));
-        const name = category.getAttribute('data-name').toLowerCase();
-
-        const matchesColor = selectedColors.length === 0 || selectedColors.includes(color);
-        const matchesType = selectedTypes.length === 0 || selectedTypes.includes(type);
-        const matchesMaterial = selectedMaterials.length === 0 || selectedMaterials.includes(material);
-        const matchesPrice = price <= maxPrice;
-        const matchesSearch = name.includes(searchTerm);
-
-        if (matchesColor && matchesType && matchesMaterial && matchesPrice && matchesSearch) {
-          category.classList.add('visible');
-        } else {
-          category.classList.remove('visible');
-        }
-      });
-    }
-
-    function sortCategories() {
-      const sortValue = sortSelect.value;
-      const categoryArray = Array.from(categories);
-
-      categoryArray.sort((a, b) => {
-        if (sortValue === 'name-asc') {
-          return a.getAttribute('data-name').localeCompare(b.getAttribute('data-name'));
-        } else if (sortValue === 'name-desc') {
-          return b.getAttribute('data-name').localeCompare(a.getAttribute('data-name'));
-        } else if (sortValue === 'price-asc') {
-          return parseInt(a.getAttribute('data-price')) - parseInt(b.getAttribute('data-price'));
-        } else if (sortValue === 'price-desc') {
-          return parseInt(b.getAttribute('data-price')) - parseInt(a.getAttribute('data-price'));
-        }
-      });
-
-      const container = document.querySelector('.category-container');
-      categoryArray.forEach(category => container.appendChild(category));
-      applyFiltersAndSearch();
-    }
-
-    // Event-Listener
-    filterColors.forEach(checkbox => checkbox.addEventListener('change', applyFiltersAndSearch));
-    filterTypes.forEach(checkbox => checkbox.addEventListener('change', applyFiltersAndSearch));
-    filterMaterials.forEach(checkbox => checkbox.addEventListener('change', applyFiltersAndSearch));
-    priceRange.addEventListener('input', () => {
-      priceValue.textContent = `Bis CHF ${priceRange.value}`;
-      applyFiltersAndSearch();
-    });
-    searchInput.addEventListener('input', applyFiltersAndSearch);
-    sortSelect.addEventListener('change', sortCategories);
-
-    // Scroll-Event nur für back-to-top
-    window.addEventListener('scroll', () => {
-      backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
-    });
-
-    backToTop.addEventListener('click', (e) => {
-      e.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    // Initial alle Produkte anzeigen
-    applyFiltersAndSearch();
-  </script>
+  <script src="scripts vorhänge.js"></script>
 </body>
 </html>

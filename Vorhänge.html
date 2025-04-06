@@ -15,22 +15,22 @@
       background-color: #f5f5f5;
       color: #2b2b2b;
       overflow-x: hidden;
-      background: url('Gallerie7.jpg') no-repeat center top / cover;
+      background: rgb(243, 243, 243);
       background-size: 100% auto;
       background-attachment: fixed;
     }
     header {
-      background-color: rgba(26, 26, 26, 0.9);
+      background-color: #1a1a1a;
       padding: 10px 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
       z-index: 1000;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
     }
     header img.logo {
       width: 60px;
@@ -49,63 +49,61 @@
       left: 50%;
       transform: translateX(-50%);
     }
-    nav {
+    .hamburger-menu {
+      position: relative;
       display: flex;
       align-items: center;
+      cursor: pointer;
       margin-left: auto;
-      margin-right: 20px;
+      margin-right: 10px;
     }
-    nav a {
-      color: #e0e0e0;
-      text-decoration: none;
-      margin: 0 10px;
-      font-size: 0.7em;
-      font-weight: 400;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      transition: color 0.3s;
-      line-height: 1;
-      vertical-align: middle;
+    .hamburger-icon {
+      width: 22px;
+      height: 17px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
-    nav a:hover { color: #d4af37; }
-    .dropdown {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
+    .hamburger-icon span {
+      width: 100%;
+      height: 3px;
+      background-color: #e0e0e0;
+      transition: background-color 0.3s;
     }
-    .dropdown > a {
-      margin: 0 10px;
-      line-height: 1;
-      vertical-align: middle;
+    .hamburger-menu:hover .hamburger-icon span {
+      background-color: #d4af37;
     }
-    .dropdown-content {
+    .menu-content {
       display: none;
       position: absolute;
+      top: 100%;
+      right: 0;
       background-color: #1a1a1a;
       min-width: 200px;
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
       z-index: 1001;
       border-radius: 8px;
-      top: 100%;
-      left: 50%;
-      transform: translateX(-50%);
     }
-    .dropdown-content a {
-      color: #e0e0e0;
-      padding: 12px 15px;
-      text-decoration: none;
+    .hamburger-menu:hover .menu-content {
       display: block;
-      font-weight: 400;
-      font-size: 0.7em;
-      transition: background-color 0.3s;
     }
-    .dropdown-content a:hover {
+    .menu-content a {
+      color: #e0e0e0;
+      text-decoration: none;
+      padding: 12px 15px;
+      display: block;
+      font-size: 0.9em;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .menu-content a:hover {
       background-color: #2b2b2b;
       color: #d4af37;
     }
-    .dropdown:hover .dropdown-content { display: block; }
     .flags {
-      margin-right: 20px;
+      margin-right: 60px;
       display: flex;
       align-items: center;
     }
@@ -294,6 +292,7 @@
       margin-top: 20px;
     }
     .category {
+      background: #ffffff;
       padding: 20px;
       border-radius: 12px;
       width: 300px;
@@ -302,6 +301,7 @@
       display: none;
       opacity: 0;
       transform: translateY(20px);
+      transition: transform 0.3s, opacity 0.3s;
     }
     .category.visible {
       display: block;
@@ -343,11 +343,60 @@
       color: #1a1a1a;
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
     }
-    .category[data-name="Tagesvorhang"] { background-color: #fafcf3; }
-    .category[data-name="Verdunklungsvorhang"] { background-color: #f4ffff; }
-    .category[data-name="Leinenvorhang"] { background-color: #fff6ec; }
-    .category[data-name="Wollvorhang"] { background-color: #e2e2e2; }
-    .category[data-name="Baumwollvorhang"] { background-color: #ffffff; }
+    .image-gallery {
+      width: 100vw;
+      margin: 60px 0;
+      padding: 0;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+    }
+    .gallery-row {
+      display: flex;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    .gallery-item {
+      flex: 1;
+      margin: 0;
+      padding: 0;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 440px;
+      object-fit: cover;
+      display: block;
+      border: none;
+    }
+    .text-section {
+      width: 100vw;
+      background-color: #e0e0e0;
+      padding: 40px 20px;
+      text-align: center;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      margin-top: 60px;
+    }
+    .text-section h2 {
+      font-size: 2em;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 20px;
+    }
+    .text-section p {
+      font-size: 1.2em;
+      font-weight: 300;
+      color: #333;
+      max-width: 1200px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
     .measuring-guide {
       max-width: 1200px;
       margin: 60px auto;
@@ -401,7 +450,7 @@
       padding: 30px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     }
-    .tab WALPane {
+    .tab-pane {
       display: none;
       text-align: center;
     }
@@ -548,6 +597,29 @@
       margin: 0 15px;
       cursor: pointer;
     }
+    .footer-contact-info {
+      color: #e0e0e0;
+      font-size: 0.8em;
+      font-weight: 300;
+      opacity: 0;
+      transform: translateX(-100px);
+      transition: all 0.5s ease;
+      margin-top: 15px;
+    }
+    .footer-contact-info.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .footer-contact-info p {
+      margin: 2px 0;
+    }
+    .footer-contact-info a {
+      color: #d4af37;
+      text-decoration: none;
+    }
+    .footer-contact-info a:hover {
+      text-decoration: underline;
+    }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
@@ -561,15 +633,20 @@
 <body>
   <header>
     <img src="Kavallerietuch.png" alt="Kavallerietuch Logo" class="logo">
-    <div class="header-title">Kavallerietuch</div>
-    <nav>
-      <a href="index.html">Home</a>
-      <div class="dropdown">
-        <a href="Gallerie.html">Gallerie</a>
+    <div class="header-title">RAUMRAETIA</div>
+    <div class="hamburger-menu">
+      <div class="hamburger-icon">
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
-      <a href="wie-funktionierts.html">Wie funktioniert’s?</a>
-      <a href="uber-uns.html">Über uns</a>
-    </nav>
+      <div class="menu-content">
+        <a href="index.html">Home</a>
+        <a href="Gallerie.html">Galerie</a>
+        <a href="wie-funktionierts.html">Wie funktioniert’s?</a>
+        <a href="über-uns.html">Über uns</a>
+      </div>
+    </div>
     <div class="flags">
       <img src="Schweizer Flagge.jpg" alt="Schweizer Flagge">
       <img src="Grabünden Flagge.jpg" alt="Graubünden Flagge">
@@ -597,43 +674,58 @@
       <a href="Vorhänge.html">Vorhänge</a>
       <a href="polster.html">Polster</a>
       <a href="Betten.html">Betten</a>
-      <a href="kavallerietuch.html">Kavallerietuch</a>
+      <a href="Zubehör.html">Zubehör</a>
       <a href="Teppiche.html">Teppiche</a>
       <a href="Sale.html" class="sale-link">Sale</a>
     </div>
-    <h2></h2>
-    <div class="category-container">
-      <div class="category" data-type="tagesvorhang" data-material="polyester" data-price="20" data-name="Tagesvorhang">
-        <img src="Tagesvorhang.jpg" alt="Tagesvorhang">
-        <h3>Tagesvorhang</h3>
-        <p>Leichter Vorhang für eine sanfte Lichtdurchlässigkeit.</p>
-        <button onclick="window.location.href='tagesvorhang.html'">Mehr erfahren</button>
+    <h2>Unsere Vorhänge</h2>
+    <div class="category-container" id="category-container"></div>
+    <section class="text-section">
+      <h2>Unsere Kollektion</h2>
+      <p>Unsere Vorhänge – Stil trifft Funktion<br><br>
+        Verleihen Sie Ihrem Zuhause Charakter und Gemütlichkeit mit unseren maßgefertigten Vorhängen 🏡✨.<br>
+        Ob elegant, modern oder zeitlos klassisch – bei uns finden Sie genau das Design, das zu Ihrem Stil passt.<br><br>
+        Unsere hochwertigen Stoffe sorgen nicht nur für ein stilvolles Ambiente, sondern bieten auch praktischen Nutzen:<br>
+        🛏️ Blickdicht für mehr Privatsphäre<br>
+        🌞 Optional verdunkelnd für erholsamen Schlaf<br>
+        🧼 Pflegeleicht & langlebig<br><br>
+        Wählen Sie aus einer Vielzahl an Farben, Stoffen und Aufhängungsarten – und gestalten Sie Ihre Vorhänge genau so, wie Sie es sich wünschen.<br><br>
+        Made to fit. Made for you. 🎯💫</p>
+    </section>
+    <section class="image-gallery">
+      <div class="gallery-row">
+        <div class="gallery-item">
+          <img src="Tagesvorhang 1.jpg" alt="Gallery Image 1">
+        </div>
+        <div class="gallery-item">
+          <img src="Nachtvorhang 2.jpg" alt="Gallery Image 2">
+        </div>
       </div>
-      <div class="category" data-type="verdunklungsvorhang" data-material="polyester" data-price="35" data-name="Verdunklungsvorhang">
-        <img src="Verdunklungsvorhang.jpg" alt="Verdunklungsvorhang">
-        <h3>Verdunklungsvorhang</h3>
-        <p>Ideal für Schlafräume – blockiert das Licht effektiv.</p>
-        <button onclick="window.location.href='Nachtvorhänge.html'">Mehr erfahren</button>
+      <div class="gallery-row">
+        <div class="gallery-item">
+          <img src="Baumwollvorhang.jpg" alt="Gallery Image 3">
+        </div>
+        <div class="gallery-item">
+          <img src="Gallerie7.jpg" alt="Gallery Image 4">
+        </div>
       </div>
-      <div class="category" data-type="leinenvorhang" data-material="leinen" data-price="50" data-name="Leinenvorhang">
-        <img src="Leinenvorhang.jpg" alt="Leinenvorhang">
-        <h3>Leinenvorhang</h3>
-        <p>Natürlicher Look mit atmungsaktivem Leinenstoff.</p>
-        <button onclick="window.location.href='Leinenvorhänge.html'">Mehr erfahren</button>
+      <div class="gallery-row">
+        <div class="gallery-item">
+          <img src="Leinenvorhang 4.jpg" alt="Gallery Image 5">
+        </div>
+        <div class="gallery-item">
+          <img src="Wollvorhang2.jpg" alt="Gallery Image 6">
+        </div>
       </div>
-      <div class="category" data-type="wollvorhang" data-material="wolle" data-price="60" data-name="Wollvorhang">
-        <img src="Wollvorhang.jpg" alt="Wollvorhang">
-        <h3>Wollvorhang</h3>
-        <p>Hochwertige Wärmeisolierung mit edlem Design.</p>
-        <button onclick="window.location.href='Wollvorhänge.html'">Mehr erfahren</button>
-      </div>
-      <div class="category" data-type="baumwollvorhang" data-material="baumwolle" data-price="25" data-name="Baumwollvorhang">
-        <img src="Baumwollvorhang.jpg" alt="Baumwollvorhang">
-        <h3>Baumwollvorhang</h3>
-        <p>Weich und pflegeleicht für eine gemütliche Atmosphäre.</p>
-        <button onclick="window.location.href='Baumwollvorhang.html'">Mehr erfahren</button>
-      </div>
-    </div>
+    </section>
+    <section class="text-section">
+      <h2>Ihre Vorhänge auf Maß</h2>
+      <p>✨ So einfach geht's: Vorhänge nach Maß bestellen<br><br>
+        Ihre perfekten Vorhänge beginnen mit dem richtigen Maß 📏. Keine Sorge – das Messen ist ganz einfach!<br>
+        Nehmen Sie sich einen Moment Zeit, notieren Sie Breite und Höhe – und wir kümmern uns um den Rest 🧵🪡.<br><br>
+        💡 Tipp: Messen Sie sorgfältig, damit Ihr Vorhang später genau so sitzt, wie Sie es sich vorstellen 🪟✔️.<br><br>
+        Jetzt Maße eingeben und Wunschvorhang gestalten – individuell, passgenau, einzigartig</p>
+    </section>
     <section class="measuring-guide">
       <h2>Perfekte Vorhänge messen – Schritt für Schritt</h2>
       <div class="tabs-container">
@@ -743,12 +835,33 @@
       <a href="https://facebook.com" target="_blank" rel="noopener"><img src="facebook.png" alt="Facebook"></a>
       <a href="https://tiktok.com" target="_blank" rel="noopener"><img src="tiktok.png" alt="TikTok"></a>
     </div>
+    <div class="footer-contact-info" id="footer-contact-info">
+      <p>Tel: +41 81 123 45 67</p>
+      <p>E-Mail: <a href="mailto:info@kavallerietuch.ch">info@kavallerietuch.ch</a></p>
+    </div>
   </footer>
 
   <script>
-    const categories = document.querySelectorAll('.category');
+    const footerContactInfo = document.getElementById('footer-contact-info');
+    if (!footerContactInfo) {
+      console.error("Element mit ID 'footer-contact-info' wurde nicht gefunden!");
+    } else {
+      setTimeout(() => {
+        footerContactInfo.classList.add('visible');
+      }, 10000);
+    }
+
+    const categories = [
+      { type: "tagesvorhang", material: "polyester", price: 20, name: "Tagesvorhang", image: "Tagesvorhang.jpg", description: "Leichter Vorhang für eine sanfte Lichtdurchlässigkeit.", link: "tagesvorhang.html" },
+      { type: "verdunklungsvorhang", material: "polyester", price: 35, name: "Verdunklungsvorhang", image: "Verdunklungsvorhang.jpg", description: "Ideal für Schlafräume – blockiert das Licht effektiv.", link: "Nachtvorhänge.html" },
+      { type: "leinenvorhang", material: "leinen", price: 50, name: "Leinenvorhang", image: "Leinenvorhang.jpg", description: "Natürlicher Look mit atmungsaktivem Leinenstoff.", link: "Leinenvorhänge.html" },
+      { type: "wollvorhang", material: "wolle", price: 60, name: "Wollvorhang", image: "Wollvorhang.jpg", description: "Hochwertige Wärmeisolierung mit edlem Design.", link: "Wollvorhänge.html" },
+      { type: "baumwollvorhang", material: "baumwolle", price: 25, name: "Baumwollvorhang", image: "Baumwollvorhang.jpg", description: "Weich und pflegeleicht für eine gemütliche Atmosphäre.", link: "Baumwollvorhang.html" }
+    ];
+
     const searchInput = document.getElementById('search-input');
     const backToTop = document.getElementById('back-to-top');
+    const container = document.getElementById('category-container');
     const cartCount = document.getElementById('cart-count');
     const cartItemsList = document.getElementById('cart-items');
     const cart = document.getElementById('cart');
@@ -760,11 +873,36 @@
     let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
     let currentIndex = 0;
 
+    function renderCategories(categoriesToRender) {
+      container.innerHTML = '';
+      categoriesToRender.forEach(category => {
+        const div = document.createElement('div');
+        div.classList.add('category');
+        div.setAttribute('data-type', category.type);
+        div.setAttribute('data-material', category.material);
+        div.setAttribute('data-price', category.price);
+        div.setAttribute('data-name', category.name);
+        div.innerHTML = `
+          <img src="${category.image}" alt="${category.name}">
+          <h3>${category.name}</h3>
+          <p>${category.description}</p>
+          <button onclick="window.location.href='${category.link}'">Mehr erfahren</button>
+        `;
+        container.appendChild(div);
+      });
+      applySearch();
+    }
+
     function applySearch() {
       const searchTerm = searchInput.value.toLowerCase();
-      categories.forEach(category => {
+      const categoryElements = document.querySelectorAll('.category');
+      categoryElements.forEach(category => {
         const name = category.getAttribute('data-name').toLowerCase();
-        category.classList.toggle('visible', name.includes(searchTerm));
+        if (name.includes(searchTerm)) {
+          category.classList.add('visible');
+        } else {
+          category.classList.remove('visible');
+        }
       });
     }
 
@@ -838,8 +976,8 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
+    renderCategories(categories);
     updateCart();
-    applySearch();
     updatePreview();
   </script>
 </body>

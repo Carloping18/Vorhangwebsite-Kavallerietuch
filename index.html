@@ -19,94 +19,96 @@
       overflow-x: hidden;
     }
     header {
-      background-color: #1a1a1a;
-      padding: 10px 20px;
-      position: static;
+      background-color: #000000;
+      padding: 30px 20px;
+      position: fixed;
       top: 0;
+      left: 0;
+      width: 100%;
       z-index: 1000;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
       display: flex;
       align-items: center;
       justify-content: space-between;
+      margin-top: -20px;
+      margin-bottom: -60px;
     }
-    header img.logo {
-      width: 60px;
-      height: 60px;
-      margin-left: 10px;
+    header img.logo-left {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      position: absolute;
+      filter: brightness(1.2);
+      margin-left: -20px;
+      margin-bottom: -20px;
+      margin-top: 10px;
+    }
+    header img.logo-center {
+      width: 200px;
+      height: 200px;
       object-fit: cover;
       filter: brightness(1.2);
-    }
-    .header-title {
-      font-size: 2em;
-      font-weight: 700;
-      color: #e0e0e0;
-      text-transform: uppercase;
-      letter-spacing: 2px;
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
+      margin-top: 20px;
     }
-    nav {
+    .hamburger-menu {
+      position: relative;
       display: flex;
       align-items: center;
+      cursor: pointer;
       margin-left: auto;
-      margin-right: 20px;
+      margin-right: 10px;
+      margin-top: 20px;
     }
-    nav a {
-      color: #e0e0e0;
-      text-decoration: none;
-      margin: 0 10px;
-      font-size: 0.7em;
-      font-weight: 400;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      transition: color 0.3s;
-      line-height: 1;
-      vertical-align: middle;
+    .hamburger-icon {
+      width: 22px;
+      height: 17px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
-    nav a:hover {
-      color: #d4af37;
+    .hamburger-icon span {
+      width: 100%;
+      height: 3px;
+      background-color: #e0e0e0;
+      transition: background-color 0.3s;
     }
-    .dropdown {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
+    .hamburger-menu:hover .hamburger-icon span {
+      background-color: #d4af37;
     }
-    .dropdown > a {
-      margin: 0 10px;
-      line-height: 1;
-      vertical-align: middle;
-    }
-    .dropdown-content {
+    .menu-content {
       display: none;
       position: absolute;
+      top: 100%;
+      right: 0;
       background-color: #1a1a1a;
       min-width: 200px;
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
       z-index: 1001;
       border-radius: 8px;
-      top: 100%;
-      left: 50%;
-      transform: translateX(-50%);
     }
-    .dropdown-content a {
-      color: #e0e0e0;
-      padding: 12px 15px;
-      text-decoration: none;
+    .hamburger-menu:hover .menu-content {
       display: block;
-      font-weight: 400;
-      font-size: 0.7em;
-      transition: background-color 0.3s;
     }
-    .dropdown-content a:hover {
+    .menu-content a {
+      color: #e0e0e0;
+      text-decoration: none;
+      padding: 12px 15px;
+      display: block;
+      font-size: 0.9em;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .menu-content a:hover {
       background-color: #2b2b2b;
       color: #d4af37;
     }
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
     .flags {
-      margin-right: 20px;
+      margin-right: 60px;
       display: flex;
       align-items: center;
     }
@@ -115,33 +117,11 @@
       height: 20px;
       margin-left: 10px;
       object-fit: cover;
-    }
-    .contact-info {
-      color: #e0e0e0;
-      font-size: 0.8em;
-      font-weight: 300;
-      opacity: 0;
-      transform: translateX(-100px);
-      transition: all 0.5s ease;
-      margin-left: 20px;
-    }
-    .contact-info.visible {
-      opacity: 1;
-      transform: translateX(0);
-    }
-    .contact-info p {
-      margin: 2px 0;
-    }
-    .contact-info a {
-      color: #d4af37;
-      text-decoration: none;
-    }
-    .contact-info a:hover {
-      text-decoration: underline;
+      margin-top: 20px;
     }
     .search-bar {
       max-width: 1200px;
-      margin: 30px auto;
+      margin: 80px auto 30px;
       padding: 0 20px;
       text-align: center;
     }
@@ -210,9 +190,7 @@
     }
     .sort-options select:focus {
       outline: none;
-      box-shadow: 0 4px 12px rgba(0, 0, 0 
-   
-, 0.15);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
     .cart {
       position: relative;
@@ -226,9 +204,6 @@
       width: 50px;
       height: 50px;
       filter: brightness(1.2);
-    }
-    .cart span {
-      display: none;
     }
     .cart-count {
       position: absolute;
@@ -641,63 +616,88 @@
       color: #1a1a1a;
     }
     footer {
-      text-align: center;
-      padding: 2em 0;
       background-color: #1a1a1a;
       color: #e0e0e0;
+      padding: 2em 0;
       box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      width: 100%;
+      margin: 0 auto;
+      flex-wrap: wrap;
     }
-    .footer-nav {
-      margin: 15px 0;
+    .footer-column {
+      flex: 1;
+      min-width: 200px;
+      padding: 0 20px;
+      text-align: center;
     }
-    .footer-nav a {
+    .footer-column a {
       color: #e0e0e0;
       text-decoration: none;
-      margin: 0 20px;
+      display: block;
+      margin: 10px 0;
       font-size: 0.9em;
       font-weight: 400;
       text-transform: uppercase;
       letter-spacing: 1px;
       transition: color 0.3s;
     }
-    .footer-nav a:hover {
+    .footer-column a:hover {
       color: #d4af37;
     }
-    .social-icons {
-      margin-top: 15px;
+    .footer-column p {
+      margin: 10px 0;
+      font-size: 0.9em;
+      font-weight: 300;
     }
-    .social-icons img {
-      width: 35px;
-      height: 35px;
-      margin: 0 15px;
-      cursor: pointer;
+    .footer-column .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 10px 0;
+    }
+    .footer-column .social-icons a {
+      display: inline-block;
+    }
+    .footer-column .social-icons img {
+      width: 20px;
+      height: 20px;
       transition: transform 0.3s;
     }
-    .social-icons img:hover {
+    .footer-column .social-icons img:hover {
       transform: scale(1.1);
     }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    @media (max-width: 768px) {
+      footer {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .footer-column {
+        margin-bottom: 20px;
+      }
     }
   </style>
 </head>
 <body>
   <header>
-    <img src="Kavallerietuch.png" alt="Kavallerietuch Logo" class="logo">
-    <div class="contact-info" id="contact-info">
-      <p>Tel: +41 81 123 45 67</p>
-      <p>E-Mail: <a href="mailto:info@kavallerietuch.ch">info@kavallerietuch.ch</a></p>
-    </div>
-    <div class="header-title">Kavallerietuch</div>
-    <nav>
-      <a href="index.html">Home</a>
-      <div class="dropdown">
-        <a href="Gallerie.html">Gallerie</a>
+    <img src="RR Only.png" alt="Linkes Logo" class="logo-left">
+    <img src="RR Gelb.png" alt="Kavallerietuch Logo" class="logo-center">
+    <div class="hamburger-menu">
+      <div class="hamburger-icon">
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
-      <a href="wie-funktionierts.html">Wie funktioniert’s?</a>
-      <a href="über-uns.html">Über uns</a>
-    </nav>
+      <div class="menu-content">
+        <a href="index.html">Home</a>
+        <a href="Gallerie.html">Galerie</a>
+        <a href="wie-funktionierts.html">Wie funktioniert’s?</a>
+        <a href="über-uns.html">Über uns</a>
+      </div>
+    </div>
     <div class="flags">
       <img src="Schweizer Flagge.jpg" alt="Schweizer Flagge">
       <img src="Grabünden Flagge.jpg" alt="Graubünden Flagge">
@@ -736,7 +736,7 @@
       <a href="polster.html">Polster</a>
       <a href="Betten.html">Betten</a>
       <a href="Teppiche.html">Teppiche</a>
-      <a href="kavallerietuch.html">Zubehör</a>
+      <a href="Zubehör.html">Zubehör</a>
       <a href="Sale.html" class="sale-link">Sale%</a>
     </div>
 
@@ -759,8 +759,8 @@
         <img src="Matratzen.jpg" alt="Matratzen">
         <h2>Matratzen</h2>
         <p>Moderner Vorhang mit feinem Muster.</p>
-        <p class="price">ab 40Fr</p>
-        <button class="add-to-cart" data-product="Matratzen" data-price="40">Bestellen</button>
+        <p class="price">ab 990Fr</p>
+        <button class="add-to-cart" data-product="Matratzen" data-price="990">Bestellen</button>
       </article>
       <article class="product bestseller" data-name="Orientteppich" data-price="50" data-category="vorhaenge">
         <img src="Orientteppich.jpg" alt="Orientteppich">
@@ -863,33 +863,30 @@
   <a href="#" class="back-to-top" id="back-to-top">Nach oben</a>
 
   <footer>
-    <p>© 2025 Kavallerietuch</p>
-    <div class="footer-nav">
-      <a href="impressum.html">Impressum</a>
-      <a href="datenschutz.html">Datenschutz</a>
-      <a href="Versand und Rückgabe.html">Versand & Rückgabe</a>
+    <div class="footer-column">
       <a href="agb.html">AGB</a>
+      <a href="datenschutz.html">Datenschutz</a>
+      <a href="impressum.html">Impressum</a>
+      <a href="Versand und Rückgabe.html">Versand & Rückgabe</a>
     </div>
-    <div class="social-icons">
-      <a href="https://instagram.com" target="_blank" rel="noopener"><img src="instagram.png" alt="Instagram"></a>
-      <a href="https://facebook.com" target="_blank" rel="noopener"><img src="facebook.png" alt="Facebook"></a>
-      <a href="https://tiktok.com" target="_blank" rel="noopener"><img src="tiktok.png" alt="TikTok"></a>
+    <div class="footer-column">
+      <div class="social-icons">
+        <a href="https://instagram.com" target="_blank" rel="noopener"><img src="instagram.png" alt="Instagram"></a>
+        <a href="https://facebook.com" target="_blank" rel="noopener"><img src="facebook.png" alt="Facebook"></a>
+        <a href="https://tiktok.com" target="_blank" rel="noopener"><img src="tiktok.png" alt="TikTok"></a>
+      </div>
+      <p>Tel: +41 81 123 45 67</p>
+     <a href="mailto:info@kavallerietuch.ch">info@kavallerietuch.ch</a></p>
+      <p>© 2025 Raum Raetia Online</p>
+    </div>
+    <div class="footer-column">
+      <a href="#">CSR</a>
+      <a href="#">Jobs</a>
+      <a href="#">@Deutsch</a>
     </div>
   </footer>
 
   <script>
-    // Debugging und Animation
-    const contactInfo = document.getElementById('contact-info');
-    if (!contactInfo) {
-      console.error("Element mit ID 'contact-info' wurde nicht gefunden!");
-    } else {
-      console.log("Kontaktinformationen gefunden, warte 10 Sekunden...");
-      setTimeout(() => {
-        console.log("Füge 'visible'-Klasse hinzu...");
-        contactInfo.classList.add('visible');
-      }, 10000); // 10 Sekunden
-    }
-
     const products = document.querySelectorAll('.product');
     const searchInput = document.getElementById('search-input');
     const sortSelect = document.getElementById('sort-select');

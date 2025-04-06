@@ -5,26 +5,433 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Datenschutz - Kavallerietuch</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Roboto Condensed', sans-serif;
+      font-weight: 300;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      color: #2b2b2b;
+      overflow-x: hidden;
+    }
+    header {
+      background-color: #1a1a1a;
+      padding: 10px 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    header img.logo {
+      width: 60px;
+      height: 60px;
+      margin-left: 10px;
+      object-fit: cover;
+      filter: brightness(1.2);
+    }
+    .header-title {
+      font-size: 2em;
+      font-weight: 700;
+      color: #e0e0e0;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .hamburger-menu {
+      position: relative;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      margin-left: auto;
+      margin-right: 10px;
+    }
+    .hamburger-icon {
+      width: 22px;
+      height: 17px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .hamburger-icon span {
+      width: 100%;
+      height: 3px;
+      background-color: #e0e0e0;
+      transition: background-color 0.3s;
+    }
+    .hamburger-menu:hover .hamburger-icon span {
+      background-color: #d4af37;
+    }
+    .menu-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: #1a1a1a;
+      min-width: 200px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      z-index: 1001;
+      border-radius: 8px;
+    }
+    .hamburger-menu:hover .menu-content {
+      display: block;
+    }
+    .menu-content a {
+      color: #e0e0e0;
+      text-decoration: none;
+      padding: 12px 15px;
+      display: block;
+      font-size: 0.9em;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .menu-content a:hover {
+      background-color: #2b2b2b;
+      color: #d4af37;
+    }
+    .flags {
+      margin-right: 60px;
+      display: flex;
+      align-items: center;
+    }
+    .flags img {
+      width: 20px;
+      height: 20px;
+      margin-left: 10px;
+      object-fit: cover;
+    }
+    .controls-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 80px;
+      margin-bottom: 20px;
+      padding: 0 20px;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .back-button {
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+      padding: 10px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-size: 1em;
+      font-weight: 400;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s;
+    }
+    .back-button:hover {
+      background-color: #2b2b2b;
+    }
+    .cart {
+      position: relative;
+      display: flex;
+      align-items: center;
+      background: none;
+      padding: 0;
+      cursor: pointer;
+    }
+    .cart img {
+      width: 70px;
+      height: 70px;
+      filter: brightness(1.2);
+    }
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background-color: #d4af37;
+      color: #1a1a1a;
+      font-size: 0.8em;
+      font-weight: 700;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    .cart-dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: #ffffff;
+      min-width: 300px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      z-index: 1001;
+      padding: 15px;
+      margin-top: 10px;
+    }
+    .cart:hover .cart-dropdown {
+      display: block;
+    }
+    .cart-dropdown h3 {
+      font-size: 1.2em;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin: 0 0 10px;
+    }
+    .cart-dropdown ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .cart-dropdown li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+    }
+    .cart-dropdown li:last-child {
+      border-bottom: none;
+    }
+    .cart-dropdown .item-name {
+      font-size: 1em;
+      color: #333;
+    }
+    .cart-dropdown .item-price {
+      font-size: 1em;
+      font-weight: 700;
+      color: #d4af37;
+    }
+    .cart-dropdown .remove-item {
+      background: none;
+      border: none;
+      color: #d4af37;
+      font-size: 0.9em;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+    .cart-dropdown .remove-item:hover {
+      color: #b8962e;
+    }
+    .cart-dropdown .checkout-btn {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      background-color: #d4af37;
+      color: #1a1a1a;
+      border: none;
+      border-radius: 25px;
+      font-size: 1em;
+      font-weight: 400;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .cart-dropdown .checkout-btn:hover {
+      background-color: #b8962e;
+    }
+    main {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 2em;
+      color: #333;
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: 700;
+    }
+    .datenschutz-content {
+      font-size: 1em;
+      color: #666;
+      line-height: 1.6;
+    }
+    .datenschutz-content h2 {
+      font-size: 1.4em;
+      color: #333;
+      margin: 20px 0 10px;
+      font-weight: 700;
+    }
+    .datenschutz-content p {
+      margin: 10px 0;
+      font-weight: 300;
+    }
+    .datenschutz-content a {
+      color: #d4af37;
+      text-decoration: none;
+    }
+    .datenschutz-content a:hover {
+      text-decoration: underline;
+    }
+    .order-form {
+      margin-top: 40px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    .order-form.hidden {
+      display: none;
+    }
+    .order-form h2 {
+      font-size: 1.6em;
+      color: #1a1a1a;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+    .order-form label {
+      display: block;
+      font-size: 1em;
+      color: #333;
+      margin-bottom: 5px;
+    }
+    .order-form input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1em;
+    }
+    .order-form button {
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 25px;
+      font-size: 1em;
+      font-weight: 400;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .order-form button:hover {
+      background-color: #d4af37;
+      color: #1a1a1a;
+    }
+    .order-btn {
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 25px;
+      font-size: 1em;
+      font-weight: 400;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin: 20px auto;
+      display: block;
+    }
+    .order-btn:hover {
+      background-color: #d4af37;
+      color: #1a1a1a;
+    }
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+      padding: 12px 24px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-size: 1em;
+      font-weight: 400;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      display: none;
+      transition: background-color 0.3s;
+    }
+    .back-to-top.hidden {
+      display: none;
+    }
+    .back-to-top:hover {
+      background-color: #d4af37;
+      color: #1a1a1a;
+    }
+    footer {
+      text-align: center;
+      padding: 2em 0;
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+      box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.2);
+    }
+    .footer-nav {
+      margin: 15px 0;
+    }
+    .footer-nav a {
+      color: #e0e0e0;
+      text-decoration: none;
+      margin: 0 20px;
+      font-size: 0.9em;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.3s;
+    }
+    .footer-nav a:hover {
+      color: #d4af37;
+    }
+    .social-icons {
+      margin-top: 15px;
+    }
+    .social-icons img {
+      width: 20px;
+      height: 20px;
+      margin: 0 15px;
+      cursor: pointer;
+    }
+    .footer-contact-info {
+      color: #e0e0e0;
+      font-size: 0.8em;
+      font-weight: 300;
+      opacity: 0;
+      transform: translateX(-100px);
+      transition: all 0.5s ease;
+      margin-top: 15px;
+    }
+    .footer-contact-info.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .footer-contact-info p {
+      margin: 2px 0;
+    }
+    .footer-contact-info a {
+      color: #d4af37;
+      text-decoration: none;
+    }
+    .footer-contact-info a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
   <header>
     <img src="Kavallerietuch.png" alt="Kavallerietuch Logo" class="logo">
-    <nav>
-      <a href="index.html">Home</a>
-      <div class="dropdown">
-        <a href="Produkte.html">Produkte</a>
-        <div class="dropdown-content">
-          <a href="Tagesvorhang.html">Vorhänge</a>
-          <a href="polster.html">Polster</a>
-          <a href="Betten.html">Betten</a>
-          <a href="produkt4.html">Kavallerietuch</a>
-          <a href="Teppiche.html">Böden</a>
-        </div>
+    <div class="header-title">RAUMRAETIA</div>
+    <div class="hamburger-menu">
+      <div class="hamburger-icon">
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
-      <a href="wie-funktionierts.html">Wie funktioniert’s?</a>
-      <a href="über-uns.html">Über uns</a>
-    </nav>
+      <div class="menu-content">
+        <a href="index.html">Home</a>
+        <a href="Gallerie.html">Galerie</a>
+        <a href="wie-funktionierts.html">Wie funktioniert’s?</a>
+        <a href="über-uns.html">Über uns</a>
+      </div>
+    </div>
     <div class="flags">
       <img src="Schweizer Flagge.jpg" alt="Schweizer Flagge">
       <img src="Grabünden Flagge.jpg" alt="Graubünden Flagge">
@@ -32,6 +439,18 @@
   </header>
 
   <main>
+    <div class="controls-container">
+      <a href="index.html" class="back-button">Zurück</a>
+      <div class="cart" id="cart">
+        <img src="cart.png" alt="Warenkorb">
+        <div class="cart-count" id="cart-count">0</div>
+        <div class="cart-dropdown" id="cart-dropdown">
+          <h3>Ihr Warenkorb</h3>
+          <ul id="cart-items"></ul>
+          <button class="checkout-btn" onclick="window.location.href='Warenkorb.html'">Zur Kasse</button>
+        </div>
+      </div>
+    </div>
     <h1>Datenschutzerklärung</h1>
     <div class="datenschutz-content">
       <h2>1. Verantwortliche Stelle</h2>
@@ -42,7 +461,7 @@
          Schweiz<br>
          E-Mail: <a href="mailto:info@kavallerietuch.ch">info@kavallerietuch.ch</a><br>
          Telefon: +41 81 123 45 67</p>
-      <!-- Weitere Abschnitte gekürzt -->
+      <!-- Weitere Abschnitte können hier ergänzt werden -->
     </div>
 
     <section id="order-form" class="order-form hidden">
@@ -72,7 +491,66 @@
       <a href="https://facebook.com" target="_blank" rel="noopener"><img src="facebook.png" alt="Facebook"></a>
       <a href="https://tiktok.com" target="_blank" rel="noopener"><img src="tiktok.png" alt="TikTok"></a>
     </div>
+    <div class="footer-contact-info" id="footer-contact-info">
+      <p>Tel: +41 81 123 45 67</p>
+      <p>E-Mail: <a href="mailto:info@kavallerietuch.ch">info@kavallerietuch.ch</a></p>
+    </div>
   </footer>
+
+  <script>
+    const backToTop = document.getElementById('back-to-top');
+    const cartCount = document.getElementById('cart-count');
+    const cartItemsList = document.getElementById('cart-items');
+    const cart = document.getElementById('cart');
+    const footerContactInfo = document.getElementById('footer-contact-info');
+    let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+
+    function updateCart() {
+      cartCount.textContent = cartItems.reduce((sum, item) => sum + (item.quantity || 1), 0);
+      cartItemsList.innerHTML = cartItems.length === 0 ? '<li>Der Warenkorb ist leer</li>' : '';
+      cartItems.forEach((item, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <span class="item-name">${item.name} (${item.quantity || 1}x)</span>
+          <span class="item-price">${(item.price * (item.quantity || 1)).toFixed(2)} €</span>
+          <button class="remove-item" data-index="${index}">Entfernen</button>
+        `;
+        cartItemsList.appendChild(li);
+      });
+      const removeButtons = cartItemsList.querySelectorAll('.remove-item');
+      removeButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const index = parseInt(e.target.getAttribute('data-index'));
+          cartItems.splice(index, 1);
+          localStorage.setItem('cart', JSON.stringify(cartItems));
+          updateCart();
+        });
+      });
+    }
+
+    cart.addEventListener('click', (e) => {
+      if (e.target.closest('.cart-dropdown') || e.target.classList.contains('remove-item')) return;
+      window.location.href = 'Warenkorb.html';
+    });
+
+    window.addEventListener('scroll', () => {
+      backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
+    });
+
+    backToTop.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    if (footerContactInfo) {
+      setTimeout(() => {
+        footerContactInfo.classList.add('visible');
+      }, 10000);
+    }
+
+    updateCart();
+  </script>
   <script src="script.js"></script>
 </body>
 </html>

@@ -19,14 +19,15 @@
     header {
       background-color: #1a1a1a;
       padding: 10px 20px;
-      position: sticky;
+      position: fixed;
       top: 0;
+      left: 0;
+      width: 100%;
       z-index: 1000;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      transition: background-color 0.3s;
     }
     header img.logo {
       width: 60px;
@@ -45,63 +46,84 @@
       left: 50%;
       transform: translateX(-50%);
     }
-    nav {
+    .hamburger-menu {
+      position: relative;
       display: flex;
       align-items: center;
+      cursor: pointer;
       margin-left: auto;
-      margin-right: 20px;
+      margin-right: 10px;
     }
-    nav a {
-      color: #e0e0e0;
-      text-decoration: none;
-      margin: 0 10px;
-      font-size: 0.7em;
-      font-weight: 400;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      transition: color 0.3s;
-      line-height: 1;
-      vertical-align: middle;
+    .hamburger-icon {
+      width: 22px;
+      height: 17px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
-    nav a:hover { color: #d4af37; }
-    .dropdown {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
+    .hamburger-icon span {
+      width: 100%;
+      height: 3px;
+      background-color: #e0e0e0;
+      transition: background-color 0.3s;
     }
-    .dropdown > a {
-      margin: 0 10px;
-      line-height: 1;
-      vertical-align: middle;
+    .hamburger-menu:hover .hamburger-icon span {
+      background-color: #d4af37;
     }
-    .dropdown-content {
+    .menu-content {
       display: none;
       position: absolute;
+      top: 100%;
+      right: 0;
       background-color: #1a1a1a;
       min-width: 200px;
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
       z-index: 1001;
       border-radius: 8px;
-      top: 100%;
-      left: 50%;
-      transform: translateX(-50%);
     }
-    .dropdown-content a {
-      color: #e0e0e0;
-      padding: 12px 15px;
-      text-decoration: none;
+    .hamburger-menu:hover .menu-content {
       display: block;
-      font-weight: 400;
-      font-size: 0.7em;
-      transition: background-color 0.3s;
     }
-    .dropdown-content a:hover {
+    .menu-content a {
+      color: #e0e0e0;
+      text-decoration: none;
+      padding: 12px 15px;
+      display: block;
+      font-size: 0.9em;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .menu-content a:hover {
       background-color: #2b2b2b;
       color: #d4af37;
     }
-    .dropdown:hover .dropdown-content { display: block; }
+    .contact-info {
+      color: #e0e0e0;
+      font-size: 0.8em;
+      font-weight: 300;
+      opacity: 0;
+      transform: translateX(-100px);
+      transition: all 0.5s ease;
+      margin-left: 20px;
+    }
+    .contact-info.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .contact-info p {
+      margin: 2px 0;
+    }
+    .contact-info a {
+      color: #d4af37;
+      text-decoration: none;
+    }
+    .contact-info a:hover {
+      text-decoration: underline;
+    }
     .flags {
-      margin-right: 20px;
+      margin-right: 60px;
       display: flex;
       align-items: center;
     }
@@ -113,7 +135,7 @@
     }
     .search-bar {
       max-width: 1200px;
-      margin: 30px auto;
+      margin: 80px auto 20px;
       padding: 0 20px;
       text-align: center;
     }
@@ -133,6 +155,121 @@
       outline: none;
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
     }
+    .controls-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 30px;
+      margin-bottom: 20px;
+      padding: 0 20px;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .back-button {
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+      padding: 10px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-size: 1em;
+      font-weight: 400;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s;
+    }
+    .back-button:hover { background-color: #2b2b2b; }
+    .cart {
+      position: relative;
+      display: flex;
+      align-items: center;
+      background: none;
+      padding: 0;
+      cursor: pointer;
+    }
+    .cart img {
+      width: 70px;
+      height: 70px;
+      filter: brightness(1.2);
+    }
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background-color: #d4af37;
+      color: #1a1a1a;
+      font-size: 0.8em;
+      font-weight: 700;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    .cart-dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: #ffffff;
+      min-width: 300px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      z-index: 1001;
+      padding: 15px;
+      margin-top: 10px;
+    }
+    .cart:hover .cart-dropdown { display: block; }
+    .cart-dropdown h3 {
+      font-size: 1.2em;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin: 0 0 10px;
+    }
+    .cart-dropdown ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .cart-dropdown li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+    }
+    .cart-dropdown li:last-child { border-bottom: none; }
+    .cart-dropdown .item-name { font-size: 1em; color: #333; }
+    .cart-dropdown .item-price {
+      font-size: 1em;
+      font-weight: 700;
+      color: #d4af37;
+    }
+    .cart-dropdown .remove-item {
+      background: none;
+      border: none;
+      color: #d4af37;
+      font-size: 0.9em;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+    .cart-dropdown .remove-item:hover { color: #b8962e; }
+    .cart-dropdown .checkout-btn {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      background-color: #d4af37;
+      color: #1a1a1a;
+      border: none;
+      border-radius: 25px;
+      font-size: 1em;
+      font-weight: 400;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .cart-dropdown .checkout-btn:hover { background-color: #b8962e; }
     .category-nav {
       max-width: 1200px;
       margin: 20px auto;
@@ -152,53 +289,17 @@
     .category-nav a:hover { color: #d4af37; }
     .category-nav .sale-link { color: #d4af37; }
     .category-nav .sale-link:hover { color: #b8962e; }
-    .back-button {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      background-color: #1a1a1a;
-      color: #e0e0e0;
-      padding: 10px 20px;
-      border-radius: 25px;
-      text-decoration: none;
-      font-size: 1em;
-      font-weight: 400;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      z-index: 1000;
-      transition: background-color 0.3s;
-    }
-    .back-button:hover { background-color: #2b2b2b; }
     main {
       max-width: 1200px;
       margin: 40px auto;
       padding: 20px;
       position: relative;
     }
-    .controls {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 30px;
-    }
-    .sort-options select {
-      padding: 10px;
-      font-size: 1em;
-      font-weight: 400;
-      border: none;
-      border-radius: 8px;
-      background-color: #ffffff;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-      transition: box-shadow 0.3s;
-    }
-    .sort-options select:focus {
-      outline: none;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    }
     h2 {
       text-align: center;
       font-size: 2.5em;
       font-weight: 700;
-      color: #1a1a1a;
+      color: #2b2b2b;
       margin-bottom: 40px;
       text-transform: uppercase;
       letter-spacing: 2px;
@@ -208,6 +309,7 @@
       flex-wrap: wrap;
       justify-content: center;
       gap: 30px;
+      margin-top: 20px;
     }
     .category {
       background: #ffffff;
@@ -215,11 +317,11 @@
       border-radius: 12px;
       width: 300px;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-      transition: transform 0.3s, box-shadow 0.3s;
       text-align: center;
       display: none;
       opacity: 0;
       transform: translateY(20px);
+      transition: transform 0.3s, opacity 0.3s;
     }
     .category.visible {
       display: block;
@@ -227,18 +329,10 @@
       transform: translateY(0);
       animation: fadeIn 0.5s ease-in-out;
     }
-    .category:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-    }
     .category img {
       width: 100%;
       border-radius: 10px;
       margin-bottom: 15px;
-      transition: transform 0.3s;
-    }
-    .category img:hover {
-      transform: scale(1.05);
     }
     .category h3 {
       margin: 0 0 10px;
@@ -269,149 +363,209 @@
       color: #1a1a1a;
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
     }
-    .filter-sidebar {
-      position: fixed;
-      top: 100px;
-      right: -270px;
-      width: 250px;
-      background: #ffffff;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-      z-index: 10;
-      transition: right 0.3s ease;
+    .image-gallery {
+      width: 100vw;
+      margin: 60px 0;
+      padding: 0;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
     }
-    .filter-sidebar.open {
-      right: 20px;
-    }
-    .filter-toggle {
-      position: fixed;
-      top: 100px;
-      right: 20px;
-      background-color: #1a1a1a;
-      color: #e0e0e0;
-      padding: 10px 15px;
-      border: none;
-      border-radius: 25px;
-      cursor: pointer;
-      z-index: 11;
-      font-size: 1em;
-      font-weight: 400;
-      transition: background-color 0.3s;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    }
-    .filter-toggle:hover {
-      background-color: #d4af37;
-    }
-    .filter-sidebar h3 {
-      margin-top: 0;
-      font-size: 1.8em;
-      font-weight: 700;
-      color: #1a1a1a;
-    }
-    .filter-sidebar h4 {
-      margin: 20px 0 10px;
-      font-size: 1.4em;
-      font-weight: 700;
-      color: #1a1a1a;
-    }
-    .filter-sidebar label {
-      display: block;
-      margin: 10px 0;
-      font-size: 1.1em;
-      font-weight: 300;
-      color: #666;
-    }
-    .filter-sidebar input[type="checkbox"] {
-      margin-right: 10px;
-    }
-    .price-filter {
-      margin-top: 20px;
-    }
-    .price-range {
+    .gallery-row {
+      display: flex;
       width: 100%;
+      margin: 0;
+      padding: 0;
     }
-    #price-value {
-      margin-top: 10px;
-      font-size: 1em;
+    .gallery-item {
+      flex: 1;
+      margin: 0;
+      padding: 0;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 440px;
+      object-fit: cover;
+      display: block;
+      border: none;
+    }
+    .text-section {
+      width: 100vw;
+      background-color: #e0e0e0;
+      padding: 40px 20px;
+      text-align: center;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      margin-top: 30px;
+    }
+    .text-section h2 {
+      font-size: 2em;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 20px;
+    }
+    .text-section p {
+      font-size: 1.2em;
       font-weight: 300;
-      color: #666;
+      color: #333;
+      max-width: 1200px;
+      margin: 0 auto;
+      line-height: 1.8;
     }
-    .process-section {
+    .measuring-guide {
       max-width: 1200px;
       margin: 60px auto;
       padding: 40px;
-      background-color: #e0e0e0;
+      background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
       border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      position: relative;
     }
-    .process-section h2 {
+    .measuring-guide h2 {
       font-size: 2.5em;
       font-weight: 700;
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 40px;
       color: #1a1a1a;
       text-transform: uppercase;
       letter-spacing: 2px;
     }
-    .process-step {
+    .tabs-container {
+      position: relative;
+    }
+    .tabs {
       display: flex;
-      align-items: center;
-      margin-bottom: 40px;
-      gap: 30px;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 30px;
     }
-    .process-step.reverse {
-      flex-direction: row-reverse;
+    .tab-button {
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 25px;
+      font-size: 1.1em;
+      font-weight: 400;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
     }
-    .process-step img {
-      width: 50%;
-      max-width: 500px;
+    .tab-button:hover {
+      background-color: #d4af37;
+      color: #1a1a1a;
+    }
+    .tab-button.active {
+      background-color: #d4af37;
+      color: #1a1a1a;
+      transform: scale(1.05);
+    }
+    .tab-content {
+      background: #ffffff;
       border-radius: 10px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      padding: 30px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     }
-    .process-step .text {
-      width: 50%;
+    .tab-pane {
+      display: none;
+      text-align: center;
     }
-    .process-step h3 {
+    .tab-pane.active {
+      display: block;
+      animation: slideIn 0.5s ease;
+    }
+    .tab-pane img {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    .tab-pane h3 {
       font-size: 1.6em;
       font-weight: 700;
       color: #1a1a1a;
-      margin-bottom: 15px;
+      margin: 0 0 15px;
     }
-    .process-step p {
+    .tab-pane p {
       font-size: 1.1em;
       font-weight: 300;
       color: #666;
+      margin: 0;
       line-height: 1.6;
     }
-    .contact-card {
-      max-width: 600px;
+    .product-preview {
+      max-width: 1200px;
       margin: 60px auto;
-      padding: 30px;
-      background-color: #f9f9f9;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 20px;
       text-align: center;
+      position: relative;
     }
-    .contact-card h2 {
-      font-size: 1.8em;
+    .product-preview h2 {
+      font-size: 2em;
       font-weight: 700;
-      color: #333;
-      margin-bottom: 20px;
+      color: #1a1a1a;
+      margin-bottom: 30px;
     }
-    .contact-card p {
-      font-size: 1em;
+    .preview-wrapper {
+      position: relative;
+      overflow: hidden;
+    }
+    .preview-container {
+      display: flex;
+      transition: transform 0.5s ease;
+      width: 100%;
+    }
+    .preview-item {
+      background: #ffffff;
+      padding: 15px;
+      border-radius: 8px;
+      width: 200px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      flex: 0 0 auto;
+      margin-right: 20px;
+    }
+    .preview-item img {
+      width: 100%;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+    .preview-item h3 {
+      font-size: 1.2em;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin: 0 0 5px;
+    }
+    .preview-item p {
+      font-size: 0.9em;
       font-weight: 400;
-      color: #666;
-      margin: 10px 0;
-    }
-    .contact-card a {
       color: #d4af37;
-      text-decoration: none;
-      font-weight: 400;
+      margin: 0;
     }
-    .contact-card a:hover {
-      text-decoration: underline;
+    .preview-nav {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+    }
+    .preview-nav button {
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.2em;
+      transition: background-color 0.3s;
+    }
+    .preview-nav button:hover {
+      background-color: #d4af37;
+      color: #1a1a1a;
     }
     .back-to-top {
       position: fixed;
@@ -452,9 +606,7 @@
       letter-spacing: 1px;
       transition: color 0.3s;
     }
-    .footer-nav a:hover {
-      color: #d4af37;
-    }
+    .footer-nav a:hover { color: #d4af37; }
     .social-icons {
       margin-top: 15px;
     }
@@ -472,20 +624,33 @@
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 <body>
   <header>
     <img src="Kavallerietuch.png" alt="Kavallerietuch Logo" class="logo">
-    <div class="header-title">Kavallerietuch</div>
-    <nav>
-      <a href="index.html">Home</a>
-      <div class="dropdown">
-        <a href="Gallerie.html">Gallerie</a>
+    <div class="contact-info" id="contact-info">
+      <p>Tel: +41 81 123 45 67</p>
+      <p>E-Mail: <a href="mailto:info@kavallerietuch.ch">info@kavallerietuch.ch</a></p>
+    </div>
+    <div class="header-title">RAUMRAETIA</div>
+    <div class="hamburger-menu">
+      <div class="hamburger-icon">
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
-      <a href="wie-funktionierts.html">Wie funktioniert’s?</a>
-      <a href="uber-uns.html">Über uns</a>
-    </nav>
+      <div class="menu-content">
+        <a href="index.html">Home</a>
+        <a href="Gallerie.html">Galerie</a>
+        <a href="wie-funktionierts.html">Wie funktioniert’s?</a>
+        <a href="über-uns.html">Über uns</a>
+      </div>
+    </div>
     <div class="flags">
       <img src="Schweizer Flagge.jpg" alt="Schweizer Flagge">
       <img src="Grabünden Flagge.jpg" alt="Graubünden Flagge">
@@ -493,93 +658,151 @@
   </header>
 
   <main>
-    <a href="javascript:history.back()" class="back-button">Zurück</a>
     <div class="search-bar">
       <input type="text" id="search-input" placeholder="Polster suchen...">
+    </div>
+    <div class="controls-container">
+      <a href="javascript:history.back()" class="back-button">Zurück</a>
+      <div class="cart" id="cart">
+        <img src="cart.png" alt="Warenkorb">
+        <div class="cart-count" id="cart-count">0</div>
+        <div class="cart-dropdown" id="cart-dropdown">
+          <h3>Ihr Warenkorb</h3>
+          <ul id="cart-items"></ul>
+          <button class="checkout-btn" onclick="window.location.href='Warenkorb.html'">Zur Kasse</button>
+        </div>
+      </div>
     </div>
     <div class="category-nav">
       <a href="index.html">Home</a>
       <a href="Vorhänge.html">Vorhänge</a>
       <a href="polster.html">Polster</a>
       <a href="Betten.html">Betten</a>
-      <a href="kavallerietuch.html">Kavallerietuch</a>
+      <a href="Zubehör.html">Zubehör</a>
       <a href="Teppiche.html">Teppiche</a>
       <a href="Sale.html" class="sale-link">Sale</a>
     </div>
-    <div class="controls">
-      <div class="sort-options">
-        <select id="sort-select">
-          <option value="name-asc">Name (A-Z)</option>
-          <option value="name-desc">Name (Z-A)</option>
-          <option value="price-asc">Preis (aufsteigend)</option>
-          <option value="price-desc">Preis (absteigend)</option>
-        </select>
-      </div>
-    </div>
     <h2>Unsere Polster</h2>
     <div class="category-container" id="category-container"></div>
-    <button class="filter-toggle" id="filter-toggle">Filter anzeigen</button>
-    <aside class="filter-sidebar" id="filter-sidebar">
-      <h3>Filter</h3>
-      <div>
-        <h4>Typ</h4>
-        <label><input type="checkbox" class="filter-type" value="sitzpolster"> Sitzpolster</label>
-        <label><input type="checkbox" class="filter-type" value="rueckenpolster"> Rückenpolster</label>
-        <label><input type="checkbox" class="filter-type" value="dekorationspolster"> Dekorationspolster</label>
-        <label><input type="checkbox" class="filter-type" value="outdoorpolster"> Outdoor-Polster</label>
-        <label><input type="checkbox" class="filter-type" value="kissen"> Kissen</label>
-        <label><input type="checkbox" class="filter-type" value="custom"> Custom</label>
-      </div>
-      <div>
-        <h4>Material</h4>
-        <label><input type="checkbox" class="filter-material" value="baumwolle"> Baumwolle</label>
-        <label><input type="checkbox" class="filter-material" value="polyester"> Polyester</label>
-        <label><input type="checkbox" class="filter-material" value="samt"> Samt</label>
-        <label><input type="checkbox" class="filter-material" value="leinen"> Leinen</label>
-      </div>
-      <div class="price-filter">
-        <h4>Preis</h4>
-        <input type="range" id="price-range" class="price-range" min="0" max="100" value="100">
-        <div id="price-value">Bis 100 €</div>
-      </div>
-    </aside>
-    <section class="process-section">
-      <h2>Wie unsere Möbel hergestellt werden</h2>
-      <div class="process-step">
-        <img src="Polster Planung.jpg" alt="Schritt 1: Design">
-        <div class="text">
-          <h3>1. Design & Planung</h3>
-          <p>Unsere Polstermöbel beginnen mit einem durchdachten Designprozess. Unsere Designer entwickeln einzigartige Konzepte, die Stil und Funktionalität vereinen, basierend auf den neuesten Trends und Kundenwünschen.</p>
+    <section class="text-section">
+      <h2>Unsere Polster-Kollektion</h2>
+      <p>Unsere Polster – Komfort trifft Stil<br><br>
+        Verwandeln Sie Ihre Möbel mit unseren maßgefertigten Polstern in wahre Wohlfühloasen 🛋️✨.<br>
+        Ob modern, klassisch oder individuell – wir bieten Ihnen die perfekte Lösung für jedes Möbelstück.<br><br>
+        Unsere hochwertigen Materialien garantieren nicht nur Komfort, sondern auch Langlebigkeit:<br>
+        🛏️ Bequeme Polsterung für entspannte Stunden<br>
+        🌿 Atmungsaktive Stoffe für ein angenehmes Klima<br>
+        🧼 Einfach zu reinigen und strapazierfähig<br><br>
+        Wählen Sie aus einer Vielzahl von Farben, Materialien und Designs – passgenau für Ihre Stühle, Sofas oder Sessel.<br><br>
+        Made to fit. Made for you. 🎯💫</p>
+    </section>
+    <section class="image-gallery">
+      <div class="gallery-row">
+        <div class="gallery-item">
+          <img src="stühle.jpg" alt="Gallery Image 1">
+        </div>
+        <div class="gallery-item">
+          <img src="Sessel.jpg" alt="Gallery Image 2">
         </div>
       </div>
-      <div class="process-step reverse">
-        <img src="Polster Material.jpg" alt="Schritt 2: Materialauswahl">
-        <div class="text">
-          <h3>2. Materialauswahl</h3>
-          <p>Wir wählen nur hochwertige Materialien wie nachhaltige Stoffe und robuste Holzrahmen aus. Jeder Stoff wird sorgfältig geprüft, um Langlebigkeit und Komfort zu gewährleisten.</p>
+      <div class="gallery-row">
+        <div class="gallery-item">
+          <img src="Rekamiere.jpg" alt="Gallery Image 3">
+        </div>
+        <div class="gallery-item">
+          <img src="Sofa.jpg" alt="Gallery Image 4">
         </div>
       </div>
-      <div class="process-step">
-        <img src="Polster Herstellung.jpg" alt="Schritt 3: Produktion">
-        <div class="text">
-          <h3>3. Handwerkliche Fertigung</h3>
-          <p>In unserer Werkstatt in Graubünden setzen erfahrene Handwerker die Designs um. Mit Präzision und Sorgfalt werden die Polster gefertigt, genäht und montiert.</p>
+      <div class="gallery-row">
+        <div class="gallery-item">
+          <img src="Hocker.jpg" alt="Gallery Image 5">
         </div>
-      </div>
-      <div class="process-step reverse">
-        <img src="Polster Qualität.jpg" alt="Schritt 4: Qualitätskontrolle">
-        <div class="text">
-          <h3>4. Qualitätskontrolle</h3>
-          <p>Vor der Auslieferung wird jedes Möbelstück einer strengen Qualitätsprüfung unterzogen, um sicherzustellen, dass es unseren hohen Standards entspricht.</p>
+        <div class="gallery-item">
+          <img src="Custom.jpg" alt="Gallery Image 6">
         </div>
       </div>
     </section>
-    <section class="contact-card">
-      <h2>Kontaktieren Sie uns</h2>
-      <p>Kavallerietuch AG</p>
-      <p>Musterstraße 123, 7000 Chur, Schweiz</p>
-      <p>Telefon: +41 81 123 45 67</p>
-      <p>E-Mail: <a href="mailto:info@kavallerietuch.ch">info@kavallerietuch.ch</a></p>
+    <section class="text-section">
+      <h2>Ihre Polster auf Maß</h2>
+      <p>✨ So einfach geht’s: Polster nach Maß bestellen<br><br>
+        Ihre perfekten Polster beginnen mit präzisen Maßen 📏. Keine Sorge – das Messen ist kinderleicht!<br>
+        Nehmen Sie sich kurz Zeit, messen Sie Breite, Höhe und Tiefe – wir übernehmen den Rest 🛠️🧵.<br><br>
+        💡 Tipp: Überprüfen Sie Ihre Maße genau, damit Ihr Polster später perfekt sitzt 🛋️✔️.<br><br>
+        Geben Sie jetzt Ihre Maße ein und gestalten Sie Ihr Polster – individuell, passgenau, einzigartig</p>
+    </section>
+    <section class="measuring-guide">
+      <h2>Perfekte Polster ausmessen – Schritt für Schritt</h2>
+      <div class="tabs-container">
+        <div class="tabs">
+          <button class="tab-button active" data-tab="step1">Breite</button>
+          <button class="tab-button" data-tab="step2">Höhe</button>
+          <button class="tab-button" data-tab="step3">Tiefe</button>
+          <button class="tab-button" data-tab="step4">Kontrolle</button>
+        </div>
+        <div class="tab-content">
+          <div class="tab-pane active" id="step1">
+            <img src="erklärung 1.jpg" alt="Schritt 1: Breite messen">
+            <h3>1. Breite ermitteln</h3>
+            <p>Messen Sie die Breite des Polsters an der breitesten Stelle, z. B. bei einem Sitzpolster die Sitzfläche.</p>
+          </div>
+          <div class="tab-pane" id="step2">
+            <img src="erklärung 2.jpg" alt="Schritt 2: Höhe bestimmen">
+            <h3>2. Höhe festlegen</h3>
+            <p>Bestimmen Sie die Höhe des Polsters, z. B. die Dicke eines Kissens oder die Rückenlehne eines Sessels.</p>
+          </div>
+          <div class="tab-pane" id="step3">
+            <img src="erklärung 3.jpg" alt="Schritt 3: Tiefe messen">
+            <h3>3. Tiefe messen</h3>
+            <p>Messen Sie die Tiefe von vorne nach hinten, um sicherzustellen, dass das Polster perfekt passt.</p>
+          </div>
+          <div class="tab-pane" id="step4">
+            <img src="erklärung 4.jpg" alt="Schritt 4: Maße überprüfen">
+            <h3>4. Alles doppelt checken</h3>
+            <p>Überprüfen Sie Ihre Maße sorgfältig, um sicherzugehen, dass das Polster ideal sitzt.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="product-preview">
+      <h2>Produktvorschau</h2>
+      <div class="preview-wrapper">
+        <div class="preview-container" id="preview-container">
+          <div class="preview-item">
+            <img src="stühle.jpg" alt="Stühle">
+            <h3>Stühle</h3>
+            <p>30 €</p>
+          </div>
+          <div class="preview-item">
+            <img src="Sessel.jpg" alt="Sessel">
+            <h3>Sessel</h3>
+            <p>40 €</p>
+          </div>
+          <div class="preview-item">
+            <img src="Rekamiere.jpg" alt="Recamieren">
+            <h3>Recamieren</h3>
+            <p>25 €</p>
+          </div>
+          <div class="preview-item">
+            <img src="Sofa.jpg" alt="Sofas">
+            <h3>Sofas</h3>
+            <p>50 €</p>
+          </div>
+          <div class="preview-item">
+            <img src="Hocker.jpg" alt="Hocker">
+            <h3>Hocker</h3>
+            <p>20 €</p>
+          </div>
+          <div class="preview-item">
+            <img src="Custom.jpg" alt="Custom">
+            <h3>Custom</h3>
+            <p>60 €</p>
+          </div>
+        </div>
+        <div class="preview-nav">
+          <button id="prev-btn">←</button>
+          <button id="next-btn">→</button>
+        </div>
+      </div>
     </section>
   </main>
   <a href="#" class="back-to-top" id="back-to-top">Nach oben</a>
@@ -597,6 +820,7 @@
       <a href="https://tiktok.com" target="_blank" rel="noopener"><img src="tiktok.png" alt="TikTok"></a>
     </div>
   </footer>
+
   <script>
     const categories = [
       { type: "sitzpolster", material: "baumwolle", price: 30, name: "Stühle", image: "stühle.jpg", description: "Bequemes Polster für Stühle und Bänke.", link: "sitzpolster.html" },
@@ -606,16 +830,28 @@
       { type: "kissen", material: "leinen", price: 20, name: "Hocker", image: "Hocker.jpg", description: "Weich und dekorativ für Sofa oder Bett.", link: "kissen.html" },
       { type: "custom", material: "samt", price: 60, name: "Custom", image: "Custom.jpg", description: "Individuell anpassbare Polster nach Ihren Wünschen.", link: "custom-polster.html" }
     ];
-    const filterTypes = document.querySelectorAll('.filter-type');
-    const filterMaterials = document.querySelectorAll('.filter-material');
-    const priceRange = document.getElementById('price-range');
-    const priceValue = document.getElementById('price-value');
     const searchInput = document.getElementById('search-input');
-    const sortSelect = document.getElementById('sort-select');
     const backToTop = document.getElementById('back-to-top');
     const container = document.getElementById('category-container');
-    const filterToggle = document.getElementById('filter-toggle');
-    const filterSidebar = document.getElementById('filter-sidebar');
+    const cartCount = document.getElementById('cart-count');
+    const cartItemsList = document.getElementById('cart-items');
+    const cart = document.getElementById('cart');
+    const previewContainer = document.getElementById('preview-container');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabPanes = document.querySelectorAll('.tab-pane');
+    const contactInfo = document.getElementById('contact-info');
+    let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    let currentIndex = 0;
+
+    if (!contactInfo) {
+      console.error("Element mit ID 'contact-info' wurde nicht gefunden!");
+    } else {
+      setTimeout(() => {
+        contactInfo.classList.add('visible');
+      }, 10000);
+    }
 
     function renderCategories(categoriesToRender) {
       container.innerHTML = '';
@@ -634,28 +870,16 @@
         `;
         container.appendChild(div);
       });
-      applyFiltersAndSearch();
+      applySearch();
     }
 
-    function applyFiltersAndSearch() {
-      const selectedTypes = Array.from(filterTypes).filter(cb => cb.checked).map(cb => cb.value);
-      const selectedMaterials = Array.from(filterMaterials).filter(cb => cb.checked).map(cb => cb.value);
-      const maxPrice = parseInt(priceRange.value);
+    function applySearch() {
       const searchTerm = searchInput.value.toLowerCase();
       const categoryElements = document.querySelectorAll('.category');
 
       categoryElements.forEach(category => {
-        const type = category.getAttribute('data-type');
-        const material = category.getAttribute('data-material');
-        const price = parseInt(category.getAttribute('data-price'));
         const name = category.getAttribute('data-name').toLowerCase();
-
-        const matchesType = selectedTypes.length === 0 || selectedTypes.includes(type);
-        const matchesMaterial = selectedMaterials.length === 0 || selectedMaterials.includes(material);
-        const matchesPrice = price <= maxPrice;
-        const matchesSearch = name.includes(searchTerm);
-
-        if (matchesType && matchesMaterial && matchesPrice && matchesSearch) {
+        if (name.includes(searchTerm)) {
           category.classList.add('visible');
         } else {
           category.classList.remove('visible');
@@ -663,36 +887,68 @@
       });
     }
 
-    function sortCategories() {
-      const sortValue = sortSelect.value;
-      const sortedCategories = [...categories];
-      sortedCategories.sort((a, b) => {
-        if (sortValue === 'name-asc') return a.name.localeCompare(b.name);
-        if (sortValue === 'name-desc') return b.name.localeCompare(a.name);
-        if (sortValue === 'price-asc') return a.price - b.price;
-        if (sortValue === 'price-desc') return b.price - a.price;
+    function updateCart() {
+      cartCount.textContent = cartItems.reduce((sum, item) => sum + (item.quantity || 1), 0);
+      cartItemsList.innerHTML = cartItems.length === 0 ? '<li>Der Warenkorb ist leer</li>' : '';
+      cartItems.forEach((item, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <span class="item-name">${item.name} (${item.quantity || 1}x)</span>
+          <span class="item-price">${(item.price * (item.quantity || 1)).toFixed(2)} €</span>
+          <button class="remove-item" data-index="${index}">Entfernen</button>
+        `;
+        cartItemsList.appendChild(li);
       });
-      renderCategories(sortedCategories);
+      const removeButtons = cartItemsList.querySelectorAll('.remove-item');
+      removeButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const index = parseInt(e.target.getAttribute('data-index'));
+          cartItems.splice(index, 1);
+          localStorage.setItem('cart', JSON.stringify(cartItems));
+          updateCart();
+        });
+      });
     }
 
-    filterToggle.addEventListener('click', () => {
-      if (filterSidebar.classList.contains('open')) {
-        filterSidebar.classList.remove('open');
-        filterToggle.textContent = 'Filter anzeigen';
-      } else {
-        filterSidebar.classList.add('open');
-        filterToggle.textContent = 'Filter ausblenden';
+    function updatePreview() {
+      const itemWidth = 220;
+      const maxIndex = Math.max(0, previewContainer.children.length - 5);
+      currentIndex = Math.max(0, Math.min(currentIndex, maxIndex));
+      previewContainer.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+    }
+
+    cart.addEventListener('click', (e) => {
+      if (e.target.closest('.cart-dropdown') || e.target.classList.contains('remove-item')) return;
+      window.location.href = 'Warenkorb.html';
+    });
+
+    prevBtn.addEventListener('click', () => {
+      if (currentIndex > 0) {
+        currentIndex--;
+        updatePreview();
       }
     });
 
-    filterTypes.forEach(checkbox => checkbox.addEventListener('change', applyFiltersAndSearch));
-    filterMaterials.forEach(checkbox => checkbox.addEventListener('change', applyFiltersAndSearch));
-    priceRange.addEventListener('input', () => {
-      priceValue.textContent = `Bis ${priceRange.value} €`;
-      applyFiltersAndSearch();
+    nextBtn.addEventListener('click', () => {
+      if (currentIndex < previewContainer.children.length - 5) {
+        currentIndex++;
+        updatePreview();
+      }
     });
-    searchInput.addEventListener('input', applyFiltersAndSearch);
-    sortSelect.addEventListener('change', sortCategories);
+
+    tabButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        tabPanes.forEach(pane => pane.classList.remove('active'));
+
+        button.classList.add('active');
+        const tabId = button.getAttribute('data-tab');
+        document.getElementById(tabId).classList.add('active');
+      });
+    });
+
+    searchInput.addEventListener('input', applySearch);
     window.addEventListener('scroll', () => {
       backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
     });
@@ -702,6 +958,8 @@
     });
 
     renderCategories(categories);
+    updateCart();
+    updatePreview();
   </script>
 </body>
 </html>

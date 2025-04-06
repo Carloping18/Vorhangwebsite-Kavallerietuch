@@ -29,6 +29,7 @@
       align-items: center;
       justify-content: space-between;
       transition: background-color 0.3s;
+      width: 100%;
     }
     header img.logo {
       width: 60px;
@@ -37,67 +38,71 @@
       object-fit: cover;
       filter: brightness(1.2);
     }
-    nav {
+    .header-title {
+      font-size: 2em;
+      font-weight: 700;
+      color: #e0e0e0;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .hamburger-menu {
+      position: relative;
       display: flex;
       align-items: center;
+      cursor: pointer;
       margin-left: auto;
-      margin-right: 20px;
+      margin-right: 10px;
     }
-    nav a {
-      color: #e0e0e0;
-      text-decoration: none;
-      margin: 0 10px;
-      font-size: 0.7em;
-      font-weight: 400;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      transition: color 0.3s;
-      line-height: 1;
-      vertical-align: middle;
+    .hamburger-icon {
+      width: 22px;
+      height: 17px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
-    nav a:hover {
-      color: #d4af37;
+    .hamburger-icon span {
+      width: 100%;
+      height: 3px;
+      background-color: #e0e0e0;
+      transition: background-color 0.3s;
     }
-    .dropdown {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
+    .hamburger-menu:hover .hamburger-icon span {
+      background-color: #d4af37;
     }
-    .dropdown > a {
-      margin: 0 10px;
-      line-height: 1;
-      vertical-align: middle;
-    }
-    .dropdown-content {
+    .menu-content {
       display: none;
       position: absolute;
+      top: 100%;
+      right: 0;
       background-color: #1a1a1a;
       min-width: 200px;
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
       z-index: 1001;
       border-radius: 8px;
-      top: 100%;
-      left: 50%;
-      transform: translateX(-50%);
     }
-    .dropdown-content a {
-      color: #e0e0e0;
-      padding: 12px 15px;
-      text-decoration: none;
+    .hamburger-menu:hover .menu-content {
       display: block;
-      font-weight: 400;
-      font-size: 0.7em;
-      transition: background-color 0.3s;
     }
-    .dropdown-content a:hover {
+    .menu-content a {
+      color: #e0e0e0;
+      text-decoration: none;
+      padding: 12px 15px;
+      display: block;
+      font-size: 0.9em;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .menu-content a:hover {
       background-color: #2b2b2b;
       color: #d4af37;
     }
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
     .flags {
-      margin-right: 20px;
+      margin-right: 60px;
       display: flex;
       align-items: center;
     }
@@ -106,6 +111,29 @@
       height: 20px;
       margin-left: 10px;
       object-fit: cover;
+    }
+    .contact-info {
+      color: #e0e0e0;
+      font-size: 0.8em;
+      font-weight: 300;
+      opacity: 0;
+      transform: translateX(-100px);
+      transition: all 0.5s ease;
+      margin-left: 20px;
+    }
+    .contact-info.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .contact-info p {
+      margin: 2px 0;
+    }
+    .contact-info a {
+      color: #d4af37;
+      text-decoration: none;
+    }
+    .contact-info a:hover {
+      text-decoration: underline;
     }
     .search-bar {
       max-width: 1200px;
@@ -128,6 +156,134 @@
       width: 65%;
       outline: none;
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    }
+    .controls-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 30px;
+      margin-bottom: 20px;
+      padding: 0 20px;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .back-button {
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+      padding: 10px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-size: 1em;
+      font-weight: 400;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s;
+    }
+    .back-button:hover {
+      background-color: #2b2b2b;
+    }
+    .cart {
+      position: relative;
+      display: flex;
+      align-items: center;
+      background: none;
+      padding: 0;
+      cursor: pointer;
+    }
+    .cart img {
+      width: 70px;
+      height: 70px;
+      filter: brightness(1.2);
+    }
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background-color: #d4af37;
+      color: #1a1a1a;
+      font-size: 0.8em;
+      font-weight: 700;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    .cart-dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: #ffffff;
+      min-width: 300px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      z-index: 1001;
+      padding: 15px;
+      margin-top: 10px;
+    }
+    .cart:hover .cart-dropdown {
+      display: block;
+    }
+    .cart-dropdown h3 {
+      font-size: 1.2em;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin: 0 0 10px;
+    }
+    .cart-dropdown ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .cart-dropdown li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+    }
+    .cart-dropdown li:last-child {
+      border-bottom: none;
+    }
+    .cart-dropdown .item-name {
+      font-size: 1em;
+      color: #333;
+    }
+    .cart-dropdown .item-price {
+      font-size: 1em;
+      font-weight: 700;
+      color: #d4af37;
+    }
+    .cart-dropdown .remove-item {
+      background: none;
+      border: none;
+      color: #d4af37;
+      font-size: 0.9em;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+    .cart-dropdown .remove-item:hover {
+      color: #b8962e;
+    }
+    .cart-dropdown .checkout-btn {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      background-color: #d4af37;
+      color: #1a1a1a;
+      border: none;
+      border-radius: 25px;
+      font-size: 1em;
+      font-weight: 400;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .cart-dropdown .checkout-btn:hover {
+      background-color: #b8962e;
     }
     .category-nav {
       max-width: 1200px;
@@ -153,24 +309,6 @@
     }
     .category-nav .sale-link:hover {
       color: #b8962e;
-    }
-    .back-button {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      background-color: #1a1a1a;
-      color: #e0e0e0;
-      padding: 10px 20px;
-      border-radius: 25px;
-      text-decoration: none;
-      font-size: 1em;
-      font-weight: 400;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      z-index: 1000;
-      transition: background-color 0.3s;
-    }
-    .back-button:hover {
-      background-color: #2b2b2b;
     }
     main {
       max-width: 1200px;
@@ -231,18 +369,10 @@
       transform: translateY(0);
       animation: fadeIn 0.5s ease-in-out;
     }
-    .category:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-    }
     .category img {
       width: 100%;
       border-radius: 10px;
       margin-bottom: 15px;
-      transition: transform 0.3s;
-    }
-    .category img:hover {
-      transform: scale(1.05);
     }
     .category h3 {
       margin: 0 0 10px;
@@ -272,6 +402,60 @@
       background-color: #d4af37;
       color: #1a1a1a;
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    }
+    .image-gallery {
+      width: 100vw;
+      margin: 60px 0;
+      padding: 0;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+    }
+    .gallery-row {
+      display: flex;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    .gallery-item {
+      flex: 1;
+      margin: 0;
+      padding: 0;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 440px;
+      object-fit: cover;
+      display: block;
+      border: none;
+    }
+    .text-section {
+      width: 100vw;
+      background-color: #e0e0e0;
+      padding: 40px 20px;
+      text-align: center;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      margin-bottom: 40px;
+    }
+    .text-section h2 {
+      font-size: 2em;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 20px;
+    }
+    .text-section p {
+      font-size: 1.2em;
+      font-weight: 300;
+      color: #333;
+      max-width: 1200px;
+      margin: 0 auto;
+      line-height: 1.8;
     }
     .filter-sidebar {
       position: fixed;
@@ -442,6 +626,7 @@
       background-color: #1a1a1a;
       color: #e0e0e0;
       box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.2);
+      width: 100%;
     }
     .footer-nav {
       margin: 15px 0;
@@ -481,15 +666,24 @@
 <body>
   <header>
     <img src="Kavallerietuch.png" alt="Kavallerietuch Logo" class="logo">
-    <nav>
-      <a href="index.html">Home</a>
-      <div class="dropdown">
-        <a href="Gallerie.html">Gallerie</a>
-        </div>
+    <div class="contact-info" id="contact-info">
+      <p>Tel: +41 81 123 45 67</p>
+      <p>E-Mail: <a href="mailto:info@kavallerietuch.ch">info@kavallerietuch.ch</a></p>
+    </div>
+    <div class="header-title">RAUMRAETIA</div>
+    <div class="hamburger-menu">
+      <div class="hamburger-icon">
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
-      <a href="wie-funktionierts.html">Wie funktioniert’s?</a>
-      <a href="uber-uns.html">Über uns</a>
-    </nav>
+      <div class="menu-content">
+        <a href="index.html">Home</a>
+        <a href="Gallerie.html">Galerie</a>
+        <a href="wie-funktionierts.html">Wie funktioniert’s?</a>
+        <a href="über-uns.html">Über uns</a>
+      </div>
+    </div>
     <div class="flags">
       <img src="Schweizer Flagge.jpg" alt="Schweizer Flagge">
       <img src="Grabünden Flagge.jpg" alt="Graubünden Flagge">
@@ -497,19 +691,43 @@
   </header>
 
   <main>
-    <a href="javascript:history.back()" class="back-button">Zurück</a>
     <div class="search-bar">
       <input type="text" id="search-input" placeholder="Betten suchen...">
+    </div>
+    <div class="controls-container">
+      <a href="javascript:history.back()" class="back-button">Zurück</a>
+      <div class="cart" id="cart">
+        <img src="cart.png" alt="Warenkorb">
+        <div class="cart-count" id="cart-count">0</div>
+        <div class="cart-dropdown" id="cart-dropdown">
+          <h3>Ihr Warenkorb</h3>
+          <ul id="cart-items"></ul>
+          <button class="checkout-btn" onclick="window.location.href='Warenkorb.html'">Zur Kasse</button>
+        </div>
+      </div>
     </div>
     <div class="category-nav">
       <a href="index.html">Home</a>
       <a href="Vorhänge.html">Vorhänge</a>
       <a href="polster.html">Polster</a>
       <a href="Betten.html">Betten</a>
-      <a href="Kavallerietuch.html">Kavallerietuch</a>
+      <a href="Zubehör.html">Zubehör</a>
       <a href="Teppiche.html">Teppiche</a>
       <a href="Sale.html" class="sale-link">Sale</a>
     </div>
+
+    <section class="text-section">
+      <h2>Entdecken Sie unsere Betten</h2>
+      <p>Schlafkomfort neu definiert<br><br>
+        Unsere Betten sind mehr als nur ein Schlafplatz – sie sind ein Statement für Stil, Qualität und Wohlbefinden 🛌✨.<br>
+        Von modernen Designs bis hin zu zeitlosen Klassikern bieten wir für jeden Geschmack das passende Bett.<br><br>
+        Was unsere Betten auszeichnet:<br>
+        🌲 Hochwertige Materialien wie Massivholz und langlebige Polster<br>
+        🛏️ Ergonomische Designs für perfekte Unterstützung<br>
+        🌿 Nachhaltige Produktion aus der Schweiz<br><br>
+        Lassen Sie sich inspirieren und finden Sie das Bett, das Ihre Nächte unvergesslich macht.</p>
+    </section>
+
     <div class="controls">
       <div class="sort-options">
         <select id="sort-select">
@@ -522,70 +740,102 @@
     </div>
     <h2>Unsere Betten</h2>
     <div class="category-container" id="category-container"></div>
-    <button class="filter-toggle" id="filter-toggle">Filter anzeigen</button>
-    <aside class="filter-sidebar" id="filter-sidebar">
-      <h3>Filter</h3>
-      <div>
-        <h4>Typ</h4>
-        <label><input type="checkbox" class="filter-type" value="doppelbett"> Doppelbett</label>
-        <label><input type="checkbox" class="filter-type" value="einzelbett"> Einzelbett</label>
-        <label><input type="checkbox" class="filter-type" value="kinderbett"> Kinderbett</label>
-        <label><input type="checkbox" class="filter-type" value="futonbett"> Futonbett</label>
-        <label><input type="checkbox" class="filter-type" value="boxspringbett"> Boxspringbett</label>
-      </div>
-      <div>
-        <h4>Material</h4>
-        <label><input type="checkbox" class="filter-material" value="holz"> Holz</label>
-        <label><input type="checkbox" class="filter-material" value="metall"> Metall</label>
-        <label><input type="checkbox" class="filter-material" value="polster"> Polster</label>
-        <label><input type="checkbox" class="filter-material" value="bambus"> Bambus</label>
-      </div>
-      <div class="price-filter">
-        <h4>Preis</h4>
-        <input type="range" id="price-range" class="price-range" min="0" max="1000" value="1000">
-        <div id="price-value">Bis 1000 €</div>
-      </div>
-    </aside>
-    <section class="process-section">
-      <h2>Wie unsere Betten hergestellt werden</h2>
-      <div class="process-step">
-        <img src="Betten_Planung.jpg" alt="Schritt 1: Design">
-        <div class="text">
-          <h3>1. Design & Planung</h3>
-          <p>Unsere Betten beginnen mit einem präzisen Designprozess. Unsere Experten entwickeln Modelle, die Komfort und Ästhetik vereinen, inspiriert von modernen Trends und Kundenbedürfnissen.</p>
+
+    <section class="image-gallery">
+      <div class="gallery-row">
+        <div class="gallery-item">
+          <img src="Matratzen.jpg" alt="Doppelbett Schramm">
+        </div>
+        <div class="gallery-item">
+          <img src="Bettgestelle.jpg" alt="Einzelbett Modern">
         </div>
       </div>
-      <div class="process-step reverse">
-        <img src="Betten_Material.jpg" alt="Schritt 2: Materialauswahl">
-        <div class="text">
-          <h3>2. Materialauswahl</h3>
-          <p>Wir verwenden nur hochwertige Materialien wie robustes Holz, langlebiges Metall und weiche Polsterstoffe, um Qualität und Nachhaltigkeit zu gewährleisten.</p>
+      <div class="gallery-row">
+        <div class="gallery-item">
+          <img src="Duvets&Kissen.jpg" alt="Kinderbett Spiel">
+        </div>
+        <div class="gallery-item">
+          <img src="Topper.jpg" alt="Futonbett Zen">
         </div>
       </div>
-      <div class="process-step">
-        <img src="Betten_Herstellung.jpg" alt="Schritt 3: Produktion">
-        <div class="text">
-          <h3>3. Handwerkliche Fertigung</h3>
-          <p>In unserer Werkstatt in Graubünden werden die Betten von erfahrenen Handwerkern mit Sorgfalt und Präzision gefertigt und montiert.</p>
+      <div class="gallery-row">
+        <div class="gallery-item">
+          <img src="Kopfteile.jpg" alt="Boxspringbett Luxus">
+        </div>
+        <div class="gallery-item">
+          <img src="Matratzen.jpg" alt="Doppelbett Schramm">
         </div>
       </div>
-      <div class="process-step reverse">
-        <img src="Betten_Qualität.jpg" alt="Schritt 4: Qualitätskontrolle">
-        <div class="text">
-          <h3>4. Qualitätskontrolle</h3>
-          <p>Jedes Bett durchläuft eine strenge Prüfung, um sicherzustellen, dass es unseren hohen Standards für Komfort und Langlebigkeit entspricht.</p>
-        </div>
-      </div>
-    </section>
-    <section class="contact-card">
-      <h2>Kontaktieren Sie uns</h2>
-      <p>Kavallerietuch AG</p>
-      <p>Musterstraße 123, 7000 Chur, Schweiz</p>
-      <p>Telefon: +41 81 123 45 67</p>
-      <p>E-Mail: <a href="mailto:info@kavallerietuch.ch">info@kavallerietuch.ch</a></p>
     </section>
   </main>
+
+  <button class="filter-toggle" id="filter-toggle">Filter anzeigen</button>
+  <aside class="filter-sidebar" id="filter-sidebar">
+    <h3>Filter</h3>
+    <div>
+      <h4>Typ</h4>
+      <label><input type="checkbox" class="filter-type" value="doppelbett"> Doppelbett</label>
+      <label><input type="checkbox" class="filter-type" value="einzelbett"> Einzelbett</label>
+      <label><input type="checkbox" class="filter-type" value="kinderbett"> Kinderbett</label>
+      <label><input type="checkbox" class="filter-type" value="futonbett"> Futonbett</label>
+      <label><input type="checkbox" class="filter-type" value="boxspringbett"> Boxspringbett</label>
+    </div>
+    <div>
+      <h4>Material</h4>
+      <label><input type="checkbox" class="filter-material" value="holz"> Holz</label>
+      <label><input type="checkbox" class="filter-material" value="metall"> Metall</label>
+      <label><input type="checkbox" class="filter-material" value="polster"> Polster</label>
+      <label><input type="checkbox" class="filter-material" value="bambus"> Bambus</label>
+    </div>
+    <div class="price-filter">
+      <h4>Preis</h4>
+      <input type="range" id="price-range" class="price-range" min="0" max="1000" value="1000">
+      <div id="price-value">Bis 1000 €</div>
+    </div>
+  </aside>
+
+  <section class="process-section">
+    <h2>Wie unsere Betten hergestellt werden</h2>
+    <div class="process-step">
+      <img src="Betten_Planung.jpg" alt="Schritt 1: Design">
+      <div class="text">
+        <h3>1. Design & Planung</h3>
+        <p>Unsere Betten beginnen mit einem präzisen Designprozess. Unsere Experten entwickeln Modelle, die Komfort und Ästhetik vereinen, inspiriert von modernen Trends und Kundenbedürfnissen.</p>
+      </div>
+    </div>
+    <div class="process-step reverse">
+      <img src="Betten_Material.jpg" alt="Schritt 2: Materialauswahl">
+      <div class="text">
+        <h3>2. Materialauswahl</h3>
+        <p>Wir verwenden nur hochwertige Materialien wie robustes Holz, langlebiges Metall und weiche Polsterstoffe, um Qualität und Nachhaltigkeit zu gewährleisten.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <img src="Betten_Herstellung.jpg" alt="Schritt 3: Produktion">
+      <div class="text">
+        <h3>3. Handwerkliche Fertigung</h3>
+        <p>In unserer Werkstatt in Graubünden werden die Betten von erfahrenen Handwerkern mit Sorgfalt und Präzision gefertigt und montiert.</p>
+      </div>
+    </div>
+    <div class="process-step reverse">
+      <img src="Betten_Qualität.jpg" alt="Schritt 4: Qualitätskontrolle">
+      <div class="text">
+        <h3>4. Qualitätskontrolle</h3>
+        <p>Jedes Bett durchläuft eine strenge Prüfung, um sicherzustellen, dass es unseren hohen Standards für Komfort und Langlebigkeit entspricht.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-card">
+    <h2>Kontaktieren Sie uns</h2>
+    <p>Kavallerietuch AG</p>
+    <p>Musterstraße 123, 7000 Chur, Schweiz</p>
+    <p>Telefon: +41 81 123 45 67</p>
+    <p>E-Mail: <a href="mailto:info@kavallerietuch.ch">info@kavallerietuch.ch</a></p>
+  </section>
+
   <a href="#" class="back-to-top" id="back-to-top">Nach oben</a>
+
   <footer>
     <p>© 2025 Kavallerietuch</p>
     <div class="footer-nav">
@@ -600,9 +850,19 @@
       <a href="https://tiktok.com" target="_blank" rel="noopener"><img src="tiktok.png" alt="TikTok"></a>
     </div>
   </footer>
+
   <script>
+    const contactInfo = document.getElementById('contact-info');
+    if (!contactInfo) {
+      console.error("Element mit ID 'contact-info' wurde nicht gefunden!");
+    } else {
+      setTimeout(() => {
+        contactInfo.classList.add('visible');
+      }, 10000);
+    }
+
     const categories = [
-      { type: "doppelbett", material: "holz", price: 500, name: "Doppelbett Klassik", image: "Matratzen.jpg", description: "Elegantes Doppelbett aus massivem Holz für erholsamen Schlaf.", link: "doppelbett.html" },
+      { type: "doppelbett", material: "holz", price: 500, name: "Schramm", image: "Matratzen.jpg", description: "Elegantes Doppelbett aus massivem Holz für erholsamen Schlaf.", link: "doppelbett.html" },
       { type: "einzelbett", material: "metall", price: 200, name: "Einzelbett Modern", image: "Bettgestelle.jpg", description: "Schlichtes Einzelbett mit stabilem Metallrahmen.", link: "einzelbett.html" },
       { type: "kinderbett", material: "holz", price: 150, name: "Kinderbett Spiel", image: "Duvets&Kissen.jpg", description: "Sicheres und verspieltes Kinderbett aus Holz.", link: "kinderbett.html" },
       { type: "futonbett", material: "bambus", price: 300, name: "Futonbett Zen", image: "Topper.jpg", description: "Minimalistisches Futonbett aus nachhaltigem Bambus.", link: "futonbett.html" },
@@ -618,6 +878,10 @@
     const container = document.getElementById('category-container');
     const filterToggle = document.getElementById('filter-toggle');
     const filterSidebar = document.getElementById('filter-sidebar');
+    const cartCount = document.getElementById('cart-count');
+    const cartItemsList = document.getElementById('cart-items');
+    const cart = document.getElementById('cart');
+    let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
 
     function renderCategories(categoriesToRender) {
       container.innerHTML = '';
@@ -677,6 +941,30 @@
       renderCategories(sortedCategories);
     }
 
+    function updateCart() {
+      cartCount.textContent = cartItems.reduce((sum, item) => sum + (item.quantity || 1), 0);
+      cartItemsList.innerHTML = cartItems.length === 0 ? '<li>Der Warenkorb ist leer</li>' : '';
+      cartItems.forEach((item, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <span class="item-name">${item.name} (${item.quantity || 1}x)</span>
+          <span class="item-price">${(item.price * (item.quantity || 1)).toFixed(2)} €</span>
+          <button class="remove-item" data-index="${index}">Entfernen</button>
+        `;
+        cartItemsList.appendChild(li);
+      });
+      const removeButtons = cartItemsList.querySelectorAll('.remove-item');
+      removeButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const index = parseInt(e.target.getAttribute('data-index'));
+          cartItems.splice(index, 1);
+          localStorage.setItem('cart', JSON.stringify(cartItems));
+          updateCart();
+        });
+      });
+    }
+
     filterToggle.addEventListener('click', () => {
       if (filterSidebar.classList.contains('open')) {
         filterSidebar.classList.remove('open');
@@ -685,6 +973,11 @@
         filterSidebar.classList.add('open');
         filterToggle.textContent = 'Filter ausblenden';
       }
+    });
+
+    cart.addEventListener('click', (e) => {
+      if (e.target.closest('.cart-dropdown') || e.target.classList.contains('remove-item')) return;
+      window.location.href = 'Warenkorb.html';
     });
 
     filterTypes.forEach(checkbox => checkbox.addEventListener('change', applyFiltersAndSearch));
@@ -704,6 +997,7 @@
     });
 
     renderCategories(categories);
+    updateCart();
   </script>
 </body>
 </html>
